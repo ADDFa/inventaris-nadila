@@ -9,11 +9,17 @@
 
 <div>
     <div>
-        <div class="Jumlah Gedung"></div>
+        <div class="">
+            <h5>Jumlah Gedung</h5>
+        </div>
+
         <div class="gambar">
             <i class="fa-solid fa-school"></i>
         </div>
-        <div class="view details"></div>
+
+        <div class="">
+            <a href="">View details ></a>
+        </div>
     </div>
 
     <div>
