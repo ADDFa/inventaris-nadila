@@ -99,7 +99,9 @@
             </div>
         </header>
 
-        <?= $this->renderSection('content') ?>
+        <div>
+            <?= $this->renderSection('content') ?>
+        </div>
     </div>
 
     <script src="/js/template.js"></script>

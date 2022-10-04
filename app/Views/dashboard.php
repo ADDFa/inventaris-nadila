@@ -11,7 +11,7 @@
     <div>
         <div class="Jumlah Gedung"></div>
         <div class="gambar">
-        <i class="fa-solid fa-school"></i>
+            <i class="fa-solid fa-school"></i>
         </div>
         <div class="view details"></div>
     </div>
@@ -19,7 +19,7 @@
     <div>
         <div class="Jumlah Ruangan"></div>
         <div class="gambar">
-        <i class="fa-solid fa-door-open"></i>
+            <i class="fa-solid fa-door-open"></i>
         </div>
         <div class="view details"></div>
     </div>
@@ -27,7 +27,7 @@
     <div>
         <div class="Jumlah Barang"></div>
         <div class="gambar">
-        <i class="fa-solid fa-layer-group"></i>
+            <i class="fa-solid fa-layer-group"></i>
         </div>
         <div class="view details"></div>
     </div>
@@ -35,7 +35,7 @@
     <div>
         <div class="Pembelian Barang"></div>
         <div class="gambar">
-        <i class="fa-solid fa-cart-shopping"></i>
+            <i class="fa-solid fa-cart-shopping"></i>
         </div>
         <div class="view details"></div>
     </div>
@@ -43,7 +43,7 @@
     <div>
         <div class="Laporan"></div>
         <div class="gambar">
-        <i class="fa-regular fa-file"></i>
+            <i class="fa-regular fa-file"></i>
         </div>
         <div class="view details"></div>
     </div>
