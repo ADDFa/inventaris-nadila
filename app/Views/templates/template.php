@@ -22,11 +22,6 @@
 <body>
     <nav>
         <ul>
-            <!-- <li>
-                <img src="" alt="">
-
-            </li> -->
-
             <li>
                 <a href="/dashboard">
                     <i class="fa-solid fa-house-chimney-window"></i>

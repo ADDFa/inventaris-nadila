@@ -19,7 +19,7 @@
         <span>Entries</span>
     </div>
 
-    <div class="print-button">
+    <div class="print-button button">
         <a href=""><i class="fa-solid fa-print"></i>Print</a>
     </div>
 </div>
@@ -40,7 +40,7 @@
         </thead>
 
         <tbody>
-            <?php for ($i = 0; $i < 9; $i++) : ?>
+            <?php for ($i = 0; $i < 19; $i++) : ?>
                 <tr>
                     <td><?= $i + 1 ?></td>
                     <td>010</td>

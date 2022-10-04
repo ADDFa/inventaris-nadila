@@ -87,7 +87,10 @@ class Pages extends BaseController
     {
         $data = [
             'title'     => 'Laporan',
-            'style'     => [],
+            'style'     => [
+                'table',
+                'manajemen'
+            ],
             'script'     => []
         ];
 
