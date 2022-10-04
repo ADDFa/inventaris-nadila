@@ -23,36 +23,54 @@
     </div>
 
     <div>
-        <div class="Jumlah Ruangan"></div>
+        <div class="">
+        <h5> Jumlah Ruangan </h5>
+    </div>
         <div class="gambar">
             <i class="fa-solid fa-door-open"></i>
         </div>
-        <div class="view details"></div>
+        <div class="">
+        <a href="">view details"></div></a>
     </div>
 
     <div>
-        <div class="Jumlah Barang"></div>
+        <div class="">
+        <h5> Jumlah Barang </h5>
+        </div>
+        
         <div class="gambar">
             <i class="fa-solid fa-layer-group"></i>
         </div>
-        <div class="view details"></div>
+        <div class="">
+        <a href="">view details"></div></a>
     </div>
 
     <div>
-        <div class="Pembelian Barang"></div>
+    <div class="">
+            <h5>Pembelian Barang</h5>
+        </div>
+
+        </div>
         <div class="gambar">
             <i class="fa-solid fa-cart-shopping"></i>
         </div>
-        <div class="view details"></div>
+
+        <div class="">
+        <a href="">view details"></div></a>
     </div>
 
     <div>
-        <div class="Laporan"></div>
+    <div class="">
+            <h5>Laporan</h5>
+        </div>
+
         <div class="gambar">
             <i class="fa-regular fa-file"></i>
         </div>
-        <div class="view details"></div>
+        <div class="">
+        <a href="">view details"></div></a>
     </div>
+
 </div>
 
 <?= $this->endSection() ?>
