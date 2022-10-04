@@ -25,9 +25,17 @@
 <div class="list-gedung">
     <?php for ($i = 0; $i < 3; $i++) : ?>
         <div>
-            <div class="judul"></div>
-            <div class="gambar"></div>
-            <div class="detail"></div>
+            <div class="judul">
+                <h5></h5>
+            </div>
+
+            <div class="gambar">
+                <img src="" alt="">
+            </div>
+
+            <div class="detail">
+                <a href="">View details ></a>
+            </div>
         </div>
     <?php endfor ?>
 </div>
@@ -35,7 +43,7 @@
 <div class="footer">
     <div class="previous-next">
         <button type="button"></button>
-        <label for=""></label>
+        <label></label>
         <button type="button"></button>
     </div>
 </div>

@@ -19,9 +19,10 @@
         <span>Entries</span>
     </div>
 
-    <div class="print-button button">
-        <a href=""><i class="fa-solid fa-print"></i>Print</a>
-    </div>
+    <a href="" class="print-button button">
+        <i class="fa-solid fa-print"></i>
+        Print
+    </a>
 </div>
 
 <div class="table-barang">

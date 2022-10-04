@@ -15,11 +15,23 @@
 .action
     display: flex
     justify-content: space-between
-    padding: 0 50px
 
-    background-color: orange
+    #entries
+        border: none
+        width: 60px
+        border-radius: 4px
+        padding: 4px 12px
+        background-color: #eee
+
+        &:focus
+            outline: none
 
     .button
         padding: 4px 12px
         border-radius: 4px
-        border: 1px solid #eaeaea
+        border: 1px solid #eee
+
+        transition: background-color 300ms
+
+        &:hover
+            background-color: #eee
