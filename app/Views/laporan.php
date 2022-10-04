@@ -12,7 +12,7 @@
 
         <select name="entries" id="entries">
             <?php for ($i = 1; $i < 5; $i++) : ?>
-                <option value=""></option>
+                <option value="<?= $i ?>"><?= $i ?></option>
             <?php endfor ?>
         </select>
 
@@ -20,10 +20,7 @@
     </div>
 
     <div class="print-button">
-        <a href="">
-            <img src="" alt="print-icon">
-            Print
-        </a>
+        <a href=""><i class="fa-solid fa-print"></i>Print</a>
     </div>
 </div>
 
