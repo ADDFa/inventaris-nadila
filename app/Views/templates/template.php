@@ -104,9 +104,7 @@
             </div>
         </header>
 
-        <div>
-            <?= $this->renderSection('content') ?>
-        </div>
+        <?= $this->renderSection('content') ?>
     </div>
 
     <script src="/js/template.js"></script>
