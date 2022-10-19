@@ -14,7 +14,9 @@
             <?php for ($i = 1; $i < 5; $i++) : ?>
                 <option value=""></option>
             <?php endfor ?>
-        </select><span></span>
+        </select>
+
+        <span></span>
     </div>
 
     <div class="add-data-button">
