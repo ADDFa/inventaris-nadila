@@ -14,7 +14,7 @@ class Pages extends BaseController
             'script'     => []
         ];
 
-        return view('dashboard', $data);
+        return view('pages/dashboard', $data);
     }
 
     public function gedung()
@@ -25,7 +25,7 @@ class Pages extends BaseController
             'script'     => []
         ];
 
-        return view('gedung', $data);
+        return view('pages/gedung', $data);
     }
 
     public function ruangan()
@@ -36,7 +36,7 @@ class Pages extends BaseController
             'script'     => []
         ];
 
-        return view('ruangan', $data);
+        return view('pages/ruangan', $data);
     }
 
     public function barang()
@@ -47,7 +47,7 @@ class Pages extends BaseController
             'script'     => []
         ];
 
-        return view('barang', $data);
+        return view('pages/barang', $data);
     }
 
     public function supplier()
@@ -58,7 +58,7 @@ class Pages extends BaseController
             'script'     => []
         ];
 
-        return view('supplier', $data);
+        return view('pages/supplier', $data);
     }
 
     public function penyimpanan()
@@ -69,7 +69,7 @@ class Pages extends BaseController
             'script'     => []
         ];
 
-        return view('penyimpanan', $data);
+        return view('pages/penyimpanan', $data);
     }
 
     public function pembelian()
@@ -80,7 +80,7 @@ class Pages extends BaseController
             'script'     => []
         ];
 
-        return view('pembelian', $data);
+        return view('pages/pembelian', $data);
     }
 
     public function laporan()
@@ -94,7 +94,7 @@ class Pages extends BaseController
             'script'     => []
         ];
 
-        return view('laporan', $data);
+        return view('pages/laporan', $data);
     }
 
     public function barcode()
@@ -105,6 +105,6 @@ class Pages extends BaseController
             'script'     => []
         ];
 
-        return view('barcode', $data);
+        return view('pages/barcode', $data);
     }
 }
