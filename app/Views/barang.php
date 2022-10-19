@@ -26,30 +26,38 @@
     <table>
         <thead>
             <tr>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
+                <th>No</th>
+                <th>Kode Barang</th>
+                <th>Nama Barang</th>
+                <th>Merk</th>
+                <th>Kategori</th>
+                <th>Jumlah</th>
+                <th>Kondisi</th>
+                <th>Harga</th>
+                <th>Opsi</th>
             </tr>
         </thead>
 
         <tbody>
             <?php for ($i = 0; $i < 9; $i++) : ?>
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td><?= $i + 1 ?></td>
+                    <td>002</td>
+                    <td>Kursi</td>
+                    <td>Napoli</td>
+                    <td>Non Elektronik</td>
+                    <td>30</td>
+                    <td>Baru</td>
+                    <td>65000</td>
+                    <th>
+                        <div class="update">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </div>
+
+                        <div class="delete">
+                            <i class="fa-solid fa-trash"></i>
+                        </div>
+                    </th>
                 </tr>
             <?php endfor ?>
         </tbody>
