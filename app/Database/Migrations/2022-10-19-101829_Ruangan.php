@@ -29,7 +29,11 @@ class Ruangan extends Migration
                 'type'          => 'VARCHAR',
                 'constraint'    => '40'
             ],
+<<<<<<< HEAD
             
+=======
+
+>>>>>>> 41bd32aad150088ea708ceff48a4b0ec41a1674c
             'creaed_at' => [
                 'type'              => 'DATETIME',
                 'null'              => true
