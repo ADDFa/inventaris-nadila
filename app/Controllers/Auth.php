@@ -18,7 +18,7 @@ class Auth extends BaseController
             'script'        => ['template']
         ];
 
-        return view('login', $data);
+        return view('pages/login', $data);
     }
 
     public function masuk()

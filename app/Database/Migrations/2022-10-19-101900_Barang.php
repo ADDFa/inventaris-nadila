@@ -79,10 +79,10 @@ class Barang extends Migration
             ]
         ]);
 
-        $this->forge->addPrimaryKey('id_barang');
-        $this->forge->addForeignKey('id_user', 'users', 'id_user', 'CASCADE', 'CASCADE');
-        $this->forge->addForeignKey('id_ruangan', 'ruangan', 'id_ruangan', 'CASCADE', 'CASCADE');
-        $this->forge->createTable('barang', true);
+        // $this->forge->addPrimaryKey('id_barang');
+        // $this->forge->addForeignKey('id_user', 'users', 'id_user', 'CASCADE', 'CASCADE');
+        // $this->forge->addForeignKey('id_ruangan', 'ruangan', 'id_ruangan', 'CASCADE', 'CASCADE');
+        // $this->forge->createTable('barang', true);
     }
 
     public function down()

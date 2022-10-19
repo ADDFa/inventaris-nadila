@@ -29,21 +29,7 @@ class Ruangan extends Migration
                 'type'          => 'VARCHAR',
                 'constraint'    => '40'
             ],
-
-            'tgl_pencatatan' => [
-                'type'          => 'VARCHAR',
-                'constraint'    => '2'
-            ],
-
-            'bulan_pencatatan' => [
-                'type'              => 'VARCHAR',
-                'constraint'        => '2'
-            ],
-
-            'tahun_pencatatan' => [
-                'type'              => 'YEAR'
-            ],
-
+            
             'creaed_at' => [
                 'type'              => 'DATETIME',
                 'null'              => true
@@ -63,6 +49,6 @@ class Ruangan extends Migration
 
     public function down()
     {
-        // $this->forge->dropTable('ruangan', true);
+        $this->forge->dropTable('ruangan', true);
     }
 }
