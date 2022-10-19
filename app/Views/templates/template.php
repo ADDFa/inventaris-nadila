@@ -7,12 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $title ?></title>
 
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <!-- // TODO: Resources -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+
+    <!-- // TODO: My Style -->
     <link rel="stylesheet" href="/css/template.css">
 
     <?php if ($style) : ?>
         <?php foreach ($style as $s) : ?>
-            <link rel="stylesheet" href="<?= '/css/' . $s . '.css' ?>">
+            <!-- <link rel="stylesheet" href="<?= '/css/' . $s . '.css' ?>"> -->
         <?php endforeach ?>
     <?php endif ?>
 
@@ -20,97 +24,87 @@
 </head>
 
 <body>
-    <nav>
-        <ul>
-            <li>
-                <a href="/dashboard">
-                    <i class="fa-solid fa-house-chimney-window"></i>
-                    <span>Dashboard</span>
-                </a>
-            </li>
 
-            <li>
-                <a href="/gedung">
-                    <i class="fa-solid fa-landmark"></i>
-                    <span>Gedung</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="/ruangan">
-                    <i class="fa-solid fa-door-open"></i>
-                    <span>Ruangan</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="/barang">
-                    <i class="fa-solid fa-boxes-stacked"></i>
-                    <span>Barang</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="/supplier">
-                    <i class="fa-solid fa-people-carry-box"></i>
-                    <span>Supplier</span>
-                </a>
-            </li>
-            <li>
-                <a href="/penyimpanan">
-                    <i class="fa-solid fa-database"></i>
-                    <span>Penyimpanan</span>
-                </a>
-            </li>
-            <li>
-                <a href="/pembelian">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                    <span>Pembelian Barang</span>
-                </a>
-            </li>
-            <li>
-                <a href="/laporan">
-                    <i class="fa-solid fa-file-lines"></i>
-                    <span>Laporan</span>
-                </a>
-            </li>
-            <li>
-                <a href="/barcode">
-                    <i class="fa-solid fa-qrcode"></i>
-                    <span>QR Code</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-
-    <div class="content">
-        <header>
-            <form action="">
-                <input type="text">
-            </form>
-
-            <div class="user">
-                <i class="fa-solid fa-user"></i>
-                <span class="username"><?= session('username') ?></span>
-
-                <a href="/logout" class="logout">
-                    <i class="fa-solid fa-right-from-bracket"></i>
-                </a>
+    <body id="body-pd">
+        <header class="header" id="header">
+            <div class="header_toggle">
+                <i class='bx bx-menu' id="header-toggle"></i>
+            </div>
+            <div class="header_img">
+                <img src="https://i.imgur.com/hczKIze.jpg" alt="user">
             </div>
         </header>
 
-        <div>
+        <div class="l-navbar" id="nav-bar">
+            <nav class="nav">
+                <div>
+                    <a href="#" class="nav_logo">
+                        <i class='bx bx-layer nav_logo-icon'></i>
+                        <span class="nav_logo-name">INVENTARIS</span>
+                    </a>
+
+                    <div class="nav_list">
+                        <a href="#" class="nav_link active">
+                            <i class='bx bx-grid-alt nav_icon'></i>
+                            <span class="nav_name">Dashboard</span>
+                        </a>
+                        <a href="#" class="nav_link">
+                            <i class='bx bx-user nav_icon'></i>
+                            <span class="nav_name">Gedung</span>
+                        </a>
+                        <a href="#" class="nav_link">
+                            <i class='bx bx-message-square-detail nav_icon'></i>
+                            <span class="nav_name">Ruangan</span>
+                        </a>
+                        <a href="#" class="nav_link">
+                            <i class='bx bx-bookmark nav_icon'></i>
+                            <span class="nav_name">Barang</span>
+                        </a>
+                        <a href="#" class="nav_link">
+                            <i class='bx bx-folder nav_icon'></i>
+                            <span class="nav_name">Supplier</span>
+                        </a>
+                        <a href="#" class="nav_link">
+                            <i class='bx bx-bar-chart-alt-2 nav_icon'></i>
+                            <span class="nav_name">Penyimpanan</span>
+                        </a>
+                        <a href="#" class="nav_link">
+                            <i class="bx bxl-bitcoin nav_icon"></i>
+                            <span class="nav_name">Pembelian Barang</span>
+                        </a>
+                        <a href="#" class="nav_link">
+                            <i class='bx bxs-report'></i>
+                            <span class="nav_name">Laporan</span>
+                        </a>
+                        <a href="#" class="nav_link">
+                            <i class='bx bx-qr-scan'></i>
+                            <span class="nav_name">QR Code</span>
+                        </a>
+                    </div>
+                </div>
+
+                <a href="#" class="nav_link">
+                    <i class='bx bx-log-out nav_icon'></i>
+                    <span class="nav_name">SignOut</span>
+                </a>
+            </nav>
+        </div>
+
+        <div class="height-100 bg-light">
             <?= $this->renderSection('content') ?>
         </div>
-    </div>
 
-    <script src="/js/template.js"></script>
 
-    <?php if ($script) : ?>
-        <?php foreach ($script as $sc) : ?>
-            <script src="<?= '/js/' . $sc . '.js' ?>"></script>
-        <?php endforeach ?>
-    <?php endif ?>
-</body>
+        <!-- // TODO: Resources -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
+        <script src="/js/template.js"></script>
+
+        <!-- // TODO: My Script -->
+        <?php if ($script) : ?>
+            <?php foreach ($script as $sc) : ?>
+                <!-- <script src="<?= '/js/' . $sc . '.js' ?>"></script> -->
+            <?php endforeach ?>
+        <?php endif ?>
+    </body>
 
 </html>

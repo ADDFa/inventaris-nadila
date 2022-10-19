@@ -1,27 +1,31 @@
-const el = element => document.querySelector(`${element}`)
-const elAll = elements => document.querySelectorAll(`${elements}`)
+document.addEventListener("DOMContentLoaded", function (event) {
+    const showNavbar = (toggleId, navId, bodyId, headerId) => {
+        const toggle = document.getElementById(toggleId),
+            nav = document.getElementById(navId),
+            bodypd = document.getElementById(bodyId),
+            headerpd = document.getElementById(headerId)
 
-const navAktif = () => el(`[href="${location.pathname}"]`).classList.add('nav-aktif')
+        if (toggle && nav && bodypd && headerpd) {
+            toggle.addEventListener('click', () => {
+                nav.classList.toggle('show')
+                toggle.classList.toggle('bx-x')
+                bodypd.classList.toggle('body-pd')
+                headerpd.classList.toggle('body-pd')
+            })
+        }
+    }
 
-if (el(`[href="${location.pathname}"]`)) {
-    window.addEventListener('load', navAktif)
-}
+    showNavbar('header-toggle', 'nav-bar', 'body-pd', 'header')
 
-const popup = (pesan, icon, title) => {
-    Swal.fire(
-        title,
-        pesan,
-        icon
-    )
-}
+    /*===== LINK ACTIVE =====*/
+    const linkColor = document.querySelectorAll('.nav_link')
 
-const pesan = dataPesan => {
-    data = dataPesan.getAttribute('data-pesan').split(',')
+    function colorLink() {
+        if (linkColor) {
+            linkColor.forEach(l => l.classList.remove('active'))
+            this.classList.add('active')
+        }
+    }
 
-    if (data[0] == 0) return popup(data[1], 'warning', 'Gagal')
-
-    return
-}
-
-const dataPesan = el('[data-pesan]')
-if (dataPesan) pesan(dataPesan)
+    linkColor.forEach(l => l.addEventListener('click', colorLink))
+})
