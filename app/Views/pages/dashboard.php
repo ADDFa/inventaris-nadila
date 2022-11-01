@@ -7,70 +7,56 @@
     <h3>Di Sistem Informasi Inventaris Barang SMPIT Iqra' Kota Bengkulu</h3>
 </div>
 
-<div>
-    <div>
-        <div class="">
-            <h5>Jumlah Gedung</h5>
+<div class="d-flex flex-wrap">
+    <div class="card text-bg-light mb-3" style="max-width: 18rem;">
+        <div class="card-header text-center">Jumlah Gedung</div>
+        <div class="card-body">
+            <img class="w-100" src="/images/gedung/sample.jpg" alt="gedung">
         </div>
-
-        <div class="gambar">
-            <i class="fa-solid fa-school"></i>
-        </div>
-
-        <div class="">
-            <a href="">View details ></a>
+        <div class="card-footer text-center">
+            <a href="#">Lihat Detail ></a>
         </div>
     </div>
 
-    <div>
-        <div class="">
-        <h5> Jumlah Ruangan </h5>
-    </div>
-        <div class="gambar">
-            <i class="fa-solid fa-door-open"></i>
+    <div class="card text-bg-light mb-3" style="max-width: 18rem;">
+        <div class="card-header text-center">Jumlah Ruangan</div>
+        <div class="card-body">
+            <img class="w-100" src="/images/ruangan/sample.jpg" alt="ruangan">
         </div>
-        <div class="">
-        <a href="">view details"></div></a>
-    </div>
-
-    <div>
-        <div class="">
-        <h5> Jumlah Barang </h5>
+        <div class="card-footer text-center">
+            <a href="#">Lihat Detail ></a>
         </div>
-        
-        <div class="gambar">
-            <i class="fa-solid fa-layer-group"></i>
-        </div>
-        <div class="">
-        <a href="">view details"></div></a>
     </div>
 
-    <div>
-    <div class="">
-            <h5>Pembelian Barang</h5>
+    <div class="card text-bg-light mb-3" style="max-width: 18rem;">
+        <div class="card-header text-center">Jumlah Barang</div>
+        <div class="card-body">
+            <img class="w-100" src="/images/gedung/sample.jpg" alt="barang">
         </div>
-
+        <div class="card-footer text-center">
+            <a href="#">Lihat Detail ></a>
         </div>
-        <div class="gambar">
-            <i class="fa-solid fa-cart-shopping"></i>
-        </div>
-
-        <div class="">
-        <a href="">view details"></div></a>
     </div>
 
-    <div>
-    <div class="">
-            <h5>Laporan</h5>
+    <div class="card text-bg-light mb-3" style="max-width: 18rem;">
+        <div class="card-header text-center">Pembelian Gedung</div>
+        <div class="card-body">
+            <img class="w-100" src="/images/gedung/sample.jpg" alt="pembelian">
         </div>
-
-        <div class="gambar">
-            <i class="fa-regular fa-file"></i>
+        <div class="card-footer text-center">
+            <a href="#">Lihat Detail ></a>
         </div>
-        <div class="">
-        <a href="">view details"></div></a>
     </div>
 
+    <div class="card text-bg-light mb-3" style="max-width: 18rem;">
+        <div class="card-header text-center">Laporan</div>
+        <div class="card-body">
+            <img class="w-100" src="/images/gedung/sample.jpg" alt="laporan">
+        </div>
+        <div class="card-footer text-center">
+            <a href="#">Lihat Detail ></a>
+        </div>
+    </div>
 </div>
 
 <?= $this->endSection() ?>
