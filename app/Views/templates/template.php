@@ -14,9 +14,9 @@
     <!-- // TODO: My Style -->
     <link rel="stylesheet" href="/css/template.css">
 
-    <?php if ($style) : ?>
+    <?php if (isset($style)) : ?>
         <?php foreach ($style as $s) : ?>
-            <!-- <link rel="stylesheet" href="<?= '/css/' . $s . '.css' ?>"> -->
+            <link rel="stylesheet" href="<?= '/css/pages/' . $s . '.css' ?>">
         <?php endforeach ?>
     <?php endif ?>
 
@@ -92,9 +92,9 @@
         <script src="/js/template.js"></script>
 
         <!-- // TODO: My Script -->
-        <?php if ($script) : ?>
+        <?php if (isset($script)) : ?>
             <?php foreach ($script as $sc) : ?>
-                <!-- <script src="<?= '/js/' . $sc . '.js' ?>"></script> -->
+                <script src="<?= '/js/' . $sc . '.js' ?>"></script>
             <?php endforeach ?>
         <?php endif ?>
     </body>

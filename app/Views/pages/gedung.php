@@ -12,7 +12,7 @@
 
         <select name="" id="">
             <?php for ($i = 1; $i < 5; $i++) : ?>
-                <option value=""><?= $i?></option>
+                <option value=""><?= $i ?></option>
             <?php endfor ?>
         </select>
         <span>Entries</span>
@@ -25,20 +25,13 @@
 
 <div class="list-gedung">
     <?php for ($i = 0; $i < 3; $i++) : ?>
-        <div>
-            <div class="judul">
-                <h5>Gedung <?= $i ?></h5>
+        <div class="card text-bg-light mb-3" style="max-width: 18rem;">
+            <div class="card-header text-center">Jumlah Gedung</div>
+            <div class="card-body">
+                <img class="w-100" src="/images/gedung/sample.jpg" alt="gedung">
             </div>
-
-            <div class="gambar">
-                <img src="/images/gedung/sample.jpg" alt="sample">
-            </div>
-
-            <div class="detail">
-                <a href="">
-                    View details 
-                    <i class="fa-solid fa-arrow-right"></i>
-                </a>
+            <div class="card-footer text-center">
+                <a href="#">Lihat Detail ></a>
             </div>
         </div>
     <?php endfor ?>

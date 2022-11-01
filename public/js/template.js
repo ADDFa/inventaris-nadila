@@ -1,3 +1,6 @@
+const el = element => document.querySelector(`${element}`)
+const elAll = elements => document.querySelectorAll(`${elements}`)
+
 document.addEventListener("DOMContentLoaded", function (event) {
     const showNavbar = (toggleId, navId, bodyId, headerId) => {
         const toggle = document.getElementById(toggleId),
@@ -28,4 +31,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     }
 
     linkColor.forEach(l => l.addEventListener('click', colorLink))
+
+    el('.active').classList.remove('active')
+    el(`[href="${location.pathname}"]`).classList.add('active')
 })

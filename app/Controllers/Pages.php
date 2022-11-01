@@ -10,7 +10,9 @@ class Pages extends BaseController
     {
         $data = [
             'title'     => 'Dashboard',
-            'style'     => [],
+            'style'     => [
+                // 'dashboard'
+            ],
             'script'     => []
         ];
 

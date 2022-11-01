@@ -7,7 +7,7 @@
     <h3>Di Sistem Informasi Inventaris Barang SMPIT Iqra' Kota Bengkulu</h3>
 </div>
 
-<div class="d-flex flex-wrap">
+<div class="container d-flex flex-wrap gap-5 justify-content-around mx-auto my-5">
     <div class="card text-bg-light mb-3" style="max-width: 18rem;">
         <div class="card-header text-center">Jumlah Gedung</div>
         <div class="card-body">
