@@ -6,25 +6,28 @@
     <h1 class="text-center">Manajemen Data Laporan</h1>
 </div>
 
-<div class="action row">
-    <div class="entries d-flex align-items-center col-md-2">
-        <label for="">Show</label>
+<div class="d-flex justify-content-between align-items-center px-5">
+    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+        <button type="button" class="btn btn-primary">Show</button>
 
-        <select name="" id="" class="form-select">
-            <?php for ($i = 1; $i < 5; $i++) : ?>
-                <option value=""><?= $i ?></option>
-            <?php endfor ?>
-        </select>
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Dropdown
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+                <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+            </ul>
+        </div>
 
-        <span>Entries</span>
+        <button type="button" class="btn btn-primary">Entries</button>
     </div>
 
-    <div class="add-data-button row col-md-11 d-flex justify-content-end mb-5 mx-auto">
-        <button type="button" class="btn btn-primary col-md-1">Tambah</button>
-    </div>
+
+    <button type="button" class="btn btn-primary">+ Insert Data</button>
 </div>
 
-<div class="table-penyimpanan col-md-11 mx-auto row">
+<div class="table-penyimpanan col-md-11 mx-auto row my-5">
     <table class="table">
         <thead>
             <tr>
@@ -67,11 +70,11 @@
     </table>
 </div>
 
-<div class="footer mt-4 row">
-    <div class="previous-next col-md-11 d-flex justify-content-end mx-auto">
-        <button type="button" class="btn btn-primary rounded-0">Previous</button>
-        <span class="py-2 px-3 border border-secondary">1</span>
-        <button type="button" class="btn btn-primary rounded-0">Next</button>
+<div class="footer d-flex justify-content-end px-5 mb-5">
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <a href="" class="btn btn-primary">Prev</a>
+        <button type="button" class="btn btn-primary">1</button>
+        <a href="" class="btn btn-primary">Next</a>
     </div>
 </div>
 

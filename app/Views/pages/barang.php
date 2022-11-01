@@ -6,24 +6,28 @@
     <h1 class="text-center">Manajemen Data Barang</h1>
 </div>
 
-<div class="action row">
-    <div class="entries d-flex align-items-center col-md-2">
-        <label for="">Show</label>
+<div class="d-flex justify-content-between align-items-center px-5">
+    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+        <button type="button" class="btn btn-primary">Show</button>
 
-        <select name="" id="" class="form-select ">
-            <?php for ($i = 1; $i < 5; $i++) : ?>
-                <option value=""><?= $i ?></option>
-            <?php endfor ?>
-        </select>
-        <span>Entries</span>
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Dropdown
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+                <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+            </ul>
+        </div>
+
+        <button type="button" class="btn btn-primary">Entries</button>
     </div>
 
-    <div class="add-data-button row col-md-11 d-flex justify-content-end mb-5 p-0 mx-auto">
-        <button type="button" class="btn btn-primary col-md-1">Tambah</button>
-    </div>
+
+    <button type="button" class="btn btn-primary">+ Insert Data</button>
 </div>
 
-<div class="table-barang col-md-11 mx-auto row">
+<div class="table-barang col-md-11 mx-auto row my-5">
     <table class="table">
         <thead>
             <tr>
@@ -40,41 +44,40 @@
             </tr>
         </thead>
         <tbody class="table-group-divider">
-           <?php for ($i = 1; $i <= 7; $i++) : ?>
-            <tr>
-                <th scope="row"><?= $i ?></th>
-                <td>Qr_Code <?= $i ?></td>
-                <td>Nama Barang <?= $i ?></td>
-                <td>Foto <?= $i ?></td>
-                <td>Kategori <?= $i ?></td>
-                <td>Merk <?= $i ?></td>
-                <td>Jenis Barang <?= $i ?></td>
-                <td>Jumlah <?= $i ?></td>
-                <td>Tanggal Pencatatan <?= $i ?></td>
-                <td class="d-flex justify-content-between align-items-center">
-                    <a href=""><button class="btn btn-warning"><i class="fa-solid fa-eye"></i></button></a>
-                    
-                    <a href=""><button class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></button></a>
+            <?php for ($i = 1; $i <= 7; $i++) : ?>
+                <tr>
+                    <th scope="row"><?= $i ?></th>
+                    <td>Qr_Code <?= $i ?></td>
+                    <td>Nama Barang <?= $i ?></td>
+                    <td>Foto <?= $i ?></td>
+                    <td>Kategori <?= $i ?></td>
+                    <td>Merk <?= $i ?></td>
+                    <td>Jenis Barang <?= $i ?></td>
+                    <td>Jumlah <?= $i ?></td>
+                    <td>Tanggal Pencatatan <?= $i ?></td>
+                    <td class="d-flex justify-content-between align-items-center">
+                        <a href=""><button class="btn btn-warning"><i class="fa-solid fa-eye"></i></button></a>
 
-                    <form action="">
-                        <button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
+                        <a href=""><button class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></button></a>
 
-                    </form>
-    
+                        <form action="">
+                            <button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
 
-                </td>
-            </tr>
+                        </form>
+
+
+                    </td>
+                </tr>
             <?php endfor ?>
         </tbody>
     </table>
-
 </div>
 
-<div class="footer mt=4 row">
-    <div class="previous-next col-md-10 d-flex justify-content-end mx-auto">
-        <button type="button" class="btn btn-primary rounded-0">Previous</button>
-        <span for="" class="py-2 px-3 border border-secondary">1</span>
-        <button type="button" class="btn btn-primary rounded-0">Next</button>
+<div class="footer d-flex justify-content-end px-5 mb-5">
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <a href="" class="btn btn-primary">Prev</a>
+        <button type="button" class="btn btn-primary">1</button>
+        <a href="" class="btn btn-primary">Next</a>
     </div>
 </div>
 
