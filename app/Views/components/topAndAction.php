@@ -1,5 +1,5 @@
 <div class="title row">
-    <h1 class="text-center">Manajemen Data <?= $title ?></h1>
+    <h1 class="text-center fw-bold">Manajemen Data <?= $title ?></h1>
 </div>
 
 <div class="d-flex justify-content-between align-items-center px-5">

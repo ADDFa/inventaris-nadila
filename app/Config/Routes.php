@@ -35,6 +35,12 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
+
+
+$routes->get('/', 'Auth::login');
+$routes->get('/logout', 'Auth::logout');
+$routes->post('/login', 'Auth::masuk');
+
 $route = [
     '/dashboard'    => 'index',
     '/gedung'       => 'gedung',
@@ -51,10 +57,19 @@ foreach ($route as $route => $method) {
     $routes->get($route, 'Pages::' . $method, ['filter'  => 'login']);
 }
 
-$routes->get('/', 'Auth::login');
-$routes->get('/logout', 'Auth::logout');
+$insert = [
+    'Gedung'       => '/gedung/',
+    'Ruangan'      => '/ruangan/',
+    'Barang'       => '/barang/',
+    'Penyimpanan'  => '/penyimpanan/'
+];
 
-$routes->post('/login', 'Auth::masuk');
+foreach ($insert as $controller => $route) {
+    $routes->get($route . 'tambah', $controller . '::create', ['filter' => 'login']);
+}
+
+$routes->get('/laporan/print', 'Laporan::print', ['filter' => 'login']);
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

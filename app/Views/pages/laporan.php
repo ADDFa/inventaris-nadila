@@ -3,7 +3,7 @@
 <?= $this->section('content') ?>
 
 <div class="title row">
-    <h1 class="text-center">Manajemen Data <?= $title ?></h1>
+    <h1 class="text-center fw-bold">Manajemen Data <?= $title ?></h1>
 </div>
 
 <div class="d-flex justify-content-between align-items-center px-5">
@@ -24,7 +24,7 @@
     </div>
 
 
-    <a href="/laproran/print" type="button" class="btn btn-default d-flex gap-2 align-items-center">
+    <a href="/laporan/print" type="button" class="btn btn-default d-flex gap-2 align-items-center">
         <i class='bx bx-printer w-100 h-100'></i>
         Print
     </a>
