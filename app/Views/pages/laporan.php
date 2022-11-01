@@ -2,74 +2,76 @@
 
 <?= $this->section('content') ?>
 
-<div class="title">
-    <h1>Manajemen Laporan Pembelian Barang</h1>
+<div class="title row">
+    <h1 class="text-center">Manajemen Data Laporan</h1>
 </div>
 
-<div class="action">
-    <div class="entries">
-        <label for="entries">Show</label>
+<div class="action row">
+    <div class="entries d-flex align-items-center col-md-2">
+        <label for="">Show</label>
 
-        <select name="entries" id="entries">
+        <select name="" id="" class="form-select">
             <?php for ($i = 1; $i < 5; $i++) : ?>
-                <option value="<?= $i ?>"><?= $i ?></option>
+                <option value=""><?= $i ?></option>
             <?php endfor ?>
         </select>
 
         <span>Entries</span>
     </div>
 
-    <a href="" class="print-button button">
-        <i class="fa-solid fa-print"></i>
-        Print
-    </a>
+    <div class="add-data-button row col-md-11 d-flex justify-content-end mb-5 mx-auto">
+        <button type="button" class="btn btn-primary col-md-1">Tambah</button>
+    </div>
 </div>
 
-<div class="table-barang">
-    <table>
+<div class="table-penyimpanan col-md-11 mx-auto row">
+    <table class="table">
         <thead>
             <tr>
-                <th>No</th>
-                <th>Kode Beli</th>
-                <th>Nama Barang</th>
-                <th>Nama Supplier</th>
-                <th>Jumlah</th>
-                <th>Tgl Beli</th>
-                <th>Harga</th>
-                <th>Opsi</th>
+                <th scope="col">No</th>
+                <th scope="col">Kode Barang</th>
+                <th scope="col">Nama Barang</th>
+                <th scope="col">Nama Gedung</th>
+                <th scope="col">Nama Ruangan</th>
+                <th scope="col">Jumlah Barang</th>
+                <th scope="col">Tanggal Penyimpanan</th>
+                <th scope="col" class="text-center">Aksi</th>
             </tr>
         </thead>
-
-        <tbody>
-            <?php for ($i = 0; $i < 19; $i++) : ?>
+        <tbody class="table-group-divider">
+            <?php for ($i = 1; $i <= 12; $i++) : ?>
                 <tr>
-                    <td><?= $i + 1 ?></td>
-                    <td>010</td>
-                    <td>Barang</td>
-                    <td>Sup</td>
-                    <td>Jml</td>
-                    <td>09-09-2009</td>
-                    <td>20000</td>
-                    <th>
-                        <div class="update">
-                            <i class="fa-solid fa-pen-to-square"></i>
-                        </div>
+                    <th scope="row"><?= $i ?></th>
+                    <td>Kode Barang <?= $i ?></td>
+                    <td>Nama Barang <?= $i ?></td>
+                    <td>Nama Gedung <?= $i ?></td>
+                    <td>Nama Ruangan <?= $i ?></td>
+                    <td>Jumlah Barang <?= $i ?></td>
+                    <td>Tanggal Penyimpanan <?= $i ?></td>
+                    <td class="d-flex justify-content-between align-items-center">
+                        <a href="">
+                            <button class="btn btn-warning"><i class="fa-solid fa-eye"></i></button>
+                        </a>
 
-                        <div class="delete">
-                            <i class="fa-solid fa-trash"></i>
-                        </div>
-                    </th>
+                        <a href="">
+                            <button class="btn btn-primary"><i class="fa-regular fa-pen-to-square"></i></button>
+                        </a>
+
+                        <form action="" method="POST">
+                            <button class="btn btn-danger" type="submit"><i class="fa-solid fa-trash"></i></button>
+                        </form>
+                    </td>
                 </tr>
             <?php endfor ?>
         </tbody>
     </table>
 </div>
 
-<div class="footer">
-    <div class="previous-next">
-        <button type="button">Previous</button>
-        <label>1</label>
-        <button type="button">Next</button>
+<div class="footer mt-4 row">
+    <div class="previous-next col-md-11 d-flex justify-content-end mx-auto">
+        <button type="button" class="btn btn-primary rounded-0">Previous</button>
+        <span class="py-2 px-3 border border-secondary">1</span>
+        <button type="button" class="btn btn-primary rounded-0">Next</button>
     </div>
 </div>
 

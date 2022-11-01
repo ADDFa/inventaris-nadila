@@ -47,20 +47,6 @@
 
     <div>
     <div class="">
-            <h5>Pembelian Barang</h5>
-        </div>
-
-        </div>
-        <div class="gambar">
-            <i class="fa-solid fa-cart-shopping"></i>
-        </div>
-
-        <div class="">
-        <a href="">view details"></div></a>
-    </div>
-
-    <div>
-    <div class="">
             <h5>Laporan</h5>
         </div>
 

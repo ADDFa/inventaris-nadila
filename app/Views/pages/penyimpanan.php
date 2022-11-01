@@ -29,13 +29,12 @@
         <thead>
             <tr>
                 <th scope="col">No</th>
-                <th scope="col">Nama Barang</th>
-                <th scope="col">Kategori Barang</th>
-                <th scope="col">Jumlah Barang</th>
-                <th scope="col">Jumlah Penyimpanan</th>
-                <th scope="col">Tanggal Penyimpanan</th>
                 <th scope="col">Nama Ruangan</th>
-                <th scope="col">Tanggal Pencatatan</th>
+                <th scope="col">Nama Barang</th>
+                <th scope="col">Jumlah Barang</th>
+                <th scope="col">kapasitas Penyimpanan</th>
+                <th scope="col">Kategori Barang</th>
+                <th scope="col">Tanggal Penyimpanan</th>
                 <th scope="col" class="text-center">Aksi</th>
             </tr>
         </thead>
@@ -44,12 +43,11 @@
                 <tr>
                     <th scope="row"><?= $i ?></th>
                     <td>Nama Barang <?= $i ?></td>
-                    <td>Kategori Barang <?= $i ?></td>
+                    <td>Nama Ruangan<?= $i ?></td>
                     <td>Jumlah Barang <?= $i ?></td>
-                    <td>Jumlah Penyimpanan <?= $i ?></td>
-                    <td>Tanggal Penyimpanan <?= $i ?></td>
-                    <td>Nama Ruangan <?= $i ?></td>
-                    <td>Tanggal Pencatatan <?= $i ?></td>
+                    <td>kapasitas Penyimpanan <?= $i ?></td>
+                    <td> Kategori Barang<?= $i ?></td>
+                    <td> Tanggal Penyimpanan <?= $i ?></td>
                     <td class="d-flex justify-content-between align-items-center">
                         <a href="">
                             <button class="btn btn-warning"><i class="fa-solid fa-eye"></i></button>

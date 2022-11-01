@@ -23,17 +23,17 @@
     </div>
 </div>
 
-<div class="table-barang col-md-10 mx-auto row">
-
+<div class="table-barang col-md-11 mx-auto row">
     <table class="table">
         <thead>
             <tr>
                 <th scope="col">No</th>
+                <th scope="col">Id_Barang</th>
                 <th scope="col">Nama Barang</th>
+                <th scope="col">Foto</th>
                 <th scope="col">Kategori</th>
                 <th scope="col">Merk </th>
-                <th scope="col">Ketersediaan</th>
-                <th scope="col">Harga</th>
+                <th scope="col">Jenis Barang</th>
                 <th scope="col">Jumlah</th>
                 <th scope="col">Tanggal Pencatatan</th>
                 <th scope="col" class="text-center">Aksi</th>
@@ -43,11 +43,12 @@
            <?php for ($i = 1; $i <= 7; $i++) : ?>
             <tr>
                 <th scope="row"><?= $i ?></th>
+                <td>Qr_Code <?= $i ?></td>
                 <td>Nama Barang <?= $i ?></td>
+                <td>Foto <?= $i ?></td>
                 <td>Kategori <?= $i ?></td>
                 <td>Merk <?= $i ?></td>
-                <td>Ketersediaan <?= $i ?></td>
-                <td>Harga <?= $i ?></td>
+                <td>Jenis Barang <?= $i ?></td>
                 <td>Jumlah <?= $i ?></td>
                 <td>Tanggal Pencatatan <?= $i ?></td>
                 <td class="d-flex justify-content-between align-items-center">
