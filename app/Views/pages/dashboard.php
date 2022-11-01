@@ -14,7 +14,7 @@
             <img class="w-100" src="/images/gedung/sample.jpg" alt="gedung">
         </div>
         <div class="card-footer text-center">
-            <a href="#">Lihat Detail ></a>
+            <a href="#">Lihat Detail &#8811;</a>
         </div>
     </div>
 
@@ -24,7 +24,7 @@
             <img class="w-100" src="/images/ruangan/sample.jpg" alt="ruangan">
         </div>
         <div class="card-footer text-center">
-            <a href="#">Lihat Detail ></a>
+            <a href="#">Lihat Detail &#8811;</a>
         </div>
     </div>
 
@@ -34,7 +34,7 @@
             <img class="w-100" src="/images/gedung/sample.jpg" alt="barang">
         </div>
         <div class="card-footer text-center">
-            <a href="#">Lihat Detail ></a>
+            <a href="#">Lihat Detail &#8811;</a>
         </div>
     </div>
 
@@ -44,7 +44,7 @@
             <img class="w-100" src="/images/gedung/sample.jpg" alt="pembelian">
         </div>
         <div class="card-footer text-center">
-            <a href="#">Lihat Detail ></a>
+            <a href="#">Lihat Detail &#8811;</a>
         </div>
     </div>
 
@@ -54,7 +54,7 @@
             <img class="w-100" src="/images/gedung/sample.jpg" alt="laporan">
         </div>
         <div class="card-footer text-center">
-            <a href="#">Lihat Detail ></a>
+            <a href="#">Lihat Detail &#8811;</a>
         </div>
     </div>
 </div>
