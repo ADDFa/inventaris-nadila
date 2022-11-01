@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $title ?></title>
+    <title><?= $title ?> | INVENTARIS</title>
 
     <!-- // TODO: Resources -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
@@ -13,6 +13,7 @@
 
     <!-- // TODO: My Style -->
     <link rel="stylesheet" href="/css/template.css">
+    <link rel="stylesheet" href="/css/templates/main.css">
 
     <?php if (isset($style)) : ?>
         <?php foreach ($style as $s) : ?>
@@ -49,19 +50,19 @@
                             <span class="nav_name">Dashboard</span>
                         </a>
                         <a href="/gedung" class="nav_link">
-                            <i class='bx bx-user nav_icon'></i>
+                            <i class='bx bx-building nav_icon'></i>
                             <span class="nav_name">Gedung</span>
                         </a>
                         <a href="/ruangan" class="nav_link">
-                            <i class='bx bx-message-square-detail nav_icon'></i>
+                            <i class='bx bx-home-circle nav_icon'></i>
                             <span class="nav_name">Ruangan</span>
                         </a>
                         <a href="/barang" class="nav_link">
-                            <i class='bx bx-bookmark nav_icon'></i>
+                            <i class='bx bx-unite nav_icon'></i>
                             <span class="nav_name">Barang</span>
                         </a>
                         <a href="/penyimpanan" class="nav_link">
-                            <i class='bx bx-bar-chart-alt-2 nav_icon'></i>
+                            <i class='bx bx-store nav_icon'></i>
                             <span class="nav_name">Penyimpanan</span>
                         </a>
                         <a href="/laporan" class="nav_link">
@@ -75,7 +76,7 @@
                     </div>
                 </div>
 
-                <a href="#" class="nav_link">
+                <a href="/logout" class="nav_link">
                     <i class='bx bx-log-out nav_icon'></i>
                     <span class="nav_name">SignOut</span>
                 </a>

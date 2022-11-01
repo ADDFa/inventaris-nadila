@@ -26,7 +26,10 @@ class Pages extends BaseController
             'style'     => [
                 'gedung'
             ],
-            'script'     => []
+            'script'     => [],
+            'linkAction' => [
+                'create' => '/gedung/tambah'
+            ]
         ];
 
         return view('pages/gedung', $data);
@@ -37,7 +40,10 @@ class Pages extends BaseController
         $data = [
             'title'     => 'Ruangan',
             'style'     => [],
-            'script'     => []
+            'script'     => [],
+            'linkAction' => [
+                'create' => '/ruangan/tambah'
+            ]
         ];
 
         return view('pages/ruangan', $data);
@@ -48,7 +54,10 @@ class Pages extends BaseController
         $data = [
             'title'     => 'Barang',
             'style'     => [],
-            'script'     => []
+            'script'     => [],
+            'linkAction' => [
+                'create' => '/barang/tambah'
+            ]
         ];
 
         return view('pages/barang', $data);
@@ -70,7 +79,10 @@ class Pages extends BaseController
         $data = [
             'title'     => 'Penyimpanan',
             'style'     => [],
-            'script'     => []
+            'script'     => [],
+            'linkAction' => [
+                'create' => '/penyimpanan/tambah'
+            ]
         ];
 
         return view('pages/penyimpanan', $data);

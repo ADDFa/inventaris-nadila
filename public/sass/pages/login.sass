@@ -4,24 +4,43 @@ body
     overflow: hidden
 
 .form
-    background-color: rgba(179, 242, 240, .5)
+    background-color: rgba(253, 60, 111, 0.7)
     height: 100vh
 
     position: relative
 
     &>div
+        background-image: linear-gradient(0, rgba(255, 255, 255, .2), rgba(255, 0, 68, 0.2))
+        backdrop-filter: blur(10px)
+        box-shadow: 7px 15px 15px -5px #0000001c
         position: absolute
         top: 50%
         left: 50%
 
         transform: translate(-50%, -50%)
 
-        background-color: #fff
-        padding: 10px 20px
+        padding: 60px 20px
         border-radius: 10px
 
-    &>div>h1
-        text-align: center
-        line-height: 5rem
-        font-size: 25px
-        font-weight: bold
+.form-label
+    color: #fff
+
+.form-control
+    background-color: transparent
+    border-radius: 0
+    border: none
+    border-bottom: 3px solid #fff
+
+    &:focus
+        outline: none
+        box-shadow: none
+        background-color: transparent
+        border-bottom-color: rgba(255, 0, 68, 0.2)
+
+.btn-login
+    background-color: #fff
+    color: #000
+
+    &:hover
+        background-color: rgba(255, 0, 68, 0.2)
+        color: #fff

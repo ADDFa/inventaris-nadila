@@ -1,13 +1,13 @@
 <div class="title row">
-    <h1 class="text-center">Manajemen Data Laporan</h1>
+    <h1 class="text-center">Manajemen Data <?= $title ?></h1>
 </div>
 
 <div class="d-flex justify-content-between align-items-center px-5">
     <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-        <button type="button" class="btn btn-primary">Show</button>
+        <button type="button" class="btn btn-default">Show</button>
 
         <div class="btn-group" role="group">
-            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <button type="button" class="btn btn-default dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                 Dropdown
             </button>
             <ul class="dropdown-menu">
@@ -16,9 +16,9 @@
             </ul>
         </div>
 
-        <button type="button" class="btn btn-primary">Entries</button>
+        <button type="button" class="btn btn-default">Entries</button>
     </div>
 
 
-    <button type="button" class="btn btn-primary">+ Insert Data</button>
+    <a href="<?= $linkAction['create'] ?>" type="button" class="btn btn-default">+ Insert Data</a>
 </div>

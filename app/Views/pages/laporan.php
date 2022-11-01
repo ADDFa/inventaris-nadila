@@ -2,7 +2,33 @@
 
 <?= $this->section('content') ?>
 
-<?= $this->include('components/topAndAction') ?>
+<div class="title row">
+    <h1 class="text-center">Manajemen Data <?= $title ?></h1>
+</div>
+
+<div class="d-flex justify-content-between align-items-center px-5">
+    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+        <button type="button" class="btn btn-default">Show</button>
+
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Dropdown
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+                <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+            </ul>
+        </div>
+
+        <button type="button" class="btn btn-default">Entries</button>
+    </div>
+
+
+    <a href="/laproran/print" type="button" class="btn btn-default d-flex gap-2 align-items-center">
+        <i class='bx bx-printer w-100 h-100'></i>
+        Print
+    </a>
+</div>
 
 <div class="table-penyimpanan col-md-11 mx-auto row my-5">
     <table class="table">
