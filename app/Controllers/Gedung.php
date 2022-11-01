@@ -6,8 +6,17 @@ use App\Controllers\BaseController;
 
 class Gedung extends BaseController
 {
+    public function view($view = '', $data = [])
+    {
+        return view('pages/gedung/' . $view, $data);
+    }
+
     public function create()
     {
-        return 'gedung';
+        $data = [
+            'title'     => 'Tambah Gedung'
+        ];
+
+        return $this->view('tambah', $data);
     }
 }

@@ -32,9 +32,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     linkColor.forEach(l => l.addEventListener('click', colorLink))
 
+    // TODO: Set Active Class
     const active = el('.active')
-    if (active) {
-        active.classList.remove('active')
-        el(`[href="${location.pathname}"]`).classList.add('active')
-    }
+    if (!active) return
+    active.classList.remove('active')
+
+    const path = this.location.pathname
+    const target = (el(`[href="${path}"]`)) ? path : '/' + path.split('/')[1]
+    el(`[href="${target}"]`).classList.add('active')
 })

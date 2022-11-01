@@ -12,8 +12,7 @@ class Pages extends BaseController
             'title'     => 'Dashboard',
             'style'     => [
                 'dashboard'
-            ],
-            'script'     => []
+            ]
         ];
 
         return view('pages/dashboard', $data);
@@ -39,8 +38,6 @@ class Pages extends BaseController
     {
         $data = [
             'title'     => 'Ruangan',
-            'style'     => [],
-            'script'     => [],
             'linkAction' => [
                 'create' => '/ruangan/tambah'
             ]
@@ -53,8 +50,6 @@ class Pages extends BaseController
     {
         $data = [
             'title'     => 'Barang',
-            'style'     => [],
-            'script'     => [],
             'linkAction' => [
                 'create' => '/barang/tambah'
             ]
@@ -66,9 +61,7 @@ class Pages extends BaseController
     public function supplier()
     {
         $data = [
-            'title'     => 'Suppllier',
-            'style'     => [],
-            'script'     => []
+            'title'     => 'Suppllier'
         ];
 
         return view('pages/supplier', $data);
@@ -78,8 +71,6 @@ class Pages extends BaseController
     {
         $data = [
             'title'     => 'Penyimpanan',
-            'style'     => [],
-            'script'     => [],
             'linkAction' => [
                 'create' => '/penyimpanan/tambah'
             ]
@@ -91,9 +82,7 @@ class Pages extends BaseController
     public function pembelian()
     {
         $data = [
-            'title'     => 'Pembelian',
-            'style'     => [],
-            'script'     => []
+            'title'     => 'Pembelian'
         ];
 
         return view('pages/pembelian', $data);
@@ -106,8 +95,7 @@ class Pages extends BaseController
             'style'     => [
                 'table',
                 'manajemen'
-            ],
-            'script'     => []
+            ]
         ];
 
         return view('pages/laporan', $data);
@@ -116,9 +104,7 @@ class Pages extends BaseController
     public function barcode()
     {
         $data = [
-            'title'     => 'Barcode',
-            'style'     => [],
-            'script'     => []
+            'title'     => 'Barcode'
         ];
 
         return view('pages/barcode', $data);
