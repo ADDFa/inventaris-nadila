@@ -16,9 +16,7 @@
     <link rel="stylesheet" href="/css/templates/main.css">
 
     <?php if (isset($style)) : ?>
-        <?php foreach ($style as $s) : ?>
-            <link rel="stylesheet" href="<?= '/css/pages/' . $s . '.css' ?>">
-        <?php endforeach ?>
+        <link rel="stylesheet" href="<?= '/css/pages/' . $style . '.css' ?>">
     <?php endif ?>
 
     <script src="https://kit.fontawesome.com/02db274a60.js" crossorigin="anonymous"></script>
@@ -94,9 +92,7 @@
 
         <!-- // TODO: My Script -->
         <?php if (isset($script)) : ?>
-            <?php foreach ($script as $sc) : ?>
-                <script src="<?= '/js/' . $sc . '.js' ?>"></script>
-            <?php endforeach ?>
+            <script src="<?= '/js/' . $script . '.js' ?>"></script>
         <?php endif ?>
     </body>
 

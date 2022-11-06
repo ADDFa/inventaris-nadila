@@ -17,12 +17,14 @@ class Users extends Migration
 
             'username' => [
                 'type'             => 'VARCHAR',
-                'constraint'       => '40'
+                'constraint'       => '40',
+                'null'             => false
             ],
 
             'password' => [
                 'type'             => 'VARCHAR',
-                'constraint'       => '255'
+                'constraint'       => '255',
+                'null'             => false
             ],
 
             'creaed_at' => [
@@ -36,12 +38,12 @@ class Users extends Migration
             ]
         ]);
 
-        // $this->forge->addPrimaryKey('id_user');
-        // $this->forge->createTable('users', true);
+        $this->forge->addPrimaryKey('id_user');
+        $this->forge->createTable('users', true);
     }
 
     public function down()
     {
-        // $this->forge->dropTable('users', true);
+        $this->forge->dropTable('users', true);
     }
 }

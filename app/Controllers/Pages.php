@@ -10,9 +10,7 @@ class Pages extends BaseController
     {
         $data = [
             'title'     => 'Dashboard',
-            'style'     => [
-                'dashboard'
-            ]
+            'style'     => 'dashboard'
         ];
 
         return view('pages/dashboard', $data);
@@ -22,10 +20,7 @@ class Pages extends BaseController
     {
         $data = [
             'title'     => 'Gedung',
-            'style'     => [
-                'gedung'
-            ],
-            'script'     => [],
+            'style'     => 'gedung',
             'linkAction' => [
                 'create' => '/gedung/tambah'
             ]
@@ -92,10 +87,7 @@ class Pages extends BaseController
     {
         $data = [
             'title'     => 'Laporan',
-            'style'     => [
-                'table',
-                'manajemen'
-            ]
+            'style'     => 'laporan'
         ];
 
         return view('pages/laporan', $data);

@@ -60,15 +60,15 @@ class Penyimpanan extends Migration
             ]
         ]);
 
-        // $this->forge->addPrimaryKey('id_penyimpanan');
-        // $this->forge->addForeignKey('id_user', 'users', 'id_user', 'CASCADE', 'CASCADE');
-        // $this->forge->addForeignKey('id_ruangan', 'ruangan', 'id_ruangan', 'CASCADE', 'CASCADE');
-        // $this->forge->addForeignKey('id_barang', 'barang', 'id_barang', 'CASCADE', 'CASCADE');
-        // $this->forge->createTable('penyimpanan', true);
+        $this->forge->addPrimaryKey('id_penyimpanan');
+        $this->forge->addForeignKey('id_user', 'users', 'id_user', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('id_ruangan', 'ruangan', 'id_ruangan', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('id_barang', 'barang', 'id_barang', 'CASCADE', 'CASCADE');
+        $this->forge->createTable('penyimpanan', true);
     }
 
     public function down()
     {
-        // $this->forge->dropTable('penyimpanan', true);
+        $this->forge->dropTable('penyimpanan', true);
     }
 }

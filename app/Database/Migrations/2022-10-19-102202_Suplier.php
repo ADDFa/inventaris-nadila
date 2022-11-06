@@ -17,26 +17,31 @@ class Supplier extends Migration
 
             'nama_supplier' => [
                 'type'          => 'VARCHAR',
-                'constraint'    => '40'
+                'constraint'    => '40',
+                'null'             => false
             ],
 
             'kontak_supplier' => [
                 'type'          => 'VARCHAR',
-                'constraint'    => '40'
+                'constraint'    => '40',
+                'null'             => false
             ],
 
             'tgl_pencatatan' => [
                 'type'          => 'VARCHAR',
-                'constraint'    => '2'
+                'constraint'    => '2',
+                'null'             => false
             ],
 
             'bulan_pencatatan' => [
                 'type'             => 'VARCHAR',
-                'constraint'       => '2'
+                'constraint'       => '2',
+                'null'             => false
             ],
 
             'tahun_pencatatan' => [
-                'type'             => 'YEAR'
+                'type'             => 'YEAR',
+                'null'             => false
             ],
 
             'creaed_at' => [
@@ -50,12 +55,12 @@ class Supplier extends Migration
             ]
         ]);
 
-        // $this->forge->addPrimaryKey('id_supplier');
-        // $this->forge->createTable('supplier', true);
+        $this->forge->addPrimaryKey('id_supplier');
+        $this->forge->createTable('supplier', true);
     }
 
     public function down()
     {
-        // $this->forge->dropTable('supplier', true);
+        $this->forge->dropTable('supplier', true);
     }
 }

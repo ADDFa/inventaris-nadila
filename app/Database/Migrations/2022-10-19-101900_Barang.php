@@ -17,55 +17,72 @@ class Barang extends Migration
 
             'id_ruangan' => [
                 'type'              => 'INT',
-                'constraint'        =>  11
+                'constraint'        =>  11,
+                'null'             => false
             ],
 
             'id_user' => [
                 'type'             => 'INT',
-                'constraint'       => 11
+                'constraint'       => 11,
+                'null'             => false
             ],
 
             'nama_barang' => [
                 'type'          => 'VARCHAR',
-                'constraint'    => '40'
+                'constraint'    => '40',
+                'null'             => false
             ],
 
             'kategori_barang' => [
                 'type'          => 'VARCHAR',
-                'constraint'    => '40'
+                'constraint'    => '40',
+                'null'             => false
             ],
 
             'jumlah_barang' => [
                 'type'          => 'VARCHAR',
-                'constraint'    => '40'
+                'constraint'    => '40',
+                'null'             => false
             ],
 
             'merk_barang' => [
                 'type'          => 'VARCHAR',
-                'constraint'    => '40'
+                'constraint'    => '40',
+                'null'             => false
             ],
             'tgl_pencatatan' => [
                 'type'          => 'VARCHAR',
-                'constraint'    => '2'
+                'constraint'    => '2',
+                'null'             => false
             ],
 
             'bulan_pencatatan' => [
                 'type'              => 'VARCHAR',
-                'constraint'        => '2'
+                'constraint'        => '2',
+                'null'             => false
             ],
 
             'tahun_pencatatan' => [
-                'type'              => 'YEAR'
+                'type'              => 'YEAR',
+                'null'             => false
             ],
 
             'ketersediaan_barang' => [
                 'type'          => 'VARCHAR',
-                'constraint'    => '40'
+                'constraint'    => '40',
+                'null'             => false
             ],
 
             'harga_barang' => [
                 'type'          => 'VARCHAR',
-                'constraint'    => '40'
+                'constraint'    => '40',
+                'null'             => false
+            ],
+
+            'gambar_barang' => [
+                'type'          => 'VARCHAR',
+                'contraint'     => '255',
+                'null'          => false
             ],
 
             'creaed_at' => [
@@ -79,14 +96,14 @@ class Barang extends Migration
             ]
         ]);
 
-        // $this->forge->addPrimaryKey('id_barang');
-        // $this->forge->addForeignKey('id_user', 'users', 'id_user', 'CASCADE', 'CASCADE');
-        // $this->forge->addForeignKey('id_ruangan', 'ruangan', 'id_ruangan', 'CASCADE', 'CASCADE');
-        // $this->forge->createTable('barang', true);
+        $this->forge->addPrimaryKey('id_barang');
+        $this->forge->addForeignKey('id_user', 'users', 'id_user', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('id_ruangan', 'ruangan', 'id_ruangan', 'CASCADE', 'CASCADE');
+        $this->forge->createTable('barang', true);
     }
 
     public function down()
     {
-        // $this->forge->dropTable('barang', true);
+        $this->forge->dropTable('barang', true);
     }
 }

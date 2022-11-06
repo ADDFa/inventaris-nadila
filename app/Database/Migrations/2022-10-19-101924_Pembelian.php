@@ -17,36 +17,43 @@ class Pembelian extends Migration
 
             'id_barang' => [
                 'type'              => 'INT',
-                'constraint'        =>  11
+                'constraint'        =>  11,
+                'null'             => false
             ],
 
             'id_user' => [
                 'type'             => 'INT',
-                'constraint'       => 11
+                'constraint'       => 11,
+                'null'             => false
             ],
 
             'jumlah_pembelian' => [
                 'type'          => 'VARCHAR',
-                'constraint'    => '40'
+                'constraint'    => '40',
+                'null'             => false
             ],
 
             'harga_pembelian' => [
                 'type'          => 'VARCHAR',
-                'constraint'    => '40'
+                'constraint'    => '40',
+                'null'             => false
             ],
 
             'tgl_pembelian' => [
                 'type'          => 'VARCHAR',
-                'constraint'    => '2'
+                'constraint'    => '2',
+                'null'             => false
             ],
 
             'bulan_pembelian' => [
                 'type'              => 'VARCHAR',
-                'constraint'        => '2'
+                'constraint'        => '2',
+                'null'             => false
             ],
 
             'tahun_pembelian' => [
-                'type'              => 'YEAR'
+                'type'              => 'YEAR',
+                'null'             => false
             ],
 
             'creaed_at' => [
@@ -60,14 +67,14 @@ class Pembelian extends Migration
             ]
         ]);
 
-        // $this->forge->addPrimaryKey('id_pembelian');
-        // $this->forge->addForeignKey('id_user', 'users', 'id_user', 'CASCADE', 'CASCADE');
-        // $this->forge->addForeignKey('id_barang', 'barang', 'id_barang', 'CASCADE', 'CASCADE');
-        // $this->forge->createTable('pembelian', true);
+        $this->forge->addPrimaryKey('id_pembelian');
+        $this->forge->addForeignKey('id_user', 'users', 'id_user', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('id_barang', 'barang', 'id_barang', 'CASCADE', 'CASCADE');
+        $this->forge->createTable('pembelian', true);
     }
 
     public function down()
     {
-        // $this->forge->dropTable('pembelian', true);
+        $this->forge->dropTable('pembelian', true);
     }
 }

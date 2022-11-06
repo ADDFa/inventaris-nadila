@@ -17,23 +17,28 @@ class Ruangan extends Migration
 
             'id_user' => [
                 'type'             => 'INT',
-                'constraint'       => 11
+                'constraint'       => 11,
+                'null'             => false
             ],
 
             'id_gedung' => [
                 'type'              => 'INT',
-                'constraint'        =>  11
+                'constraint'        =>  11,
+                'null'             => false
             ],
 
             'nama_ruangan' => [
                 'type'          => 'VARCHAR',
-                'constraint'    => '40'
+                'constraint'    => '40',
+                'null'             => false
             ],
-<<<<<<< HEAD
-            
-=======
 
->>>>>>> 41bd32aad150088ea708ceff48a4b0ec41a1674c
+            'gambar_ruangan' => [
+                'type'          => 'VARCHAR',
+                'contraint'     => '255',
+                'null'          => false
+            ],
+
             'creaed_at' => [
                 'type'              => 'DATETIME',
                 'null'              => true

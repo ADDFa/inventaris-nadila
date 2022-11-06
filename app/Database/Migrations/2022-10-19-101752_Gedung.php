@@ -18,26 +18,37 @@ class Gedung extends Migration
 
             'id_user' => [
                 'type'             => 'INT',
-                'constraint'       => 11
+                'constraint'       => 11,
+                'null'             => false
             ],
 
             'nama_gedung' => [
                 'type'          => 'VARCHAR',
-                'constraint'    => '40'
+                'constraint'    => '40',
+                'null'             => false
             ],
 
             'tgl_pencatatan' => [
                 'type'          => 'VARCHAR',
-                'constraint'    => '2'
+                'constraint'    => '2',
+                'null'             => false
             ],
 
             'bulan_pencatatan' => [
                 'type'              => 'VARCHAR',
-                'constraint'        => '2'
+                'constraint'        => '2',
+                'null'             => false
             ],
 
             'tahun_pencatatan' => [
-                'type'              => 'YEAR'
+                'type'              => 'YEAR',
+                'null'             => false
+            ],
+
+            'gambar_gedung' => [
+                'type'          => 'VARCHAR',
+                'contraint'     => '255',
+                'null'          => false
             ],
 
             'creaed_at' => [
@@ -51,13 +62,13 @@ class Gedung extends Migration
             ]
         ]);
 
-        // $this->forge->addPrimaryKey('id_gedung');
-        // $this->forge->addForeignKey('id_user', 'users', 'id_user', 'CASCADE', 'CASCADE');
-        // $this->forge->createTable('gedung', true);
+        $this->forge->addPrimaryKey('id_gedung');
+        $this->forge->addForeignKey('id_user', 'users', 'id_user', 'CASCADE', 'CASCADE');
+        $this->forge->createTable('gedung', true);
     }
 
     public function down()
     {
-        // $this->forge->dropTable('gedung', true);
+        $this->forge->dropTable('gedung', true);
     }
 }
