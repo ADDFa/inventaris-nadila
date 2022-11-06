@@ -32,21 +32,25 @@ class Penyimpanan extends Migration
 
             'jumlah_penyimpanan' => [
                 'type'          => 'VARCHAR',
-                'constraint'    => '40'
+                'constraint'    => '40',
+                'null'          => false
             ],
 
             'tgl_penyimpanan' => [
                 'type'          => 'VARCHAR',
-                'constraint'    => '2'
+                'constraint'    => '2',
+                'null'          => false
             ],
 
             'bulan_penyimpanan' => [
                 'type'              => 'VARCHAR',
-                'constraint'        => '2'
+                'constraint'        => '2',
+                'null'          => false
             ],
 
             'tahun_penyimpanan' => [
-                'type'              => 'YEAR'
+                'type'              => 'YEAR',
+                'null'          => false
             ],
 
             'creaed_at' => [

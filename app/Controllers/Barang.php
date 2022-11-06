@@ -11,6 +11,18 @@ class Barang extends BaseController
         return view('pages/barang/' . $view, $data);
     }
 
+    public function index()
+    {
+        $data = [
+            'title'     => 'Barang',
+            'linkAction' => [
+                'create' => '/barang/tambah'
+            ]
+        ];
+
+        return $this->view('index', $data);
+    }
+
     public function create()
     {
         $data = [

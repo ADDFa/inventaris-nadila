@@ -41,34 +41,48 @@ $routes->get('/', 'Auth::login');
 $routes->get('/logout', 'Auth::logout');
 $routes->post('/login', 'Auth::masuk');
 
+// -------------------
+
+// TODO: Gedung
+
+// $routes->get('/gedung/index', 'Gedung::index');
+
 $route = [
-    '/dashboard'    => 'index',
-    '/gedung'       => 'gedung',
-    '/ruangan'      => 'ruangan',
-    '/barang'       => 'barang',
-    '/supplier'     => 'supplier',
-    '/penyimpanan'  => 'penyimpanan',
-    '/pembelian'    => 'pembelian',
-    '/laporan'      => 'laporan',
-    '/barcode'      => 'barcode'
+    '/dashboard'    => 'Home::index',
+    '/gedung'       => 'Gedung::index',
+    '/ruangan'      => 'Ruangan::index',
+    '/barang'       => 'Barang::index',
+    '/supplier'     => 'Supplier::index',
+    '/penyimpanan'  => 'Penyimpanan::index',
+    '/pembelian'    => 'Pembelian::index',
+    '/laporan'      => 'Laporan::index',
+    '/barcode'      => 'Barcode::index'
 ];
 
-foreach ($route as $route => $method) {
-    $routes->get($route, 'Pages::' . $method, ['filter'  => 'login']);
-}
+$routes->group('', ['filter' => 'login'], static function ($routes) use ($route) {
+    foreach ($route as $route => $method) {
+        $routes->get($route, $method);
+    }
+});
 
-$insert = [
-    'Gedung'       => '/gedung/',
-    'Ruangan'      => '/ruangan/',
-    'Barang'       => '/barang/',
-    'Penyimpanan'  => '/penyimpanan/'
-];
+// -------------------
 
-foreach ($insert as $controller => $route) {
-    $routes->get($route . 'tambah', $controller . '::create', ['filter' => 'login']);
-}
+// foreach ($route as $route => $method) {
+//     $routes->get($route, 'Pages::' . $method, ['filter'  => 'login']);
+// }
 
-$routes->get('/laporan/print', 'Laporan::print', ['filter' => 'login']);
+// $insert = [
+//     'Gedung'       => '/gedung/',
+//     'Ruangan'      => '/ruangan/',
+//     'Barang'       => '/barang/',
+//     'Penyimpanan'  => '/penyimpanan/'
+// ];
+
+// foreach ($insert as $controller => $route) {
+//     $routes->get($route . 'tambah', $controller . '::create', ['filter' => 'login']);
+// }
+
+// $routes->get('/laporan/print', 'Laporan::print', ['filter' => 'login']);
 
 /*
  * --------------------------------------------------------------------

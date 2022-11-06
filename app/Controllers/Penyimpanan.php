@@ -11,6 +11,18 @@ class Penyimpanan extends BaseController
         return view('pages/penyimpanan/' . $view, $data);
     }
 
+    public function index()
+    {
+        $data = [
+            'title'     => 'Penyimpanan',
+            'linkAction' => [
+                'create' => '/penyimpanan/tambah'
+            ]
+        ];
+
+        return $this->view('index', $data);
+    }
+
     public function create()
     {
         $data = [

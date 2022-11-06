@@ -17,14 +17,12 @@ class Ruangan extends Migration
 
             'id_user' => [
                 'type'             => 'INT',
-                'constraint'       => 11,
-                'null'             => false
+                'constraint'       => 11
             ],
 
             'id_gedung' => [
                 'type'              => 'INT',
-                'constraint'        =>  11,
-                'null'             => false
+                'constraint'        =>  11
             ],
 
             'nama_ruangan' => [
@@ -35,7 +33,7 @@ class Ruangan extends Migration
 
             'gambar_ruangan' => [
                 'type'          => 'VARCHAR',
-                'contraint'     => '255',
+                'constraint'     => '255',
                 'null'          => false
             ],
 

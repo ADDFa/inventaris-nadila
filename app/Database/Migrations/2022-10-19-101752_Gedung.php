@@ -47,7 +47,7 @@ class Gedung extends Migration
 
             'gambar_gedung' => [
                 'type'          => 'VARCHAR',
-                'contraint'     => '255',
+                'constraint'    => '255',
                 'null'          => false
             ],
 

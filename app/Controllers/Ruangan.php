@@ -11,6 +11,18 @@ class Ruangan extends BaseController
         return view('pages/ruangan/' . $view, $data);
     }
 
+    public function index()
+    {
+        $data = [
+            'title'     => 'Ruangan',
+            'linkAction' => [
+                'create' => '/ruangan/tambah'
+            ]
+        ];
+
+        return $this->view('index', $data);
+    }
+
     public function create()
     {
         $data = [

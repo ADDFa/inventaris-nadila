@@ -53,15 +53,6 @@ class Pages extends BaseController
         return view('pages/barang', $data);
     }
 
-    public function supplier()
-    {
-        $data = [
-            'title'     => 'Suppllier'
-        ];
-
-        return view('pages/supplier', $data);
-    }
-
     public function penyimpanan()
     {
         $data = [
@@ -72,15 +63,6 @@ class Pages extends BaseController
         ];
 
         return view('pages/penyimpanan', $data);
-    }
-
-    public function pembelian()
-    {
-        $data = [
-            'title'     => 'Pembelian'
-        ];
-
-        return view('pages/pembelian', $data);
     }
 
     public function laporan()

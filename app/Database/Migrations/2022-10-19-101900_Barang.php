@@ -17,14 +17,12 @@ class Barang extends Migration
 
             'id_ruangan' => [
                 'type'              => 'INT',
-                'constraint'        =>  11,
-                'null'             => false
+                'constraint'        =>  11
             ],
 
             'id_user' => [
                 'type'             => 'INT',
-                'constraint'       => 11,
-                'null'             => false
+                'constraint'       => 11
             ],
 
             'nama_barang' => [
@@ -81,7 +79,7 @@ class Barang extends Migration
 
             'gambar_barang' => [
                 'type'          => 'VARCHAR',
-                'contraint'     => '255',
+                'constraint'     => '255',
                 'null'          => false
             ],
 

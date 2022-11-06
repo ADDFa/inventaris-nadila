@@ -11,6 +11,19 @@ class Gedung extends BaseController
         return view('pages/gedung/' . $view, $data);
     }
 
+    public function index()
+    {
+        $data = [
+            'title'     => 'Gedung',
+            'style'     => 'gedung',
+            'linkAction' => [
+                'create' => '/gedung/tambah'
+            ]
+        ];
+
+        return $this->view('index', $data);
+    }
+
     public function create()
     {
         $data = [
