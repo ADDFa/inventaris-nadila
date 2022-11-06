@@ -31,4 +31,19 @@ class Barang extends BaseController
 
         return $this->view('tambah', $data);
     }
+
+    public function insert()
+    {
+        return redirect()->to('/barang');
+    }
+
+    public function update()
+    {
+        return redirect()->to('/barang');
+    }
+
+    public function delete()
+    {
+        return redirect()->to('/barang');
+    }
 }

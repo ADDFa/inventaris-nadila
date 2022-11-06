@@ -32,4 +32,19 @@ class Gedung extends BaseController
 
         return $this->view('tambah', $data);
     }
+
+    public function insert()
+    {
+        return redirect()->to('/gedung');
+    }
+
+    public function update()
+    {
+        return redirect()->to('/gedung');
+    }
+
+    public function delete()
+    {
+        return redirect()->to('/gedung');
+    }
 }

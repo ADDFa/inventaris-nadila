@@ -31,4 +31,19 @@ class Penyimpanan extends BaseController
 
         return $this->view('tambah', $data);
     }
+
+    public function insert()
+    {
+        return redirect()->to('/penyimpanan');
+    }
+
+    public function update()
+    {
+        return redirect()->to('/penyimpanan');
+    }
+
+    public function delete()
+    {
+        return redirect()->to('/penyimpanan');
+    }
 }

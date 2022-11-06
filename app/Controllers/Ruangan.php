@@ -31,4 +31,19 @@ class Ruangan extends BaseController
 
         return $this->view('tambah', $data);
     }
+
+    public function insert()
+    {
+        return redirect()->to('/ruangan');
+    }
+
+    public function update()
+    {
+        return redirect()->to('/ruangan');
+    }
+
+    public function delete()
+    {
+        return redirect()->to('/ruangan');
+    }
 }
