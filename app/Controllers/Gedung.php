@@ -27,13 +27,16 @@ class Gedung extends BaseController
 
     public function index()
     {
+        $paginate = $this->paginate($this->table, 2);
+
         $data = [
             'title'         => 'Gedung',
             'style'         => 'gedung',
             'linkAction'    => [
                 'create'    => '/gedung/tambah'
             ],
-            'dataGedung'    => $this->table->findAll(3)
+            'pagination'    => $paginate->paginate,
+            'dataGedung'    => $paginate->data
         ];
 
         return $this->view('index', $data);
@@ -52,9 +55,9 @@ class Gedung extends BaseController
         return $this->view('tambah', $data);
     }
 
-    public function insert()
+    private function validasiGedung()
     {
-        if (!$this->validate([
+        return $this->validate([
             'nama' => [
                 'rules'     => $this->rule(),
                 'errors'    => $this->pesan('Nama Gedung')
@@ -80,7 +83,12 @@ class Gedung extends BaseController
                     'required'  => 'Tahun Tidak Boleh Kosong'
                 ]
             ]
-        ])) return redirect()->to('/gedung/tambah')->withInput();
+        ]);
+    }
+
+    public function insert()
+    {
+        if (!$this->validasiGedung()) return redirect()->to('/gedung/tambah')->withInput();
 
         if (!$this->gambarValid('gambar')) return redirect()->to('/gedung/tambah')->withInput()->with('gambarError', $this->getMessageGambarError());
 
@@ -112,6 +120,8 @@ class Gedung extends BaseController
 
     public function update()
     {
+
+
         return redirect()->to('/gedung');
     }
 

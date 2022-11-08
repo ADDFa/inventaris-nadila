@@ -16,7 +16,9 @@ class Ruangan extends BaseController
         $data = [
             'title'     => 'Ruangan',
             'linkAction' => [
-                'create' => '/ruangan/tambah'
+                'create' => '/ruangan/tambah',
+                'next'      => '/ruangan?page=2',
+                'prev'      => '/ruangan?page=2'
             ]
         ];
 

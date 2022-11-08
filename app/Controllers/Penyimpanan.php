@@ -16,7 +16,9 @@ class Penyimpanan extends BaseController
         $data = [
             'title'     => 'Penyimpanan',
             'linkAction' => [
-                'create' => '/penyimpanan/tambah'
+                'create'    => '/penyimpanan/tambah',
+                'next'      => '/penyimpanan?page=2',
+                'prev'      => '/penyimpanan?page=2'
             ]
         ];
 

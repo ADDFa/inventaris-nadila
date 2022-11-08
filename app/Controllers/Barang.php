@@ -16,7 +16,9 @@ class Barang extends BaseController
         $data = [
             'title'     => 'Barang',
             'linkAction' => [
-                'create' => '/barang/tambah'
+                'create'    => '/barang/tambah',
+                'next'      => '/barang?page=2',
+                'prev'      => '/barang?page=2'
             ]
         ];
 

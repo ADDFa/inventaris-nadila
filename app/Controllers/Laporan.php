@@ -13,9 +13,16 @@ class Laporan extends BaseController
 
     public function index()
     {
+        $page = $this->request->getGet('page') ?? 1;
+
         $data = [
             'title'     => 'Laporan',
-            'style'     => 'laporan'
+            'style'     => 'laporan',
+            'linkAction'    => [
+                'next'      => '/laporan?page=' . $page + 1,
+                'prev'      => ($page == '2') ? '/laporan' : '/laporan?page=' . $page - 1
+            ],
+            'page'      => $page
         ];
 
         return $this->view('index', $data);

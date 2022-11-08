@@ -133,7 +133,7 @@ abstract class BaseController extends Controller
         '8'     => 'Agu',
         '9'     => 'Sep',
         '10'    => 'Okt',
-        '11'    => 'Mov',
+        '11'    => 'Nov',
         '12'    => 'Des'
     ];
 
@@ -141,6 +141,42 @@ abstract class BaseController extends Controller
     {
         return $this->bulan;
     }
+
+    /**
+     * Constructor.
+     */
+    protected function paginate($table, int $limit)
+    {
+        $originUri = base_url() . $_SERVER['PATH_INFO'];
+
+        $jumlahHalaman = ceil($table->countAllResults() / $limit);
+        $page = $this->request->getGet('page') ?? 1;
+        $prev = ($page <= 2) ? $originUri : $originUri . '?page=' . $page - 1;
+        $prevDisabled = ($page <= 1) ? 'is-disabled' : '';
+        $next = ($page < $jumlahHalaman) ? $originUri . '?page=' . $page + 1 : $originUri . '?page=' . $page;
+        $nextDisabled = ($jumlahHalaman <= $page) ? 'is-disabled' : '';
+        $offset = $limit * ($page - 1);
+        $data = $this->table->findAll($limit);
+
+        if ($page > 1) {
+            $data = $this->table->findAll($limit, $offset);
+        }
+
+        $pagination =
+            '<div class="footer d-flex justify-content-end px-5 mb-5">' .
+            '<div class="btn-group" role="group" aria-label="Basic example">' .
+            '<a href="' . $prev . '" class="btn btn-default ' . $prevDisabled . '">Prev</a>' .
+            '<button type="button" class="btn btn-default">' . $page . '</button>' .
+            '<a href="' . $next . '" class="btn btn-default ' . $nextDisabled . '">Next</a>' .
+            '</div>' .
+            '</div>';
+
+        return (object) [
+            'paginate' => $pagination,
+            'data'     => $data
+        ];
+    }
+
 
     /**
      * Constructor.
