@@ -14,8 +14,8 @@ class Auth extends BaseController
 
         $data = [
             'title'         => 'Login Inventaris',
-            'style'         => ['login'],
-            'script'        => ['template']
+            'style'         => 'login',
+            'script'        => 'template'
         ];
 
         return view('pages/login', $data);

@@ -4,18 +4,25 @@
 
 <?= $this->include('components/topAndAction') ?>
 
+<?php if ($x = session()->getFlashdata('crud') ?? false) : ?>
+    <div class="alert alert-<?= $x->status ?> alert-dismissible fade show w-100 my-3" role="alert">
+        <?= $x->message ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<?php endif ?>
+
 <div class="my-5 d-flex justify-content-between w-75 mx-auto">
-    <?php for ($i = 0; $i < 3; $i++) : ?>
+    <?php foreach ($dataGedung as $gedung) : ?>
         <div class="card text-bg-light mb-3" style="max-width: 18rem;">
             <div class="card-header text-center">Jumlah Gedung</div>
             <div class="card-body">
-                <img class="w-100" src="/images/gedung/sample.jpg" alt="gedung">
+                <img class="w-100" src="<?= '/images/gedung/' . $gedung->gambar_gedung ?>" alt="gedung">
             </div>
             <div class="card-footer text-center">
                 <a href="#">Lihat Detail ></a>
             </div>
         </div>
-    <?php endfor ?>
+    <?php endforeach ?>
 </div>
 
 <?= $this->include('components/bottomAndAction') ?>

@@ -83,7 +83,7 @@ class Barang extends Migration
                 'null'          => false
             ],
 
-            'creaed_at' => [
+            'created_at' => [
                 'type'              => 'DATETIME',
                 'null'              => true
             ],

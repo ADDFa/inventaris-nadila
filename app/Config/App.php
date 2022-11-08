@@ -2,6 +2,7 @@
 
 namespace Config;
 
+use CodeIgniter\Commands\Utilities\Environment;
 use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Session\Handlers\FileHandler;
 

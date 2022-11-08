@@ -46,6 +46,7 @@ $routes->group('', ['filter' => 'login'], static function ($routes) {
 
     $routes->get('/gedung', 'Gedung::index');
     $routes->get('/gedung/tambah', 'Gedung::create');
+    $routes->post('/gedung/insert', 'Gedung::insert');
 
     $routes->get('/ruangan', 'Ruangan::index');
     $routes->get('/ruangan/tambah', 'ruangan::create');
