@@ -25,14 +25,14 @@
             </tr>
         </thead>
         <tbody class="table-group-divider">
-            <?php for ($i = 1; $i <= 5; $i++) : ?>
+            <?php foreach ($ruangan as $no => $ruangan) : ?>
                 <tr>
-                    <th scope="row"><?= $i ?></th>
-                    <td>Qr_Code <?= $i ?></td>
-                    <td>Nama Ruangan <?= $i ?></td>
-                    <td>Kapasitas <?= $i ?></td>
-                    <td>Terisi <?= $i ?></td>
-                    <td>Foto <?= $i ?></td>
+                    <th scope="row"><?= $no + 1 ?></th>
+                    <td>Qr_Code <?= $no + 1 ?></td>
+                    <td><?= $ruangan->nama_ruangan ?></td>
+                    <td><?= $ruangan->kapasitas_ruangan ?></td>
+                    <td>Terisi <?= $no + 1 ?></td>
+                    <td>Foto <?= $no + 1 ?></td>
                     <td class="d-flex justify-content-between align-items-center">
                         <a href=""><button class="btn btn-warning"><i class="fa-solid fa-eye"></i></button></a>
 
@@ -46,7 +46,7 @@
 
                     </td>
                 </tr>
-            <?php endfor ?>
+            <?php endforeach ?>
         </tbody>
     </table>
 </div>

@@ -26,12 +26,13 @@ class Ruangan extends BaseController
     public function index()
     {
         $data = [
-            'title'     => 'Ruangan',
-            'linkAction' => [
-                'create' => '/ruangan/tambah',
-                'next'      => '/ruangan?page=2',
-                'prev'      => '/ruangan?page=2'
-            ]
+            'title'             => 'Ruangan',
+            'linkAction'        => [
+                'create'        => '/ruangan/tambah',
+                'next'          => '/ruangan?page=2',
+                'prev'          => '/ruangan?page=2'
+            ],
+            'ruangan'           => $this->table->findAll()
         ];
 
         return $this->view('index', $data);

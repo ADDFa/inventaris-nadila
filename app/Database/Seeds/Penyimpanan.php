@@ -15,7 +15,7 @@ class Penyimpanan extends Seeder
                 'id_user'               => 1,
                 'id_ruangan'            => 1,
                 'id_barang'             => 1,
-                'jumlah_penyimpanan'    => $i * 10,
+                'kapasitas'             => $i * 10,
                 'tgl_penyimpanan'       => '10',
                 'bulan_penyimpanan'     => '11',
                 'tahun_penyimpanan'     => '2022'

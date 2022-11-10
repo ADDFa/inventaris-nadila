@@ -39,11 +39,11 @@ class Users extends Migration
         ]);
 
         $this->forge->addPrimaryKey('id_user');
-        $this->forge->createTable('users', true);
+        $this->forge->createTable('users');
     }
 
     public function down()
     {
-        $this->forge->dropTable('users', true);
+        $this->forge->dropTable('users');
     }
 }

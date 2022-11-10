@@ -31,6 +31,16 @@ class Ruangan extends Migration
                 'null'             => false
             ],
 
+            'kapasitas_ruangan'          => [
+                'type'          => 'INT',
+                'constraint'    => 11
+            ],
+
+            'terisi'          => [
+                'type'          => 'INT',
+                'constraint'    => 11
+            ],
+
             'gambar_ruangan' => [
                 'type'          => 'VARCHAR',
                 'constraint'     => '255',
@@ -51,11 +61,11 @@ class Ruangan extends Migration
         $this->forge->addPrimaryKey('id_ruangan');
         $this->forge->addForeignKey('id_user', 'users', 'id_user', 'CASCADE', 'CASCADE');
         $this->forge->addForeignKey('id_gedung', 'gedung', 'id_gedung', 'CASCADE', 'CASCADE');
-        $this->forge->createTable('ruangan', true);
+        $this->forge->createTable('ruangan');
     }
 
     public function down()
     {
-        $this->forge->dropTable('ruangan', true);
+        $this->forge->dropTable('ruangan');
     }
 }

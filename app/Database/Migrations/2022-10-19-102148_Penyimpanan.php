@@ -30,7 +30,7 @@ class Penyimpanan extends Migration
                 'constraint'        =>  11
             ],
 
-            'jumlah_penyimpanan' => [
+            'kapasitas' => [
                 'type'          => 'VARCHAR',
                 'constraint'    => '40',
                 'null'          => false
@@ -68,11 +68,11 @@ class Penyimpanan extends Migration
         $this->forge->addForeignKey('id_user', 'users', 'id_user', 'CASCADE', 'CASCADE');
         $this->forge->addForeignKey('id_ruangan', 'ruangan', 'id_ruangan', 'CASCADE', 'CASCADE');
         $this->forge->addForeignKey('id_barang', 'barang', 'id_barang', 'CASCADE', 'CASCADE');
-        $this->forge->createTable('penyimpanan', true);
+        $this->forge->createTable('penyimpanan');
     }
 
     public function down()
     {
-        $this->forge->dropTable('penyimpanan', true);
+        $this->forge->dropTable('penyimpanan');
     }
 }

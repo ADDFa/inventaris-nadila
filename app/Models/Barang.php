@@ -8,8 +8,8 @@ class Barang extends Model
 {
     protected $table            = 'barang';
     protected $primaryKey       = 'id_barang';
-    protected $useAutoIncrement = true;
     protected $returnType       = 'object';
+    protected $allowedFields    = ['id_user', 'id_ruangan', 'id_barang', 'nama_barang', 'kategori_barang', 'jenis_barang', 'jumlah_barang', 'merk_barang', 'tgl_pencatatan', 'bulan_pencatatan', 'tahun_pencatatan', 'ketersediaan_barang', 'harga_barang', 'gambar_barang'];
 
     // Dates
     protected $useTimestamps = true;

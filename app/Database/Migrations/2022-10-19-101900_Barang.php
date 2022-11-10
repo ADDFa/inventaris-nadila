@@ -27,14 +27,17 @@ class Barang extends Migration
 
             'nama_barang' => [
                 'type'          => 'VARCHAR',
-                'constraint'    => '40',
-                'null'             => false
+                'constraint'    => '40'
             ],
 
             'kategori_barang' => [
                 'type'          => 'VARCHAR',
-                'constraint'    => '40',
-                'null'             => false
+                'constraint'    => '40'
+            ],
+
+            'jenis_barang'  => [
+                'type'          => 'VARCHAR',
+                'constraint'    => '40'
             ],
 
             'jumlah_barang' => [
@@ -48,6 +51,7 @@ class Barang extends Migration
                 'constraint'    => '40',
                 'null'             => false
             ],
+
             'tgl_pencatatan' => [
                 'type'          => 'VARCHAR',
                 'constraint'    => '2',
@@ -97,11 +101,11 @@ class Barang extends Migration
         $this->forge->addPrimaryKey('id_barang');
         $this->forge->addForeignKey('id_user', 'users', 'id_user', 'CASCADE', 'CASCADE');
         $this->forge->addForeignKey('id_ruangan', 'ruangan', 'id_ruangan', 'CASCADE', 'CASCADE');
-        $this->forge->createTable('barang', true);
+        $this->forge->createTable('barang');
     }
 
     public function down()
     {
-        $this->forge->dropTable('barang', true);
+        $this->forge->dropTable('barang');
     }
 }

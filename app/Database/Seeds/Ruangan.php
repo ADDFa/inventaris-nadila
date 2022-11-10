@@ -14,8 +14,10 @@ class Ruangan extends Seeder
             array_push($data, [
                 'id_user'           => 1,
                 'id_gedung'         => '1',
-                'nama_ruangan'       => 'Ruangan ' . $i,
-                'gambar_ruangan'     => 'sample.jpg'
+                'nama_ruangan'      => 'Ruangan ' . $i,
+                'kapasitas_ruangan' => $i * 100,
+                'terisi'            => $i * 10,
+                'gambar_ruangan'    => 'sample.jpg'
             ]);
         }
 

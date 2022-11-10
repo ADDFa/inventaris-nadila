@@ -64,11 +64,11 @@ class Gedung extends Migration
 
         $this->forge->addPrimaryKey('id_gedung');
         $this->forge->addForeignKey('id_user', 'users', 'id_user', 'CASCADE', 'CASCADE');
-        $this->forge->createTable('gedung', true);
+        $this->forge->createTable('gedung');
     }
 
     public function down()
     {
-        $this->forge->dropTable('gedung', true);
+        $this->forge->dropTable('gedung');
     }
 }
