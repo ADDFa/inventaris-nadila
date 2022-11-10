@@ -21,17 +21,21 @@
             </tr>
         </thead>
         <tbody class="table-group-divider">
-            <?php for ($i = 1; $i <= 7; $i++) : ?>
+            <?php foreach ($barang as $no => $barang) : ?>
                 <tr>
-                    <th scope="row"><?= $i ?></th>
-                    <td>Qr_Code <?= $i ?></td>
-                    <td>Nama Barang <?= $i ?></td>
-                    <td>Foto <?= $i ?></td>
-                    <td>Kategori <?= $i ?></td>
-                    <td>Merk <?= $i ?></td>
-                    <td>Jenis Barang <?= $i ?></td>
-                    <td>Jumlah <?= $i ?></td>
-                    <td>Tanggal Pencatatan <?= $i ?></td>
+                    <th scope="row"><?= $no ?></th>
+                    <td>Qr_Code <?= $no + 1 ?></td>
+                    <td><?= $barang->nama_barang ?></td>
+                    <td>
+                        <img src="<?= '/images/barang/' . $barang->gambar_barang ?>" alt="<?= $barang->nama_barang ?>">
+                    </td>
+                    <td><?= $barang->kategori_barang ?></td>
+                    <td><?= $barang->merk_barang ?></td>
+                    <td><?= $barang->jenis_barang ?></td>
+                    <td><?= $barang->jumlah_barang ?></td>
+                    <td>
+                        <?= $barang->tgl_pencatatan . '-' . $barang->bulan_pencatatan . '-' . $barang->tahun_pencatatan ?>
+                    </td>
                     <td class="d-flex justify-content-between align-items-center">
                         <a href=""><button class="btn btn-warning"><i class="fa-solid fa-eye"></i></button></a>
 
@@ -39,13 +43,10 @@
 
                         <form action="">
                             <button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
-
                         </form>
-
-
                     </td>
                 </tr>
-            <?php endfor ?>
+            <?php endforeach ?>
         </tbody>
     </table>
 </div>

@@ -31,8 +31,10 @@
                     <td>Qr_Code <?= $no + 1 ?></td>
                     <td><?= $ruangan->nama_ruangan ?></td>
                     <td><?= $ruangan->kapasitas_ruangan ?></td>
-                    <td>Terisi <?= $no + 1 ?></td>
-                    <td>Foto <?= $no + 1 ?></td>
+                    <td><?= $ruangan->terisi ?></td>
+                    <td>
+                        <img class="w-100 h-100" src="<?= '/images/ruangan/' . $ruangan->gambar_ruangan ?>" alt="<?= $ruangan->nama_ruangan ?>">
+                    </td>
                     <td class="d-flex justify-content-between align-items-center">
                         <a href=""><button class="btn btn-warning"><i class="fa-solid fa-eye"></i></button></a>
 

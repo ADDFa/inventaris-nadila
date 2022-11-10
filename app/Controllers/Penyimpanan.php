@@ -4,8 +4,17 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 
+use App\Models\Penyimpanan as Table;
+
 class Penyimpanan extends BaseController
 {
+    private $table;
+
+    public function __construct()
+    {
+        $this->table = new Table();
+    }
+
     public function view($view = '', $data = [])
     {
         return view('pages/penyimpanan/' . $view, $data);
@@ -14,12 +23,13 @@ class Penyimpanan extends BaseController
     public function index()
     {
         $data = [
-            'title'     => 'Penyimpanan',
-            'linkAction' => [
+            'title'         => 'Penyimpanan',
+            'linkAction'    => [
                 'create'    => '/penyimpanan/tambah',
                 'next'      => '/penyimpanan?page=2',
                 'prev'      => '/penyimpanan?page=2'
-            ]
+            ],
+            'penyimpanan'   => $this->table->findAll()
         ];
 
         return $this->view('index', $data);

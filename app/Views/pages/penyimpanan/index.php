@@ -19,15 +19,15 @@
             </tr>
         </thead>
         <tbody class="table-group-divider">
-            <?php for ($i = 1; $i <= 7; $i++) : ?>
+            <?php foreach ($penyimpanan as $no => $penyimpanan) : ?>
                 <tr>
-                    <th scope="row"><?= $i ?></th>
-                    <td>Nama Barang <?= $i ?></td>
-                    <td>Nama Ruangan<?= $i ?></td>
-                    <td>Jumlah Barang <?= $i ?></td>
-                    <td>kapasitas Penyimpanan <?= $i ?></td>
-                    <td> Kategori Barang<?= $i ?></td>
-                    <td> Tanggal Penyimpanan <?= $i ?></td>
+                    <th scope="row"><?= $no ?></th>
+                    <td><?= $no ?></td>
+                    <td><?= $no ?></td>
+                    <td><?= $no ?></td>
+                    <td><?= $penyimpanan->kapasitas ?></td>
+                    <td><?= $no ?></td>
+                    <td><?= $penyimpanan->tgl_penyimpanan . '-' . $penyimpanan->bulan_penyimpanan . '=' . $penyimpanan->tahun_penyimpanan ?></td>
                     <td class="d-flex justify-content-between align-items-center">
                         <a href="">
                             <button class="btn btn-warning"><i class="fa-solid fa-eye"></i></button>
@@ -42,7 +42,7 @@
                         </form>
                     </td>
                 </tr>
-            <?php endfor ?>
+            <?php endforeach ?>
         </tbody>
     </table>
 </div>
