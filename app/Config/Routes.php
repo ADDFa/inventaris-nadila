@@ -50,6 +50,7 @@ $routes->group('', ['filter' => 'login'], static function ($routes) {
 
     $routes->get('/ruangan', 'Ruangan::index');
     $routes->get('/ruangan/tambah', 'ruangan::create');
+    $routes->post('/ruangan/insert', 'Ruangan::insert');
 
     $routes->get('/barang', 'Barang::index');
     $routes->get('/barang/tambah', 'Barang::create');

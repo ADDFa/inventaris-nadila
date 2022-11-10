@@ -10,6 +10,8 @@ use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
 use Config\Services;
 
+use App\Models\User;
+
 /**
  * Class BaseController
  *
@@ -38,9 +40,11 @@ abstract class BaseController extends Controller
      */
     protected $helpers = [];
 
+
     /**
      * Validation
      */
+    protected $validation;
 
     protected $lengthTanggal = '|max_length[2]',
         $lengthMax = '40';
@@ -70,7 +74,7 @@ abstract class BaseController extends Controller
 
     private $gambarError, $gambarSize = 1000000, $namaGambar = '';
 
-    protected function gambarValid($name)
+    protected function gambarValid($name, $dir)
     {
         $gambar = $this->request->getFile($name);
 
@@ -98,7 +102,7 @@ abstract class BaseController extends Controller
 
         $this->namaGambar = $gambar->getRandomName();
 
-        $gambar->move('images/gedung', $this->namaGambar);
+        $gambar->move('images/' . $dir, $this->namaGambar);
 
         return true;
     }
@@ -143,7 +147,7 @@ abstract class BaseController extends Controller
     }
 
     /**
-     * Constructor.
+     * Pagination.
      */
     protected function paginate($table, int $limit)
     {
@@ -177,6 +181,18 @@ abstract class BaseController extends Controller
         ];
     }
 
+    /**
+     * User.
+     */
+    private $user;
+
+    protected function getUser()
+    {
+        $this->user = new User();
+
+        $user = $this->user->where('username', session('username'))->find();
+        return $user[0] ?? false;
+    }
 
     /**
      * Constructor.
@@ -189,5 +205,8 @@ abstract class BaseController extends Controller
         // Preload any models, libraries, etc, here.
 
         // E.g.: $this->session = \Config\Services::session();
+
+        $this->validation = Services::validation();
+        $this->user = new User();
     }
 }

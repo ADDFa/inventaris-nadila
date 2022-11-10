@@ -4,6 +4,13 @@
 
 <?= $this->include('components/topAndAction') ?>
 
+<?php if ($x = session()->getFlashdata('crud') ?? false) : ?>
+    <div class="alert alert-<?= $x->status ?> alert-dismissible fade show w-100 my-3" role="alert">
+        <?= $x->message ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<?php endif ?>
+
 <div class="table-ruangan col-md-11 mx-auto my-5 row">
     <table class="table">
         <thead>

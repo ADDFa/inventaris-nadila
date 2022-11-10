@@ -22,78 +22,76 @@
     <script src="https://kit.fontawesome.com/02db274a60.js" crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body id="body-pd">
+    <header class="header" id="header">
+        <div class="header_toggle">
+            <i class='bx bx-menu' id="header-toggle"></i>
+        </div>
+        <div class="header_img">
+            <img src="https://i.imgur.com/hczKIze.jpg" alt="user">
+        </div>
+    </header>
 
-    <body id="body-pd">
-        <header class="header" id="header">
-            <div class="header_toggle">
-                <i class='bx bx-menu' id="header-toggle"></i>
-            </div>
-            <div class="header_img">
-                <img src="https://i.imgur.com/hczKIze.jpg" alt="user">
-            </div>
-        </header>
-
-        <div class="l-navbar" id="nav-bar">
-            <nav class="nav">
-                <div>
-                    <a href="#" class="nav_logo">
-                        <i class='bx bx-layer nav_logo-icon'></i>
-                        <span class="nav_logo-name">INVENTARIS</span>
-                    </a>
-
-                    <div class="nav_list">
-                        <a href="/dashboard" class="nav_link active">
-                            <i class='bx bx-grid-alt nav_icon'></i>
-                            <span class="nav_name">Dashboard</span>
-                        </a>
-                        <a href="/gedung" class="nav_link">
-                            <i class='bx bx-building nav_icon'></i>
-                            <span class="nav_name">Gedung</span>
-                        </a>
-                        <a href="/ruangan" class="nav_link">
-                            <i class='bx bx-home-circle nav_icon'></i>
-                            <span class="nav_name">Ruangan</span>
-                        </a>
-                        <a href="/barang" class="nav_link">
-                            <i class='bx bx-unite nav_icon'></i>
-                            <span class="nav_name">Barang</span>
-                        </a>
-                        <a href="/penyimpanan" class="nav_link">
-                            <i class='bx bx-store nav_icon'></i>
-                            <span class="nav_name">Penyimpanan</span>
-                        </a>
-                        <a href="/laporan" class="nav_link">
-                            <i class='bx bxs-report'></i>
-                            <span class="nav_name">Laporan</span>
-                        </a>
-                        <a href="/barcode" class="nav_link">
-                            <i class='bx bx-qr-scan'></i>
-                            <span class="nav_name">QR Code</span>
-                        </a>
-                    </div>
-                </div>
-
-                <a href="/logout" class="nav_link">
-                    <i class='bx bx-log-out nav_icon'></i>
-                    <span class="nav_name">SignOut</span>
+    <div class="l-navbar" id="nav-bar">
+        <nav class="nav">
+            <div>
+                <a href="#" class="nav_logo">
+                    <i class='bx bx-layer nav_logo-icon'></i>
+                    <span class="nav_logo-name">INVENTARIS</span>
                 </a>
-            </nav>
-        </div>
 
-        <div class="height-100 bg-light">
-            <?= $this->renderSection('content') ?>
-        </div>
+                <div class="nav_list">
+                    <a href="/dashboard" class="nav_link active">
+                        <i class='bx bx-grid-alt nav_icon'></i>
+                        <span class="nav_name">Dashboard</span>
+                    </a>
+                    <a href="/gedung" class="nav_link">
+                        <i class='bx bx-building nav_icon'></i>
+                        <span class="nav_name">Gedung</span>
+                    </a>
+                    <a href="/ruangan" class="nav_link">
+                        <i class='bx bx-home-circle nav_icon'></i>
+                        <span class="nav_name">Ruangan</span>
+                    </a>
+                    <a href="/barang" class="nav_link">
+                        <i class='bx bx-unite nav_icon'></i>
+                        <span class="nav_name">Barang</span>
+                    </a>
+                    <a href="/penyimpanan" class="nav_link">
+                        <i class='bx bx-store nav_icon'></i>
+                        <span class="nav_name">Penyimpanan</span>
+                    </a>
+                    <a href="/laporan" class="nav_link">
+                        <i class='bx bxs-report'></i>
+                        <span class="nav_name">Laporan</span>
+                    </a>
+                    <a href="/barcode" class="nav_link">
+                        <i class='bx bx-qr-scan'></i>
+                        <span class="nav_name">QR Code</span>
+                    </a>
+                </div>
+            </div>
+
+            <a href="/logout" class="nav_link">
+                <i class='bx bx-log-out nav_icon'></i>
+                <span class="nav_name">SignOut</span>
+            </a>
+        </nav>
+    </div>
+
+    <div class="height-100 bg-light">
+        <?= $this->renderSection('content') ?>
+    </div>
 
 
-        <!-- // TODO: Resources -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-        <script src="/js/template.js"></script>
+    <!-- // TODO: Resources -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <script src="/js/index.js" type="module"></script>
 
-        <!-- // TODO: My Script -->
-        <?php if (isset($script)) : ?>
-            <script src="<?= '/js/' . $script . '.js' ?>"></script>
-        <?php endif ?>
-    </body>
+    <!-- // TODO: My Script -->
+    <?php if (isset($script)) : ?>
+        <script src="<?= '/js/pages/' . $script . '.js' ?>" type="module"></script>
+    <?php endif ?>
+</body>
 
 </html>

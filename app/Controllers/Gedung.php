@@ -3,11 +3,8 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use Config\Services;
 
-use App\Models\Gedung as tbGedung;
-use App\Models\User;
-use DateTime;
+use App\Models\Gedung as Table;
 use Exception;
 
 class Gedung extends BaseController
@@ -16,8 +13,7 @@ class Gedung extends BaseController
 
     public function __construct()
     {
-        $this->table = new tbGedung();
-        $this->tbUser = new User();
+        $this->table = new Table();
     }
 
     public function view($view = '', $data = [])
@@ -27,7 +23,7 @@ class Gedung extends BaseController
 
     public function index()
     {
-        $paginate = $this->paginate($this->table, 2);
+        $paginate = $this->paginate($this->table, 3);
 
         $data = [
             'title'         => 'Gedung',
@@ -46,7 +42,7 @@ class Gedung extends BaseController
     {
         $data = [
             'title'         => 'Tambah Gedung',
-            'validation'    => Services::validation(),
+            'validation'    => $this->validation,
             'script'        => 'gedung/create',
             'jumlahHari'    => cal_days_in_month(CAL_GREGORIAN, date('m'), date('Y')),
             'bulan'         => $this->getDataBulan()
@@ -89,13 +85,10 @@ class Gedung extends BaseController
     public function insert()
     {
         if (!$this->validasiGedung()) return redirect()->to('/gedung/tambah')->withInput();
-
-        if (!$this->gambarValid('gambar')) return redirect()->to('/gedung/tambah')->withInput()->with('gambarError', $this->getMessageGambarError());
-
-        $user = $this->tbUser->where('username', session('username'))->find()[0];
+        if (!$this->gambarValid('gambar', 'gedung')) return redirect()->to('/gedung/tambah')->withInput()->with('gambarError', $this->getMessageGambarError());
 
         $data = [
-            'id_user'           => $user->id_user,
+            'id_user'           => $this->getUser()->id_user,
             'nama_gedung'       => $this->request->getPost('nama'),
             'tgl_pencatatan'    => $this->request->getPost('tanggal'),
             'bulan_pencatatan'  => $this->request->getPost('bulan'),
