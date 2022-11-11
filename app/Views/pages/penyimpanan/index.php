@@ -18,6 +18,7 @@
                 <th scope="col" class="text-center">Aksi</th>
             </tr>
         </thead>
+        
         <tbody class="table-group-divider">
             <?php foreach ($penyimpanan as $no => $penyimpanan) : ?>
                 <tr>

@@ -33,19 +33,18 @@
                     <td><?= $ruangan->kapasitas_ruangan ?></td>
                     <td><?= $ruangan->terisi ?></td>
                     <td>
-                        <img class="w-100 h-100" src="<?= '/images/ruangan/' . $ruangan->gambar_ruangan ?>" alt="<?= $ruangan->nama_ruangan ?>">
+                        <img class="w-100 h-100" src="<?= '/images/ruangan/' . $ruangan->gambar_ruangan ?>" alt="<?= $ruangan->gambar_ruangan ?>">
                     </td>
                     <td class="d-flex justify-content-between align-items-center">
-                        <a href=""><button class="btn btn-warning"><i class="fa-solid fa-eye"></i></button></a>
+                        <a href="/ruangan/detail"><button class="btn btn-warning"><i class="fa-solid fa-eye"></i></button></a>
 
-                        <a href=""><button class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></button></a>
+                        <a href="/ruangan/ubah/<?= $ruangan->id_ruangan ?>"><button class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></button></a>
 
-                        <form action="">
+                        <form action="/ruangan/delete" method="POST">
+                            <input type="hidden" name="id" value="<?= $ruangan->id_ruangan ?>">
+
                             <button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
-
                         </form>
-
-
                     </td>
                 </tr>
             <?php endforeach ?>
