@@ -52,6 +52,11 @@ class Ruangan extends BaseController
         return $this->view('manage', $data);
     }
 
+    public function show($id)
+    {
+        dd($id);
+    }
+
     public function validasiRuangan()
     {
         $kapasitasValid = $this->request->getPost('kapasitas') > 0;

@@ -51,6 +51,7 @@ $routes->group('', ['filter' => 'login'], static function ($routes) {
     $routes->get('/ruangan', 'Ruangan::index');
     $routes->get('/ruangan/tambah', 'Ruangan::create');
     $routes->get('/ruangan/ubah/(:num)', 'Ruangan::create/$1');
+    $routes->get('/ruangan/detail/(:num)', 'Ruangan::show/$1');
     $routes->post('/ruangan/insert', 'Ruangan::insert');
     $routes->post('/ruangan/update', 'Ruangan::update');
     $routes->post('/ruangan/delete', 'Ruangan::delete');

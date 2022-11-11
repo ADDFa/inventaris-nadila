@@ -14,37 +14,39 @@
 <div class="table-ruangan col-md-11 mx-auto my-5 row">
     <table class="table">
         <thead>
-            <tr>
+            <tr class="text-center">
                 <th scope="col">No</th>
                 <th scope="col">Id Ruangan</th>
                 <th scope="col">Nama Ruangan</th>
                 <th scope="col">Kapasitas</th>
                 <th scope="col">Terisi</th>
                 <th scope="col">Foto</th>
-                <th scope="col" class="text-center">Aksi</th>
+                <th scope="col" class="col-md-2">Aksi</th>
             </tr>
         </thead>
         <tbody class="table-group-divider">
             <?php foreach ($ruangan as $no => $ruangan) : ?>
-                <tr>
+                <tr class="text-center align-middle">
                     <th scope="row"><?= $no + 1 ?></th>
                     <td>Qr_Code <?= $no + 1 ?></td>
                     <td><?= $ruangan->nama_ruangan ?></td>
                     <td><?= $ruangan->kapasitas_ruangan ?></td>
                     <td><?= $ruangan->terisi ?></td>
-                    <td>
-                        <img class="w-100 h-100" src="<?= '/images/ruangan/' . $ruangan->gambar_ruangan ?>" alt="<?= $ruangan->gambar_ruangan ?>">
+                    <td class="col-md-2">
+                        <img class="rounded-3 p-1 border bg-light w-100 h-100" src="<?= '/images/ruangan/' . $ruangan->gambar_ruangan ?>" alt="<?= $ruangan->gambar_ruangan ?>">
                     </td>
-                    <td class="d-flex justify-content-between align-items-center">
-                        <a href="/ruangan/detail"><button class="btn btn-warning"><i class="fa-solid fa-eye"></i></button></a>
+                    <td class="col-md-2">
+                        <div class="d-flex justify-content-center gap-3">
+                            <a href="/ruangan/detail/<?= $ruangan->id_ruangan ?>"><button class="btn btn-warning"><i class="fa-solid fa-eye"></i></button></a>
 
-                        <a href="/ruangan/ubah/<?= $ruangan->id_ruangan ?>"><button class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></button></a>
+                            <a href="/ruangan/ubah/<?= $ruangan->id_ruangan ?>"><button class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></button></a>
 
-                        <form action="/ruangan/delete" method="POST">
-                            <input type="hidden" name="id" value="<?= $ruangan->id_ruangan ?>">
+                            <form action="/ruangan/delete" method="POST">
+                                <input type="hidden" name="id" value="<?= $ruangan->id_ruangan ?>">
 
-                            <button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
-                        </form>
+                                <button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
             <?php endforeach ?>
