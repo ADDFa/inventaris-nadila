@@ -28,7 +28,8 @@ class Ruangan extends Migration
             'nama_ruangan' => [
                 'type'          => 'VARCHAR',
                 'constraint'    => '40',
-                'null'             => false
+                'null'          => false,
+                'unique'        => true
             ],
 
             'kapasitas_ruangan'          => [

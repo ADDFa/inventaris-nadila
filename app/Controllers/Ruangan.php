@@ -10,7 +10,7 @@ use Exception;
 
 class Ruangan extends BaseController
 {
-    private $gedung, $table;
+    protected $gedung, $table;
 
     public function __construct()
     {
@@ -25,6 +25,8 @@ class Ruangan extends BaseController
 
     public function index()
     {
+        $paginate = $this->paginate($this->table, 5);
+
         $data = [
             'title'             => 'Ruangan',
             'linkAction'        => [
@@ -32,7 +34,8 @@ class Ruangan extends BaseController
                 'next'          => '/ruangan?page=2',
                 'prev'          => '/ruangan?page=2'
             ],
-            'ruangan'           => $this->table->findAll()
+            'ruangan'           => $paginate->data,
+            'pagination'        => $paginate->paginate
         ];
 
         return $this->view('index', $data);
@@ -62,6 +65,9 @@ class Ruangan extends BaseController
         $kapasitasValid = $this->request->getPost('kapasitas') > 0;
         if (!$kapasitasValid) $this->validation->setError('kapasitas', 'Kapasitas Tidak Boleh Kurang Dari 1');
 
+        $pesan = $this->pesan('Nama Ruangan');
+        $pesan += ['is_unique'  => 'Ruangan sudah terdaftar.'];
+
         $validasi = $this->validate([
             'gedung' => [
                 'rules'     => 'required|integer',
@@ -71,8 +77,8 @@ class Ruangan extends BaseController
             ],
 
             'nama'  => [
-                'rules'     => $this->rule(),
-                'errors'    => $this->pesan('Nama Ruangan')
+                'rules'     => $this->rule() . '|is_unique[ruangan.nama_ruangan]',
+                'errors'    => $pesan
             ],
 
             'kapasitas' => [

@@ -25,7 +25,8 @@ class Gedung extends Migration
             'nama_gedung' => [
                 'type'          => 'VARCHAR',
                 'constraint'    => '40',
-                'null'             => false
+                'null'          => false,
+                'unique'        => true
             ],
 
             'tgl_pencatatan' => [

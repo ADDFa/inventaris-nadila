@@ -167,7 +167,7 @@ abstract class BaseController extends Controller
         }
 
         $pagination =
-            '<div class="footer d-flex justify-content-end px-5 mb-5">' .
+            '<div class="footer d-flex justify-content-end px-5">' .
             '<div class="btn-group" role="group" aria-label="Basic example">' .
             '<a href="' . $prev . '" class="btn btn-default ' . $prevDisabled . '">Prev</a>' .
             '<button type="button" class="btn btn-default">' . $page . '</button>' .

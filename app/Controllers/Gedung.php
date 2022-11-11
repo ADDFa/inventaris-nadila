@@ -53,10 +53,13 @@ class Gedung extends BaseController
 
     private function validasiGedung()
     {
+        $pesan = $this->pesan('Nama Gedung');
+        $pesan += ['is_unique'  => 'Gedung sudah ada terdaftar.'];
+
         return $this->validate([
             'nama' => [
-                'rules'     => $this->rule(),
-                'errors'    => $this->pesan('Nama Gedung')
+                'rules'     => $this->rule() . '|is_unique[gedung.nama_gedung]',
+                'errors'    => $pesan
             ],
 
             'tanggal' => [
