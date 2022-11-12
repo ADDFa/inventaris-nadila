@@ -161,6 +161,10 @@ class Ruangan extends BaseController
 
         if ($this->request->getFile('gambar')->getError() === 0) {
             if (!$this->gambarValid('gambar', 'ruangan')) return redirect()->to('/ruangan/ubah/' . $id)->withInput()->with('gambarError', $this->getMessageGambarError());
+
+            $dataRuangan = $this->table->find($id);
+            unlink('images/ruangan/' . $dataRuangan->gambar_ruangan);
+
             $data += ['gambar_ruangan' => $this->getNameGambar()];
         }
 

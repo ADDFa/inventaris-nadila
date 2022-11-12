@@ -2,27 +2,33 @@
 
 <?= $this->section('content') ?>
 
+<div class="row col-md-10 justify-content-end mx-auto">
+    <a href="/ruangan" class="col-md-1 badge bg-info py-2 text-light"><i class="fa-solid fa-arrow-left"></i> Kembali</a>
+</div>
+
 <h1 class="text-center fw-bold"><?= $ruangan->nama_ruangan ?></h1>
 
 <div class="col-lg-5 mx-auto">
     <img src="/images/ruangan/sample.jpg" alt="" class="w-100 border border-secondary p-1 rounded-3">
 </div>
 
-<ol class="mt-5 col-lg-8 mx-auto list-group list-group-numbered">
-    <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="ms-2 me-auto">
-            <div class="fw-bold">Kapasitas ruangan</div>
-            <?= $ruangan->kapasitas_ruangan ?>
-        </div>
-        <span class="badge bg-primary rounded-pill"><?= $ruangan->kapasitas_ruangan ?></span>
-    </li>
-    <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="ms-2 me-auto">
-            <div class="fw-bold">Jumlah barang</div>
-            <?= $ruangan->terisi ?>
-        </div>
-        <span class="badge bg-primary rounded-pill"><?= $ruangan->terisi ?></span>
-    </li>
+<div class="col-lg-8 mt-5 mx-auto">
+    <ol class="list-group list-group-numbered">
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+                <div class="fw-bold">Kapasitas ruangan</div>
+                <?= $ruangan->kapasitas_ruangan ?>
+            </div>
+            <span class="badge bg-primary rounded-pill"><?= $ruangan->kapasitas_ruangan ?></span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+                <div class="fw-bold">Jumlah barang</div>
+                <?= $ruangan->terisi ?>
+            </div>
+            <span class="badge bg-primary rounded-pill"><?= $ruangan->terisi ?></span>
+        </li>
+    </ol>
 
     <div class="accordion my-2" id="accordionBarang">
         <div class="accordion-item">
@@ -56,6 +62,6 @@
             </div>
         </div>
     </div>
-</ol>
+</div>
 
 <?= $this->endSection() ?>
