@@ -5,8 +5,8 @@
 <?= $this->include('components/topAndAction') ?>
 
 <?php if ($x = session()->getFlashdata('crud') ?? false) : ?>
-    <div class="alert alert-<?= $x->status ?> alert-dismissible fade show w-100 my-3" role="alert">
-        <?= $x->message ?>
+    <div class="alert alert-<?= $x['status'] ?> alert-dismissible fade show w-100 my-3" role="alert">
+        <?= $x['message'] ?>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 <?php endif ?>
@@ -24,11 +24,12 @@
                 <th scope="col" class="col-md-2">Aksi</th>
             </tr>
         </thead>
+
         <tbody class="table-group-divider">
-            <?php foreach ($ruangan as $no => $ruangan) : ?>
+            <?php foreach ($ruangan as $ruangan) : ?>
                 <tr class="text-center align-middle">
-                    <th scope="row"><?= $no + 1 ?></th>
-                    <td>Qr_Code <?= $no + 1 ?></td>
+                    <th scope="row"><?= $startNumber++ ?></th>
+                    <td>Qr_Code 1</td>
                     <td><?= $ruangan->nama_ruangan ?></td>
                     <td><?= $ruangan->kapasitas_ruangan ?></td>
                     <td><?= $ruangan->terisi ?></td>
@@ -41,10 +42,28 @@
 
                             <a href="/ruangan/ubah/<?= $ruangan->id_ruangan ?>"><button class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></button></a>
 
+                            <!-- Modal -->
                             <form action="/ruangan/delete" method="POST">
                                 <input type="hidden" name="id" value="<?= $ruangan->id_ruangan ?>">
 
-                                <button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#hapus">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+
+                                <div class="modal fade" id="hapus" tabindex="-1" aria-labelledby="label" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="label">Yakin ingin menghapus?</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                <button class="btn btn-primary">Ya hapus!</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </form>
                         </div>
                     </td>

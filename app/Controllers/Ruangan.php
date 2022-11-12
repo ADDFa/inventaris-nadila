@@ -10,7 +10,10 @@ use Exception;
 
 class Ruangan extends BaseController
 {
-    protected $gedung, $table;
+    protected
+        $gedung,
+        $table,
+        $limitData = 5;
 
     public function __construct()
     {
@@ -25,7 +28,7 @@ class Ruangan extends BaseController
 
     public function index()
     {
-        $paginate = $this->paginate($this->table, 5);
+        $paginate = $this->paginate($this->table, $this->limitData);
 
         $data = [
             'title'             => 'Ruangan',
@@ -35,7 +38,8 @@ class Ruangan extends BaseController
                 'prev'          => '/ruangan?page=2'
             ],
             'ruangan'           => $paginate->data,
-            'pagination'        => $paginate->paginate
+            'pagination'        => $paginate->paginate,
+            'startNumber'       => $paginate->startNumber
         ];
 
         return $this->view('index', $data);
@@ -60,13 +64,17 @@ class Ruangan extends BaseController
         dd($id);
     }
 
-    public function validasiRuangan()
+    public function validasiRuangan($type = null)
     {
         $kapasitasValid = $this->request->getPost('kapasitas') > 0;
         if (!$kapasitasValid) $this->validation->setError('kapasitas', 'Kapasitas Tidak Boleh Kurang Dari 1');
 
-        $pesan = $this->pesan('Nama Ruangan');
-        $pesan += ['is_unique'  => 'Ruangan sudah terdaftar.'];
+        $namaRules = $this->rule();
+        $namaPesan = $this->pesan('Nama Ruangan');
+        if (!$type) {
+            $namaRules .= '|is_unique[ruangan.nama_ruangan]';
+            $namaPesan += ['is_unique'  => 'Ruangan sudah terdaftar.'];
+        };
 
         $validasi = $this->validate([
             'gedung' => [
@@ -77,8 +85,8 @@ class Ruangan extends BaseController
             ],
 
             'nama'  => [
-                'rules'     => $this->rule() . '|is_unique[ruangan.nama_ruangan]',
-                'errors'    => $pesan
+                'rules'     => $namaRules,
+                'errors'    => $namaPesan
             ],
 
             'kapasitas' => [
@@ -106,7 +114,6 @@ class Ruangan extends BaseController
         if (!$this->validasiRuangan() || !$idGedung) return redirect()->to('/ruangan/tambah')->withInput();
         if (!$this->gambarValid('gambar', 'ruangan')) return redirect()->to('/ruangan/tambah')->withInput()->with('gambarError', $this->getMessageGambarError());
 
-
         $data = [
             'id_user'           => $this->getUser()->id_user,
             'id_gedung'         => $idGedung,
@@ -118,7 +125,7 @@ class Ruangan extends BaseController
         try {
             $this->table->insert($data);
 
-            session()->setFlashdata('crud', (object) [
+            session()->setFlashdata('crud', [
                 'status'    => 'success',
                 'message'   => 'Berhasil Menambahkan Data Ruangan'
             ]);
@@ -126,14 +133,15 @@ class Ruangan extends BaseController
             $e->getMessage();
         }
 
-        return redirect()->to('/ruangan');
+        $to = '/ruangan?page=' . ceil(count($this->table->findAll()) / $this->limitData);
+        return redirect()->to($to);
     }
 
     public function update()
     {
         $id = $this->request->getPost('id');
         $idGedung = $this->getIdGedungValid();
-        if (!$this->validasiRuangan() || !$idGedung) return redirect()->to('/ruangan/ubah/' . $id)->withInput();
+        if (!$this->validasiRuangan('update') || !$idGedung) return redirect()->to('/ruangan/ubah/' . $id)->withInput();
 
         $data = [
             'id_user'           => $this->getUser()->id_user,
@@ -150,7 +158,7 @@ class Ruangan extends BaseController
         try {
             $this->table->update($id, $data);
 
-            session()->setFlashdata('crud', (object) [
+            session()->setFlashdata('crud', [
                 'status'    => 'success',
                 'message'   => 'Ruangan Berhasil Diupdate'
             ]);
@@ -158,7 +166,7 @@ class Ruangan extends BaseController
             $e->getMessage();
         }
 
-        return redirect()->to('/ruangan');
+        return redirect()->to('/ruangan/ubah/' . $id);
     }
 
     public function delete()
@@ -170,7 +178,7 @@ class Ruangan extends BaseController
             $this->table->delete($id);
             unlink('images/ruangan/' . $ruangan[0]->gambar_ruangan);
 
-            session()->setFlashdata('crud', (object) [
+            session()->setFlashdata('crud', [
                 'status'    => 'success',
                 'message'   => $ruangan[0]->nama_ruangan . ' Berhasil Dihapus.'
             ]);
@@ -178,6 +186,6 @@ class Ruangan extends BaseController
             $e->getMessage();
         }
 
-        return redirect()->to('/ruangan');
+        return redirect()->back();
     }
 }

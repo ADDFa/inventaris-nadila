@@ -18,7 +18,7 @@ export class Sidebar extends Main {
 
                 if (toggle && nav && bodypd && headerpd) {
                     toggle.addEventListener('click', () => {
-                        nav.classList.toggle('show')
+                        nav.classList.toggle('show-nav')
                         toggle.classList.toggle('bx-x')
                         bodypd.classList.toggle('body-pd')
                         headerpd.classList.toggle('body-pd')

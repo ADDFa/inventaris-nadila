@@ -9,7 +9,10 @@ use Exception;
 
 class Gedung extends BaseController
 {
-    protected $table, $tbUser;
+    protected
+        $table,
+        $tbUser,
+        $limitData = 3;
 
     public function __construct()
     {
@@ -23,7 +26,7 @@ class Gedung extends BaseController
 
     public function index()
     {
-        $paginate = $this->paginate($this->table, 3);
+        $paginate = $this->paginate($this->table, $this->limitData);
 
         $data = [
             'title'         => 'Gedung',
@@ -102,22 +105,20 @@ class Gedung extends BaseController
         try {
             $this->table->insert($data);
 
-            session()->setFlashdata('crud', (object) [
+            session()->setFlashdata('crud', [
                 'status'    => 'success',
                 'message'   => 'Berhasil Menambahkan Data Gedung'
             ]);
         } catch (Exception $e) {
             var_dump($e->getMessage());
-            sleep(3);
         }
 
-        return redirect()->to('/gedung');
+        $to = '/gedung?page=' . ceil(count($this->table->findAll()) / $this->limitData);
+        return redirect()->to($to);
     }
 
     public function update()
     {
-
-
         return redirect()->to('/gedung');
     }
 

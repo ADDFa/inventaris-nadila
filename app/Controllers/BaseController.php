@@ -149,6 +149,7 @@ abstract class BaseController extends Controller
     /**
      * Pagination.
      */
+
     protected function paginate($table, int $limit)
     {
         $originUri = base_url() . $_SERVER['PATH_INFO'];
@@ -177,6 +178,7 @@ abstract class BaseController extends Controller
 
         return (object) [
             'paginate' => $pagination,
+            'startNumber'   => $offset + 1,
             'data'     => $data
         ];
     }
@@ -188,10 +190,7 @@ abstract class BaseController extends Controller
 
     protected function getUser()
     {
-        $this->user = new User();
-
-        $user = $this->user->where('username', session('username'))->find();
-        return $user[0] ?? false;
+        return session('user') ?? false;
     }
 
     /**

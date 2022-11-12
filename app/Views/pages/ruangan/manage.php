@@ -4,6 +4,13 @@
 
 <h1 class="text-center fw-bold"><?= $title . ' Ruangan' ?></h1>
 
+<?php if ($x = session()->getFlashdata('crud') ?? false) : ?>
+    <div class="alert alert-<?= $x['status'] ?> alert-dismissible fade show w-100 my-3" role="alert">
+        <?= $x['message'] ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<?php endif ?>
+
 <form action="/ruangan/<?= ($path === 'tambah') ? 'insert' : 'update' ?>" method="POST" enctype="multipart/form-data" class="col-md-8 mx-auto my-5">
     <?php if ($path === 'ubah') : ?>
         <input type="hidden" value="<?= $ruangan->id_ruangan ?>" name="id">

@@ -14,8 +14,6 @@
     <?php if (isset($style)) : ?>
         <link rel="stylesheet" href="<?= '/css/pages/' . $style . '.css' ?>">
     <?php endif ?>
-
-    <script src="/js/sweetalert2.all.min.js"></script>
 </head>
 
 <body>

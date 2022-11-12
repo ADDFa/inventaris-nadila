@@ -14,8 +14,7 @@ class Auth extends BaseController
 
         $data = [
             'title'         => 'Login Inventaris',
-            'style'         => 'login',
-            'script'        => 'template'
+            'style'         => 'login'
         ];
 
         return view('pages/login', $data);
@@ -29,22 +28,13 @@ class Auth extends BaseController
 
         $data_user = $user_models->where('username', $username)->find();
 
-        if ($data_user === []) {
-            $pesan = [0, 'Username Salah'];
-            session()->setFlashdata('pesan', $pesan);
+        if (!$data_user) return redirect()->to('/')->withInput()->with('wrongUsername', 'Username Salah');
+        if (!password_verify($password, $data_user[0]->password)) return redirect()->to('/')->withInput()->with('wrongPassword', 'Password Salah');
 
-            return redirect()->to('/');
-        }
-
-        if (!password_verify($password, $data_user[0]->password)) {
-            $pesan = [0, 'Password Salah'];
-            session()->setFlashdata('pesan', $pesan);
-
-            return redirect()->to('/');
-        }
-
-        session()->set('login', true);
-        session()->set('username', $username);
+        session()->set([
+            'login' => true,
+            'user'  => $data_user[0]
+        ]);
 
         return redirect()->to('/dashboard');
     }

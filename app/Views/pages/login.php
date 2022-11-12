@@ -12,13 +12,17 @@
 
         <form action="/login" method="post">
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Username</label>
-                <input type="text" class="form-control text-light" id="exampleInputEmail1" name="username">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control text-light <?= session('wrongUsername') ? 'is-invalid' : '' ?>" id="username" name="username" value="<?= old('username') ?>">
+                <div id="username" class="invalid-feedback"><?= session('wrongUsername') ?></div>
             </div>
+
             <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Password</label>
-                <input type="password" class="form-control text-light" id="exampleInputPassword1" name="password">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control text-light <?= session('wrongPassword') ? 'is-invalid' : '' ?>" id="password" name="password">
+                <div id="password" class="invalid-feedback"><?= session('wrongPassword') ?></div>
             </div>
+
             <div class="mb-3 d-flex mt-5">
                 <button type="submit" class="btn btn-login w-100">Login</button>
             </div>
