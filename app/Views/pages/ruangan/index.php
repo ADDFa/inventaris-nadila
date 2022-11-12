@@ -16,7 +16,6 @@
         <thead>
             <tr class="text-center">
                 <th scope="col">No</th>
-                <th scope="col">Id Ruangan</th>
                 <th scope="col">Nama Ruangan</th>
                 <th scope="col">Kapasitas</th>
                 <th scope="col">Terisi</th>
@@ -29,7 +28,6 @@
             <?php foreach ($ruangan as $ruangan) : ?>
                 <tr class="text-center align-middle">
                     <th scope="row"><?= $startNumber++ ?></th>
-                    <td>Qr_Code 1</td>
                     <td><?= $ruangan->nama_ruangan ?></td>
                     <td><?= $ruangan->kapasitas_ruangan ?></td>
                     <td><?= $ruangan->terisi ?></td>

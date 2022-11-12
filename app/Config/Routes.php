@@ -58,6 +58,7 @@ $routes->group('', ['filter' => 'login'], static function ($routes) {
 
     $routes->get('/barang', 'Barang::index');
     $routes->get('/barang/tambah', 'Barang::create');
+    $routes->get('/barang/detail/(:num)', 'Barang::show/$1');
 
     $routes->get('/penyimpanan', 'Penyimpanan::index');
     $routes->get('/penyimpanan/tambah', 'Penyimpanan::create');

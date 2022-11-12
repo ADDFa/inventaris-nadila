@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 
 use App\Models\Gedung;
 use App\Models\Ruangan as Table;
+use App\Models\Barang;
 use Exception;
 
 class Ruangan extends BaseController
@@ -13,12 +14,14 @@ class Ruangan extends BaseController
     protected
         $gedung,
         $table,
+        $barang,
         $limitData = 5;
 
     public function __construct()
     {
         $this->gedung = new Gedung();
         $this->table = new Table();
+        $this->barang = new Barang();
     }
 
     public function view($view = '', $data = [])
@@ -61,7 +64,13 @@ class Ruangan extends BaseController
 
     public function show($id)
     {
-        dd($id);
+        $data = [
+            'title'         => 'Detail Ruangan',
+            'ruangan'       => $this->table->find($id),
+            'barang'        => $this->barang->where('id_ruangan', $id)->findAll()
+        ];
+
+        return $this->view('detail', $data);
     }
 
     public function validasiRuangan($type = null)

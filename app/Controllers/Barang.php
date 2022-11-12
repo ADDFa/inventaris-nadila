@@ -35,6 +35,16 @@ class Barang extends BaseController
         return $this->view('index', $data);
     }
 
+    public function show($id)
+    {
+        $data = [
+            'title'     => 'Detail Ruangan',
+            'barang'   => $this->table->find($id)
+        ];
+
+        return $this->view('detail', $data);
+    }
+
     public function create()
     {
         $data = [
