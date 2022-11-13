@@ -24,6 +24,7 @@ class Ruangan extends BaseController
         $this->barang = new Barang();
     }
 
+    // TODO: Fungsi untuk view ruangan
     public function view($view = '', $data = [])
     {
         return view('pages/ruangan/' . $view, $data);
@@ -31,6 +32,7 @@ class Ruangan extends BaseController
 
     public function index()
     {
+        // ?: Ambil data ruangan dan pagination dari method paginate()
         $paginate = $this->paginate($this->table, $this->limitData);
 
         $data = [
@@ -117,68 +119,63 @@ class Ruangan extends BaseController
         return false;
     }
 
+    public function getRequestDataRuangan()
+    {
+        return [
+            'id_user'           => $this->getUser()->id_user,
+            'id_gedung'         => $this->getIdGedungValid(),
+            'nama_ruangan'      => $this->request->getPost('nama'),
+            'kapasitas_ruangan' => $this->request->getPost('kapasitas')
+        ];
+    }
+
     public function insert()
     {
+        // ?: Cek apakah data ruangan valid, gambar ruangan valid, dan apakah gedung terdaftar
         $idGedung = $this->getIdGedungValid();
         if (!$this->validasiRuangan() || !$idGedung) return redirect()->to('/ruangan/tambah')->withInput();
         if (!$this->gambarValid('gambar', 'ruangan')) return redirect()->to('/ruangan/tambah')->withInput()->with('gambarError', $this->getMessageGambarError());
 
-        $data = [
-            'id_user'           => $this->getUser()->id_user,
-            'id_gedung'         => $idGedung,
-            'nama_ruangan'      => $this->request->getPost('nama'),
-            'kapasitas_ruangan' => $this->request->getPost('kapasitas'),
-            'gambar_ruangan'    => $this->getNameGambar()
-        ];
+        // ?: Jika valid ambil data ruangan dari method getRequestDataRuangan() serta tambahkan data gambar dan masukkan data ruangan kedalam database
+        $data = $this->getRequestDataRuangan() + ['gambar_ruangan' => $this->getNameGambar()];
+        $this->table->insert($data);
 
-        try {
-            $this->table->insert($data);
+        // ?: Berikan flash message dan kembalikan ke halaman ruangan pada halaman terakhir
+        session()->setFlashdata('crud', [
+            'status'    => 'success',
+            'message'   => 'Berhasil Menambahkan Data Ruangan'
+        ]);
 
-            session()->setFlashdata('crud', [
-                'status'    => 'success',
-                'message'   => 'Berhasil Menambahkan Data Ruangan'
-            ]);
-        } catch (Exception $e) {
-            $e->getMessage();
-        }
-
-        $to = '/ruangan?page=' . ceil(count($this->table->findAll()) / $this->limitData);
-        return redirect()->to($to);
+        $page = ceil(count($this->table->findAll()) / $this->limitData);
+        return redirect()->to('/ruangan?page=' . $page);
     }
 
     public function update()
     {
+        // ?: Cek apakah ruangan valid, gambar ruangan valid
         $id = $this->request->getPost('id');
         $idGedung = $this->getIdGedungValid();
         if (!$this->validasiRuangan('update') || !$idGedung) return redirect()->to('/ruangan/ubah/' . $id)->withInput();
 
-        $data = [
-            'id_user'           => $this->getUser()->id_user,
-            'id_gedung'         => $idGedung,
-            'nama_ruangan'      => $this->request->getPost('nama'),
-            'kapasitas_ruangan' => $this->request->getPost('kapasitas')
-        ];
+        // ?: Jika valid ambil data ruangan dari method getRequestDataRuangan() dan update data ruangan tapi sebelum itu cek apakah gambar diupdate atau tidak
+        $data = $this->getRequestDataRuangan();
 
+        // ?: Cek apakah gambar diupdate atau tidak, jika gambar diupdate, maka hapus gambar lama dan masukkan gambar baru
         if ($this->request->getFile('gambar')->getError() === 0) {
             if (!$this->gambarValid('gambar', 'ruangan')) return redirect()->to('/ruangan/ubah/' . $id)->withInput()->with('gambarError', $this->getMessageGambarError());
 
             $dataRuangan = $this->table->find($id);
-
             if (file_exists('images/ruangan/' . $dataRuangan->gambar_ruangan)) unlink('images/ruangan/' . $dataRuangan->gambar_ruangan);
 
             $data += ['gambar_ruangan' => $this->getNameGambar()];
         }
+        $this->table->update($id, $data);
 
-        try {
-            $this->table->update($id, $data);
-
-            session()->setFlashdata('crud', [
-                'status'    => 'success',
-                'message'   => 'Ruangan Berhasil Diupdate'
-            ]);
-        } catch (Exception $e) {
-            $e->getMessage();
-        }
+        // ?: Berikan flash message dan kembalikan ke halaman ubah gedung
+        session()->setFlashdata('crud', [
+            'status'    => 'success',
+            'message'   => 'Ruangan Berhasil Diupdate'
+        ]);
 
         return redirect()->to('/ruangan/ubah/' . $id);
     }
@@ -188,18 +185,15 @@ class Ruangan extends BaseController
         $id = $this->request->getPost('id');
         $ruangan = $this->table->find($id);
 
-        try {
-            $this->table->delete($id);
+        // ?: Delete gambar gedung dan cek apakah gambar gedung terdapat didalam direktori atau tidak. Jika iya, maka hapus gambar tersebut
+        $this->table->delete($id);
+        if (file_exists('images/ruangan/' . $ruangan->gambar_ruangan)) unlink('images/ruangan/' . $ruangan->gambar_ruangan);
 
-            if (file_exists('images/ruangan/' . $ruangan->gambar_ruangan)) unlink('images/ruangan/' . $ruangan->gambar_ruangan);
-
-            session()->setFlashdata('crud', [
-                'status'    => 'success',
-                'message'   => $ruangan->nama_ruangan . ' Berhasil Dihapus.'
-            ]);
-        } catch (Exception $e) {
-            $e->getMessage();
-        }
+        // ?: Berikan flash message dan kembalikan ke halaman sebelumnya
+        session()->setFlashdata('crud', [
+            'status'    => 'success',
+            'message'   => $ruangan->nama_ruangan . ' Berhasil Dihapus.'
+        ]);
 
         return redirect()->back();
     }

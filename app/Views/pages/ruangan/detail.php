@@ -9,7 +9,7 @@
 <h1 class="text-center fw-bold"><?= $ruangan->nama_ruangan ?></h1>
 
 <div class="col-lg-5 mx-auto">
-    <img src="/images/ruangan/sample.jpg" alt="" class="w-100 border border-secondary p-1 rounded-3">
+    <img src="/images/ruangan/<?= $ruangan->gambar_ruangan ?>" alt="<?= $ruangan->gambar_ruangan ?>" class="w-100 border border-secondary p-1 rounded-3">
 </div>
 
 <div class="col-lg-8 mt-5 mx-auto">

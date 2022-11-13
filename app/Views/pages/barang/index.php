@@ -54,11 +54,11 @@
                             <form action="/barang/delete" method="POST">
                                 <input type="hidden" name="id" value="<?= $barang->id_barang ?>">
 
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#hapus">
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#hapus<?= $barang->id_barang ?>">
                                     <i class="fa-solid fa-trash"></i>
                                 </button>
 
-                                <div class="modal fade" id="hapus" tabindex="-1" aria-labelledby="label" aria-hidden="true">
+                                <div class="modal fade" id="hapus<?= $barang->id_barang ?>" tabindex="-1" aria-labelledby="label" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -67,7 +67,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                                <button class="btn btn-primary">Ya hapus!</button>
+                                                <button class="btn btn-danger">Ya hapus!</button>
                                             </div>
                                         </div>
                                     </div>
