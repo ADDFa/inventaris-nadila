@@ -163,7 +163,8 @@ class Ruangan extends BaseController
             if (!$this->gambarValid('gambar', 'ruangan')) return redirect()->to('/ruangan/ubah/' . $id)->withInput()->with('gambarError', $this->getMessageGambarError());
 
             $dataRuangan = $this->table->find($id);
-            unlink('images/ruangan/' . $dataRuangan->gambar_ruangan);
+
+            if (file_exists('images/ruangan/' . $dataRuangan->gambar_ruangan)) unlink('images/ruangan/' . $dataRuangan->gambar_ruangan);
 
             $data += ['gambar_ruangan' => $this->getNameGambar()];
         }
@@ -184,16 +185,17 @@ class Ruangan extends BaseController
 
     public function delete()
     {
-        $id = $this->request->getPost();
+        $id = $this->request->getPost('id');
         $ruangan = $this->table->find($id);
 
         try {
             $this->table->delete($id);
-            unlink('images/ruangan/' . $ruangan[0]->gambar_ruangan);
+
+            if (file_exists('images/ruangan/' . $ruangan->gambar_ruangan)) unlink('images/ruangan/' . $ruangan->gambar_ruangan);
 
             session()->setFlashdata('crud', [
                 'status'    => 'success',
-                'message'   => $ruangan[0]->nama_ruangan . ' Berhasil Dihapus.'
+                'message'   => $ruangan->nama_ruangan . ' Berhasil Dihapus.'
             ]);
         } catch (Exception $e) {
             $e->getMessage();

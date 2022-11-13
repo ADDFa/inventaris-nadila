@@ -4,6 +4,13 @@
 
 <?= $this->include('components/topAndAction') ?>
 
+<?php if ($x = session()->getFlashdata('crud') ?? false) : ?>
+    <div class="alert alert-<?= $x['status'] ?> alert-dismissible fade show w-100 my-3" role="alert">
+        <?= $x['message'] ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<?php endif ?>
+
 <div class="table-barang col-lg-11 mx-auto row my-5">
     <table class="table">
         <thead>
@@ -21,13 +28,13 @@
             </tr>
         </thead>
         <tbody class="table-group-divider">
-            <?php foreach ($barang as $no => $barang) : ?>
+            <?php foreach ($barang as $barang) : ?>
                 <tr class="text-center align-middle">
-                    <th scope="row"><?= $no + 1 ?></th>
-                    <td>Qr_Code <?= $no + 1 ?></td>
+                    <th scope="row"><?= $startNumber++ ?></th>
+                    <td>Qr_Code 1</td>
                     <td><?= $barang->nama_barang ?></td>
                     <td class="col-lg-2">
-                        <img class="w-100 p-1 border border-secondary rounded-3" src="<?= '/images/barang/' . $barang->gambar_barang ?>" alt="<?= $barang->nama_barang ?>">
+                        <img class="w-100 p-1 border border-secondary rounded-3" src="<?= '/images/barang/' . $barang->gambar_barang ?>" alt="<?= $barang->gambar_barang ?>">
                     </td>
                     <td><?= $barang->kategori_barang ?></td>
                     <td><?= $barang->merk_barang ?></td>
