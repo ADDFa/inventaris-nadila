@@ -45,27 +45,35 @@ class Barang extends BaseController
         return $this->view('detail', $data);
     }
 
-    public function create()
+    public function create($id = null)
     {
         $data = [
-            'title'     => 'Tambah Barang'
+            'title'     => $id ? 'Ubah' : 'Tambah',
+            'path'      => $id ? 'update' : 'insert',
+            'id'        => $id
         ];
 
-        return $this->view('tambah', $data);
+        return $this->view('manage', $data);
     }
 
     public function insert()
     {
+        dd($this->request->getPost());
+
         return redirect()->to('/barang');
     }
 
     public function update()
     {
+        dd($this->request->getPost('id'));
+
         return redirect()->to('/barang');
     }
 
     public function delete()
     {
+        dd($this->request->getPost('id'));
+
         return redirect()->to('/barang');
     }
 }

@@ -11,7 +11,7 @@
     </div>
 <?php endif ?>
 
-<div class="my-5 d-flex justify-content-between w-75 mx-auto">
+<div class="my-5 d-flex flex-wrap justify-content-evenly gap-3 mx-auto col-lg-10">
     <?php foreach ($dataGedung as $gedung) : ?>
         <div class="card text-bg-light mb-3" style="max-width: 18rem;">
             <div class="card-header text-center">Jumlah Gedung</div>

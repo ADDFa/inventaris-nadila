@@ -11,8 +11,8 @@
     </div>
 <?php endif ?>
 
-<form action="/ruangan/<?= ($path === 'tambah') ? 'insert' : 'update' ?>" method="POST" enctype="multipart/form-data" class="col-md-8 mx-auto my-5">
-    <?php if ($path === 'ubah') : ?>
+<form action="/ruangan/<?= $path ?>" method="POST" enctype="multipart/form-data" class="col-md-8 mx-auto my-5">
+    <?php if ($path === 'update') : ?>
         <input type="hidden" value="<?= $ruangan->id_ruangan ?>" name="id">
     <?php endif ?>
 

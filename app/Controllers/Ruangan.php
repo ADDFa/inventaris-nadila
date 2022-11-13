@@ -52,7 +52,7 @@ class Ruangan extends BaseController
     {
         $data = [
             'title'         => $id ? 'Ubah' : 'Tambah',
-            'path'          => $id ? 'ubah' : 'tambah',
+            'path'          => $id ? 'update' : 'insert',
             'validation'    => $this->validation,
             'gedung'        => $this->gedung->findAll(),
             'script'        => 'ruangan/create',

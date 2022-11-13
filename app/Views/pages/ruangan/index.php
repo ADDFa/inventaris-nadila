@@ -11,7 +11,7 @@
     </div>
 <?php endif ?>
 
-<div class="table-ruangan col-md-11 mx-auto my-5 row">
+<div class="table-ruangan col-lg-11 mx-auto my-5 row">
     <table class="table">
         <thead>
             <tr class="text-center">
@@ -20,7 +20,7 @@
                 <th scope="col">Kapasitas</th>
                 <th scope="col">Terisi</th>
                 <th scope="col">Foto</th>
-                <th scope="col" class="col-md-2">Aksi</th>
+                <th scope="col" class="col-lg-2">Aksi</th>
             </tr>
         </thead>
 
@@ -31,16 +31,15 @@
                     <td><?= $ruangan->nama_ruangan ?></td>
                     <td><?= $ruangan->kapasitas_ruangan ?></td>
                     <td><?= $ruangan->terisi ?></td>
-                    <td class="col-md-2">
+                    <td class="col-lg-2">
                         <img class="rounded-3 p-1 border bg-light w-100 h-100" src="<?= '/images/ruangan/' . $ruangan->gambar_ruangan ?>" alt="<?= $ruangan->gambar_ruangan ?>">
                     </td>
-                    <td class="col-md-2">
+                    <td class="col-lg-2">
                         <div class="d-flex justify-content-center gap-3">
                             <a href="/ruangan/detail/<?= $ruangan->id_ruangan ?>"><button class="btn btn-warning"><i class="fa-solid fa-eye"></i></button></a>
 
                             <a href="/ruangan/ubah/<?= $ruangan->id_ruangan ?>"><button class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></button></a>
 
-                            <!-- Modal -->
                             <form action="/ruangan/delete" method="POST">
                                 <input type="hidden" name="id" value="<?= $ruangan->id_ruangan ?>">
 

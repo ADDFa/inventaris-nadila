@@ -2,7 +2,7 @@
     <h1 class="text-center fw-bold">Manajemen Data <?= $title ?></h1>
 </div>
 
-<div class="d-flex justify-content-between align-items-center px-5">
+<div class="d-flex flex-wrap justify-content-between align-items-center px-5 gap-3">
     <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
         <button type="button" class="btn btn-default">Show</button>
 

@@ -51,7 +51,7 @@ class Gedung extends BaseController
             'bulan'         => $this->getDataBulan()
         ];
 
-        return $this->view('tambah', $data);
+        return $this->view('manage', $data);
     }
 
     private function validasiGedung()

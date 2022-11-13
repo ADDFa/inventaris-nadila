@@ -3,11 +3,11 @@
 <?= $this->section('content') ?>
 
 <div>
-    <h1 class="fw-bold">Selamat Datang..</h1>
+    <h1 class="fw-bold">Selamat Datang <?= session('user')->username ?></h1>
     <h3 class="fs-5">Di Sistem Informasi Inventaris Barang SMPIT Iqra' Kota Bengkulu</h3>
 </div>
 
-<div class="container d-flex flex-wrap gap-5 justify-content-around mx-auto my-5">
+<div class="col-lg-10 d-flex flex-wrap gap-3 justify-content-around mx-auto my-5">
     <div class="card text-bg-light mb-3" style="max-width: 18rem;">
         <div class="card-header text-center">Jumlah Gedung</div>
         <div class="card-body">
