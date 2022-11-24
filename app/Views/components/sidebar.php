@@ -32,10 +32,10 @@
                     <i class='bx bx-unite nav_icon'></i>
                     <span class="nav_name">Barang</span>
                 </a>
-                <a href="/penyimpanan" class="nav_link">
+                <!-- <a href="/penyimpanan" class="nav_link">
                     <i class='bx bx-store nav_icon'></i>
                     <span class="nav_name">Penyimpanan</span>
-                </a>
+                </a> -->
                 <a href="/laporan" class="nav_link">
                     <i class='bx bxs-report'></i>
                     <span class="nav_name">Laporan</span>

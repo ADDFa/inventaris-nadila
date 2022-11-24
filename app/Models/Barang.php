@@ -13,4 +13,12 @@ class Barang extends Model
 
     // Dates
     protected $useTimestamps = true;
+
+    public function getBarang()
+    {
+        return $this->db->table('barang')
+            ->join('ruangan', 'barang.id_ruangan = ruangan.id_ruangan', 'INNER')
+            ->join('gedung', 'ruangan.id_gedung = gedung.id_gedung', 'INNER')
+            ->get()->getResultObject();
+    }
 }

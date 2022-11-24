@@ -45,15 +45,15 @@
             </tr>
         </thead>
         <tbody class="table-group-divider">
-            <?php for ($i = 1; $i <= 12; $i++) : ?>
+            <?php foreach ($barang as $no => $barang) : ?>
                 <tr>
-                    <th scope="row"><?= $i ?></th>
-                    <td>Kode Barang <?= $i ?></td>
-                    <td>Nama Barang <?= $i ?></td>
-                    <td>Nama Gedung <?= $i ?></td>
-                    <td>Nama Ruangan <?= $i ?></td>
-                    <td>Jumlah Barang <?= $i ?></td>
-                    <td>Tanggal Penyimpanan <?= $i ?></td>
+                    <th scope="row"><?= ++$no ?></th>
+                    <td><?= 'Kode Barang' ?></td>
+                    <td><?= $barang->nama_barang ?></td>
+                    <td><?= $barang->nama_gedung ?></td>
+                    <td><?= $barang->nama_ruangan ?></td>
+                    <td><?= $barang->jumlah_barang ?></td>
+                    <td><?= $bulan[$barang->bulan_pencatatan] ?></td>
                     <td class="d-flex justify-content-between align-items-center">
                         <a href="">
                             <button class="btn btn-warning"><i class="fa-solid fa-eye"></i></button>
@@ -68,7 +68,7 @@
                         </form>
                     </td>
                 </tr>
-            <?php endfor ?>
+            <?php endforeach ?>
         </tbody>
     </table>
 </div>

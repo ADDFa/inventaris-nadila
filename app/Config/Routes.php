@@ -64,8 +64,8 @@ $routes->group('', ['filter' => 'login'], static function ($routes) {
     $routes->post('/barang/update', 'Barang::update');
     $routes->post('/barang/delete', 'Barang::delete');
 
-    $routes->get('/penyimpanan', 'Penyimpanan::index');
-    $routes->get('/penyimpanan/tambah', 'Penyimpanan::create');
+    // $routes->get('/penyimpanan', 'Penyimpanan::index');
+    // $routes->get('/penyimpanan/tambah', 'Penyimpanan::create');
 
     $routes->get('/pembelian', 'Pembelian::index');
     $routes->get('/pembelian/tambah', 'Pembelian::create');

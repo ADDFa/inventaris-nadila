@@ -36,7 +36,8 @@ class Gedung extends BaseController
                 'create'    => '/gedung/tambah'
             ],
             'pagination'    => $paginate->paginate,
-            'dataGedung'    => $paginate->data
+            'dataGedung'    => $paginate->data,
+            'jumlahPages'   => ceil(count($this->table->findAll()) / $this->limitData)
         ];
 
         return $this->view('index', $data);

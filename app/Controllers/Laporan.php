@@ -4,8 +4,17 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 
+use App\Models\Barang;
+
 class Laporan extends BaseController
 {
+    private $barang;
+
+    public function __construct()
+    {
+        $this->barang = new Barang();
+    }
+
     public function view($view = '', $data = [])
     {
         return view('pages/laporan/' . $view, $data);
@@ -22,7 +31,9 @@ class Laporan extends BaseController
                 'next'      => '/laporan?page=' . $page + 1,
                 'prev'      => ($page == '2') ? '/laporan' : '/laporan?page=' . $page - 1
             ],
-            'page'      => $page
+            'page'      => $page,
+            'barang'    => $this->barang->getBarang(),
+            'bulan'     => $this->getDataBulan()
         ];
 
         return $this->view('index', $data);

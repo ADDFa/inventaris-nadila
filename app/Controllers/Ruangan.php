@@ -7,7 +7,6 @@ use App\Controllers\BaseController;
 use App\Models\Gedung;
 use App\Models\Ruangan as Table;
 use App\Models\Barang;
-use Exception;
 
 class Ruangan extends BaseController
 {
@@ -39,12 +38,13 @@ class Ruangan extends BaseController
             'title'             => 'Ruangan',
             'linkAction'        => [
                 'create'        => '/ruangan/tambah',
-                'next'          => '/ruangan?page=2',
-                'prev'          => '/ruangan?page=2'
+                // 'next'          => '/ruangan?page=2',
+                // 'prev'          => '/ruangan?page=2'
             ],
             'ruangan'           => $paginate->data,
             'pagination'        => $paginate->paginate,
-            'startNumber'       => $paginate->startNumber
+            'startNumber'       => $paginate->startNumber,
+            'jumlahPages'       => ceil(count($this->table->findAll()) / $this->limitData)
         ];
 
         return $this->view('index', $data);

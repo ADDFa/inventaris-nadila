@@ -13,7 +13,7 @@ class Barang extends BaseController
     protected
         $table,
         $ruangan,
-        $dataLimit = 10;
+        $limitData = 10;
 
     public function __construct()
     {
@@ -30,18 +30,19 @@ class Barang extends BaseController
     public function index()
     {
         // ?: Ambil data barang dan pagination dari method paginate()
-        $paginate = $this->paginate($this->table, $this->dataLimit);
+        $paginate = $this->paginate($this->table, $this->limitData);
 
         $data = [
             'title'         => 'Barang',
             'linkAction'    => [
                 'create'    => '/barang/tambah',
-                'next'      => '/barang?page=2',
-                'prev'      => '/barang?page=2'
+                // 'next'      => '/barang?page=2',
+                // 'prev'      => '/barang?page=2'
             ],
             'barang'        => $paginate->data,
             'pagination'    => $paginate->paginate,
-            'startNumber'   => $paginate->startNumber
+            'startNumber'   => $paginate->startNumber,
+            'jumlahPages'   => ceil(count($this->table->findAll()) / $this->limitData)
         ];
 
         return $this->view('index', $data);
@@ -202,7 +203,7 @@ class Barang extends BaseController
             'message'   => 'Berhasil Menambahkan Barang'
         ]);
 
-        $page = ceil(count($this->table->findAll()) / $this->dataLimit);
+        $page = ceil(count($this->table->findAll()) / $this->limitData);
         return redirect()->to('/barang?page=' . $page);
     }
 
