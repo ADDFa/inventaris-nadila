@@ -7,8 +7,8 @@
             "users      - items"            : "one to many",
             "building   - rooms"            : "one to many",
             "rooms      - items"            : "one to many",
-            "rooms      - category"         : "one to many",
-            "rooms      - type"             : "one to many"
+            "rooms      - categories"       : "one to many",
+            "rooms      - types"            : "one to many"
         },
 
         "database": {
@@ -27,9 +27,9 @@
                 "buildings": {
                     "id": "INT AUTO_INCREMENT PRIMARY_KEY",
                     "user_id":"INT FOREIGN_KEY",
-                    "gedung_name": "VARCHAR(40)",
+                    "building_name": "VARCHAR(40)",
                     "bulding_size": "VARCHAR(10)",
-                    "total_room": "INT 11",
+                    "room_total": "INT 11",
                     "building_registration_date": "VARCHAR(40)",
                     "building_image": "VARCHAR(255)"
                 },
@@ -41,7 +41,7 @@
                     "room_name": "VARCHAR(40)",
                     "room_capacity": "INT 11",
                     "filed": "INT 11",
-                    "availavle": "INT 11",
+                    "available": "INT 11",
                     "room_size": "VARCHAR(10)",
                     "room_image": "VARCHAR(255)"
                 },
@@ -52,8 +52,8 @@
                     "building_id":"INT FOREIGN_KEY",
                     "category_id": "INT FOREIGN_KEY",
                     "type_id": "INT FOREIGN_KEY",
-                    "items_name": "VARCHAR(40)",
-                    "total_item": "INT 11"
+                    "item_name": "VARCHAR(40)",
+                    "item_total": "INT 11"
                 },
 
                 "item_categories": {
