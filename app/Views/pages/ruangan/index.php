@@ -19,7 +19,8 @@
                 <th scope="col">Nama Ruangan</th>
                 <th scope="col">Kapasitas</th>
                 <th scope="col">Terisi</th>
-                <th scope="col">Foto</th>
+                <th scope="col">Tersedia</th>
+                <th scope="col">Ukuran Ruangan</th>
                 <th scope="col" class="col-lg-2">Aksi</th>
             </tr>
         </thead>
@@ -31,9 +32,6 @@
                     <td><?= $ruangan->nama_ruangan ?></td>
                     <td><?= $ruangan->kapasitas_ruangan ?></td>
                     <td><?= $ruangan->terisi ?></td>
-                    <td class="col-lg-2">
-                        <img class="rounded-3 p-1 border bg-light w-100 h-100" src="<?= '/images/ruangan/' . $ruangan->gambar_ruangan ?>" alt="<?= $ruangan->gambar_ruangan ?>">
-                    </td>
                     <td class="col-lg-2">
                         <div class="d-flex justify-content-center gap-3">
                             <a href="/ruangan/detail/<?= $ruangan->id_ruangan ?>"><button class="btn btn-warning"><i class="fa-solid fa-eye"></i></button></a>

@@ -47,6 +47,7 @@ $routes->group('', ['filter' => 'login'], static function ($routes) {
     $routes->get('/gedung', 'Gedung::index');
     $routes->get('/gedung/tambah', 'Gedung::create');
     $routes->post('/gedung/insert', 'Gedung::insert');
+    $routes->get('/gedung/(:num)', 'Gedung::show/$1');
 
     $routes->get('/ruangan', 'Ruangan::index');
     $routes->get('/ruangan/tambah', 'Ruangan::create');
@@ -64,16 +65,11 @@ $routes->group('', ['filter' => 'login'], static function ($routes) {
     $routes->post('/barang/update', 'Barang::update');
     $routes->post('/barang/delete', 'Barang::delete');
 
-    // $routes->get('/penyimpanan', 'Penyimpanan::index');
-    // $routes->get('/penyimpanan/tambah', 'Penyimpanan::create');
-
     $routes->get('/pembelian', 'Pembelian::index');
     $routes->get('/pembelian/tambah', 'Pembelian::create');
 
     $routes->get('/laporan', 'Laporan::index');
     $routes->get('/laporan/print', 'Laporan::print');
-
-    $routes->get('/barcode', 'Barcode::index');
 });
 
 

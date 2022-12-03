@@ -40,10 +40,10 @@
                     <i class='bx bxs-report'></i>
                     <span class="nav_name">Laporan</span>
                 </a>
-                <a href="/barcode" class="nav_link">
+                <!-- <a href="/barcode" class="nav_link">
                     <i class='bx bx-qr-scan'></i>
                     <span class="nav_name">QR Code</span>
-                </a>
+                </a> -->
             </div>
         </div>
 

@@ -16,14 +16,9 @@
         <thead>
             <tr class="text-center">
                 <th scope="col">No</th>
-                <th scope="col">Id_Barang</th>
                 <th scope="col">Nama Barang</th>
-                <th scope="col" class="col-lg-2">Foto</th>
-                <th scope="col">Kategori</th>
-                <th scope="col">Merk </th>
-                <th scope="col">Jenis Barang</th>
+                <th scope="col">Merk</th>
                 <th scope="col">Jumlah</th>
-                <th scope="col">Tanggal Pencatatan</th>
                 <th scope="col" class="text-center">Aksi</th>
             </tr>
         </thead>
@@ -31,18 +26,9 @@
             <?php foreach ($barang as $barang) : ?>
                 <tr class="text-center align-middle">
                     <th scope="row"><?= $startNumber++ ?></th>
-                    <td>Qr_Code 1</td>
                     <td><?= $barang->nama_barang ?></td>
-                    <td class="col-lg-2">
-                        <img class="w-100 p-1 border border-secondary rounded-3" src="<?= '/images/barang/' . $barang->gambar_barang ?>" alt="<?= $barang->gambar_barang ?>">
-                    </td>
-                    <td><?= $barang->kategori_barang ?></td>
                     <td><?= $barang->merk_barang ?></td>
-                    <td><?= $barang->jenis_barang ?></td>
                     <td><?= $barang->jumlah_barang ?></td>
-                    <td>
-                        <?= $barang->tgl_pencatatan . '-' . $barang->bulan_pencatatan . '-' . $barang->tahun_pencatatan ?>
-                    </td>
                     <td class="col-lg-2">
                         <div class="d-flex justify-content-between align-items-center">
                             <a href=""><button class="btn btn-warning"><i class="fa-solid fa-eye"></i></button></a>

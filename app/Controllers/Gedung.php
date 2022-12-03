@@ -37,6 +37,7 @@ class Gedung extends BaseController
             ],
             'pagination'    => $paginate->paginate,
             'dataGedung'    => $paginate->data,
+            'startNumber'   => $paginate->startNumber,
             'jumlahPages'   => ceil(count($this->table->findAll()) / $this->limitData)
         ];
 
@@ -54,6 +55,16 @@ class Gedung extends BaseController
         ];
 
         return $this->view('manage', $data);
+    }
+
+    public function show($id = null)
+    {
+        $data = [
+            'title'         => 'Detail Gedung',
+            'start'
+        ];
+
+        return $this->view('detail', $data);
     }
 
     private function validasiGedung()

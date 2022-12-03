@@ -2,6 +2,6 @@
 
 <?= $this->section('content') ?>
 
-<h1>barcode</h1>
+<h1 class="text-center fw-bold"><?= $title ?></h1>
 
 <?= $this->endSection() ?>
