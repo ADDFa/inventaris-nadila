@@ -9,36 +9,18 @@ class Users extends Migration
     public function up()
     {
         $this->forge->addField([
-            'id_user' => [
+            'id' => [
                 'type'             => 'INT',
-                'constraint'       => 11,
                 'auto_increment'   => true
             ],
 
-            'username' => [
+            'name' => [
                 'type'             => 'VARCHAR',
-                'constraint'       => '40',
-                'null'             => false
-            ],
-
-            'password' => [
-                'type'             => 'VARCHAR',
-                'constraint'       => '255',
-                'null'             => false
-            ],
-
-            'created_at' => [
-                'type'              => 'DATETIME',
-                'null'              => true
-            ],
-
-            'updated_at' => [
-                'type'              => 'DATETIME',
-                'null'              => true
+                'constraint'       => '40'
             ]
         ]);
 
-        $this->forge->addPrimaryKey('id_user');
+        $this->forge->addPrimaryKey('id');
         $this->forge->createTable('users');
     }
 
