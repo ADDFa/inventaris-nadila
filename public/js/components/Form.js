@@ -1,23 +1,20 @@
-import {
-    Main
-} from '../main/Main.js'
+const { el, elAll } = require('../partials/main')
 
-const main = new Main()
+const select = [...elAll('[data-select]')]
+const form = el('form')
 
-export class Form {
-    setSelected() {
-        const select = [...main.elAll('[data-select]')]
+if (select.length > 0) {
+    select.map(e => {
+        const selected = e.querySelector('[selected]')
+        const dataSelect = e.querySelector(`[value="${e.getAttribute('data-select')}"]`)
 
-        select.map(e => {
-            const selected = e.querySelector('[selected]')
-            const dataSelect = e.querySelector(`[value="${e.getAttribute('data-select')}"]`)
+        if (selected) selected.removeAttribute('selected')
+        if (dataSelect) dataSelect.setAttribute('selected', '')
+    })
+}
 
-            if (selected) selected.removeAttribute('selected')
-            if (dataSelect) dataSelect.setAttribute('selected', '')
-        })
-    }
-
-    removeAlertOnInput() {
-        main.el('form').addEventListener('input', e => (!e.target.classList.contains('is-invalid')) ? '' : e.target.classList.remove('is-invalid'))
-    }
+if (form) {
+    form.addEventListener('input', e => {
+        return (!e.target.classList.contains('is-invalid')) ? '' : e.target.classList.remove('is-invalid')
+    })
 }

@@ -3,29 +3,33 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-
-use App\Models\Gedung;
-use App\Models\Ruangan;
-use App\Models\Barang;
+use App\Models\Building;
+use App\Models\Room;
+use App\Models\Item;
 
 class Home extends BaseController
 {
     public function index()
     {
-        $gedung = (new Gedung())->findAll();
-        $ruangan = (new Ruangan())->findAll();
-        $barang = (new Barang())->findAll();
+        $numberOfBuilding = (new Building())->countAllResults();
+        $numberOfRoom = (new Room())->countAllResults();
+        $numberOfItem = (new Item())->countAllResults();
 
         $data = [
             'title'         => 'Dashboard',
             'style'         => 'dashboard',
-            'jumlahData'   => (object) [
-                'gedung'    => count($gedung),
-                'ruangan'   => count($ruangan),
-                'barang'    => count($barang)
+            'numberOf'     => [
+                'building'   => $numberOfBuilding,
+                'room'      => $numberOfRoom,
+                'item'      => $numberOfItem
             ]
         ];
 
-        return view('pages/dashboard', $data);
+        return view('dashboard', $data);
+    }
+
+    public function report()
+    {
+        echo 'report';
     }
 }

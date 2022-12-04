@@ -38,38 +38,16 @@ $routes->set404Override();
 
 
 $routes->get('/', 'Auth::login');
+$routes->post('/', 'Auth::entry');
 $routes->get('/logout', 'Auth::logout');
-$routes->post('/login', 'Auth::masuk');
 
 $routes->group('', ['filter' => 'login'], static function ($routes) {
-    $routes->get('/dashboard', 'Home::index');
+    $routes->get('dashboard', 'Home::index');
+    $routes->get('report', 'Home::report');
 
-    $routes->get('/gedung', 'Gedung::index');
-    $routes->get('/gedung/tambah', 'Gedung::create');
-    $routes->post('/gedung/insert', 'Gedung::insert');
-    $routes->get('/gedung/(:num)', 'Gedung::show/$1');
-
-    $routes->get('/ruangan', 'Ruangan::index');
-    $routes->get('/ruangan/tambah', 'Ruangan::create');
-    $routes->get('/ruangan/ubah/(:num)', 'Ruangan::create/$1');
-    $routes->get('/ruangan/detail/(:num)', 'Ruangan::show/$1');
-    $routes->post('/ruangan/insert', 'Ruangan::insert');
-    $routes->post('/ruangan/update', 'Ruangan::update');
-    $routes->post('/ruangan/delete', 'Ruangan::delete');
-
-    $routes->get('/barang', 'Barang::index');
-    $routes->get('/barang/tambah', 'Barang::create');
-    $routes->get('/barang/ubah/(:num)', 'Barang::create/$1');
-    $routes->get('/barang/detail/(:num)', 'Barang::show/$1');
-    $routes->post('/barang/insert', 'Barang::insert');
-    $routes->post('/barang/update', 'Barang::update');
-    $routes->post('/barang/delete', 'Barang::delete');
-
-    $routes->get('/pembelian', 'Pembelian::index');
-    $routes->get('/pembelian/tambah', 'Pembelian::create');
-
-    $routes->get('/laporan', 'Laporan::index');
-    $routes->get('/laporan/print', 'Laporan::print');
+    $routes->resource('building');
+    $routes->resource('room');
+    $routes->resource('item');
 });
 
 

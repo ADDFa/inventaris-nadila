@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 
-use App\Models\User;
+use App\Models\Credential;
 
 class Auth extends BaseController
 {
@@ -17,23 +17,23 @@ class Auth extends BaseController
             'style'         => 'login'
         ];
 
-        return view('pages/login', $data);
+        return view('login', $data);
     }
 
-    public function masuk()
+    public function entry()
     {
-        $user_models = new User();
         $username = $this->request->getPost('username');
         $password = $this->request->getPost('password');
 
-        $data_user = $user_models->where('username', $username)->find();
+        $users = (new Credential())->where('username', $username)->first();
 
-        if (!$data_user) return redirect()->to('/')->withInput()->with('wrongUsername', 'Username Salah');
-        if (!password_verify($password, $data_user[0]->password)) return redirect()->to('/')->withInput()->with('wrongPassword', 'Password Salah');
+        if (!$users) return redirect()->to('/')->with('fail-u', 'Username Salah');
+        if (!password_verify($password, $users->password)) return redirect()->to('/')->withInput()
+            ->with('fail-p', 'Password Salah');
 
         session()->set([
             'login' => true,
-            'user'  => $data_user[0]
+            'users' => $users
         ]);
 
         return redirect()->to('/dashboard');

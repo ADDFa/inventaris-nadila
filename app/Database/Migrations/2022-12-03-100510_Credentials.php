@@ -15,7 +15,8 @@ class Credentials extends Migration
 
             'username' => [
                 'type'          => 'VARCHAR',
-                'constraint'    => 40
+                'constraint'    => 40,
+                'unique'        => true
             ],
 
             'password' => [

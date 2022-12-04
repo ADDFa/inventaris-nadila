@@ -9,9 +9,8 @@ class Main extends Seeder
     public function run()
     {
         $this->call('Users');
-        $this->call('Gedung');
-        $this->call('Ruangan');
-        $this->call('Barang');
-        $this->call('Penyimpanan');
+        $this->call('Buildings');
+        $this->call('Rooms');
+        $this->call('Items');
     }
 }

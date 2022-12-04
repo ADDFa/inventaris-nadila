@@ -32,11 +32,13 @@ class Rooms extends Migration
             ],
 
             'filed' => [
-                'type'              => 'INT'
+                'type'              => 'INT',
+                'default'           => 0
             ],
 
             'available' => [
-                'type'              => 'INT'
+                'type'              => 'INT',
+                'default'           => 0
             ],
 
             'room_size' => [

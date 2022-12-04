@@ -42,156 +42,184 @@ abstract class BaseController extends Controller
 
 
     /**
-     * Validation
+     * Custom
      */
-    protected $validation;
+    protected $maxImageSize = 2000000;
 
-    protected $lengthTanggal = '|max_length[2]',
-        $lengthMax = '40';
-
-    protected function rule($rule = false)
+    public function checkImageValid($name)
     {
-        switch ($rule) {
-            case 'tanggal':
-                return 'requred|' . $this->lengthBulan;
+        $image = $this->request->getFile($name);
+        $type = explode('/', $image->getMimeType());
 
-            default:
-                return 'required|' . 'max_length[' . $this->lengthMax . ']';
+        if ($image->getError() != 0) {
+            $this->validator->setError('image', 'Gambar Tidak Boleh Kosong');
+
+            return false;
         }
+
+        if ($image->getSize() > $this->maxImageSize) {
+            $this->validator->setError('image', 'Ukuran Gambar Terlalu Besar, Max 2MB');
+
+            return false;
+        }
+
+        if ($type[0] !== 'image') {
+            $this->validator->setError('image', 'Yang Anda Upload Bukan Gambar');
+
+            return false;
+        }
+
+        return $image->getRandomName();
     }
 
-    public function pesan($name = '')
-    {
-        return [
-            'required'      => $name . ' Tidak Boleh Kosong',
-            'max_length'    => $name . ' Tidak Boleh Lebih Dari ' . $this->lengthMax . ' Karakter'
-        ];
-    }
+    // protected $validation;
+
+    // protected $lengthTanggal = '|max_length[2]',
+    //     $lengthMax = '40';
+
+    // protected function rule($rule = false)
+    // {
+    //     switch ($rule) {
+    //         case 'tanggal':
+    //             return 'requred|' . $this->lengthBulan;
+
+    //         default:
+    //             return 'required|' . 'max_length[' . $this->lengthMax . ']';
+    //     }
+    // }
+
+    // public function pesan($name = '')
+    // {
+    //     return [
+    //         'required'      => $name . ' Tidak Boleh Kosong',
+    //         'max_length'    => $name . ' Tidak Boleh Lebih Dari ' . $this->lengthMax . ' Karakter'
+    //     ];
+    // }
 
     /**
      * Validation Image.
      */
 
-    private $gambarError, $gambarSize = 1000000, $namaGambar = '';
+    // private $gambarError, $gambarSize = 1000000, $namaGambar = '';
 
-    protected function gambarValid($name, $dir)
-    {
-        $gambar = $this->request->getFile($name);
+    // protected function gambarValid($name, $dir)
+    // {
+    //     $gambar = $this->request->getFile($name);
 
-        if ($gambar->getError() === 4) {
-            $this->gambarError = 'Gambar Tidak Boleh Kosong';
-            return false;
-        }
+    //     if ($gambar->getError() === 4) {
+    //         $this->gambarError = 'Gambar Tidak Boleh Kosong';
+    //         return false;
+    //     }
 
-        if ($gambar->getExtension() !== 'png' && $gambar->getExtension() !== 'jpg' && $gambar->getExtension() !== 'jpeg') {
-            $this->gambarError = 'Ekstensi Gambar Tidak Valid';
-            return false;
-        }
+    //     if ($gambar->getExtension() !== 'png' && $gambar->getExtension() !== 'jpg' && $gambar->getExtension() !== 'jpeg') {
+    //         $this->gambarError = 'Ekstensi Gambar Tidak Valid';
+    //         return false;
+    //     }
 
-        if ($gambar->getSize() >= $this->gambarSize) {
-            $error = 'Ukuran Gambar Terlalu Besar | Max ' . floor($this->gambarSize / 1000000) . 'MB';
+    //     if ($gambar->getSize() >= $this->gambarSize) {
+    //         $error = 'Ukuran Gambar Terlalu Besar | Max ' . floor($this->gambarSize / 1000000) . 'MB';
 
-            if ($this->gambarSize < 1024) {
-                $error = 'Ukuran Gambar Terlalu Besar | Max ' . $this->gambarSize . 'KB';
-            }
+    //         if ($this->gambarSize < 1024) {
+    //             $error = 'Ukuran Gambar Terlalu Besar | Max ' . $this->gambarSize . 'KB';
+    //         }
 
-            $this->gambarError = $error;
+    //         $this->gambarError = $error;
 
-            return false;
-        }
+    //         return false;
+    //     }
 
-        $this->namaGambar = $gambar->getRandomName();
+    //     $this->namaGambar = $gambar->getRandomName();
 
-        $gambar->move('images/' . $dir, $this->namaGambar);
+    //     $gambar->move('images/' . $dir, $this->namaGambar);
 
-        return true;
-    }
+    //     return true;
+    // }
 
-    protected function getNameGambar()
-    {
-        return $this->namaGambar;
-    }
+    // protected function getNameGambar()
+    // {
+    //     return $this->namaGambar;
+    // }
 
-    protected function setSizeGambar(int $size)
-    {
-        $this->gambarSize = $size;
-    }
+    // protected function setSizeGambar(int $size)
+    // {
+    //     $this->gambarSize = $size;
+    // }
 
-    protected function getMessageGambarError()
-    {
-        return $this->gambarError;
-    }
+    // protected function getMessageGambarError()
+    // {
+    //     return $this->gambarError;
+    // }
 
     /**
      * Data Bulan.
      */
 
-    private $bulan = [
-        '1'     => 'Jan',
-        '2'     => 'Feb',
-        '3'     => 'Mar',
-        '4'     => 'Apr',
-        '5'     => 'Mei',
-        '6'     => 'Jun',
-        '7'     => 'Jul',
-        '8'     => 'Agu',
-        '9'     => 'Sep',
-        '10'    => 'Okt',
-        '11'    => 'Nov',
-        '12'    => 'Des'
-    ];
+    // private $bulan = [
+    //     '1'     => 'Jan',
+    //     '2'     => 'Feb',
+    //     '3'     => 'Mar',
+    //     '4'     => 'Apr',
+    //     '5'     => 'Mei',
+    //     '6'     => 'Jun',
+    //     '7'     => 'Jul',
+    //     '8'     => 'Agu',
+    //     '9'     => 'Sep',
+    //     '10'    => 'Okt',
+    //     '11'    => 'Nov',
+    //     '12'    => 'Des'
+    // ];
 
-    protected function getDataBulan()
-    {
-        return $this->bulan;
-    }
+    // protected function getDataBulan()
+    // {
+    //     return $this->bulan;
+    // }
 
     /**
      * Pagination.
      */
 
-    protected function paginate($table, int $limit)
-    {
-        $originUri = base_url() . $_SERVER['PATH_INFO'];
+    // protected function paginate($table, int $limit)
+    // {
+    //     $originUri = base_url() . $_SERVER['PATH_INFO'];
 
-        $jumlahHalaman = ceil($table->countAllResults() / $limit);
-        $page = $this->request->getGet('page') ?? 1;
-        $prev = ($page <= 2) ? $originUri : $originUri . '?page=' . $page - 1;
-        $prevDisabled = ($page <= 1) ? 'is-disabled' : '';
-        $next = ($page < $jumlahHalaman) ? $originUri . '?page=' . $page + 1 : $originUri . '?page=' . $page;
-        $nextDisabled = ($jumlahHalaman <= $page) ? 'is-disabled' : '';
-        $offset = $limit * ($page - 1);
-        $data = $this->table->findAll($limit);
+    //     $jumlahHalaman = ceil($table->countAllResults() / $limit);
+    //     $page = $this->request->getGet('page') ?? 1;
+    //     $prev = ($page <= 2) ? $originUri : $originUri . '?page=' . $page - 1;
+    //     $prevDisabled = ($page <= 1) ? 'is-disabled' : '';
+    //     $next = ($page < $jumlahHalaman) ? $originUri . '?page=' . $page + 1 : $originUri . '?page=' . $page;
+    //     $nextDisabled = ($jumlahHalaman <= $page) ? 'is-disabled' : '';
+    //     $offset = $limit * ($page - 1);
+    //     $data = $this->table->findAll($limit);
 
-        if ($page > 1) {
-            $data = $this->table->findAll($limit, $offset);
-        }
+    //     if ($page > 1) {
+    //         $data = $this->table->findAll($limit, $offset);
+    //     }
 
-        $pagination =
-            '<div class="footer d-flex justify-content-end px-5">' .
-            '<div class="btn-group" role="group" aria-label="Basic example">' .
-            '<a href="' . $prev . '" class="btn btn-default ' . $prevDisabled . '">Prev</a>' .
-            '<button type="button" class="btn btn-default">' . $page . '</button>' .
-            '<a href="' . $next . '" class="btn btn-default ' . $nextDisabled . '">Next</a>' .
-            '</div>' .
-            '</div>';
+    //     $pagination =
+    //         '<div class="footer d-flex justify-content-end px-5">' .
+    //         '<div class="btn-group" role="group" aria-label="Basic example">' .
+    //         '<a href="' . $prev . '" class="btn btn-default ' . $prevDisabled . '">Prev</a>' .
+    //         '<button type="button" class="btn btn-default">' . $page . '</button>' .
+    //         '<a href="' . $next . '" class="btn btn-default ' . $nextDisabled . '">Next</a>' .
+    //         '</div>' .
+    //         '</div>';
 
-        return (object) [
-            'paginate' => $pagination,
-            'startNumber'   => $offset + 1,
-            'data'     => $data
-        ];
-    }
+    //     return (object) [
+    //         'paginate' => $pagination,
+    //         'startNumber'   => $offset + 1,
+    //         'data'     => $data
+    //     ];
+    // }
 
     /**
      * User.
      */
-    private $user;
+    // private $user;
 
-    protected function getUser()
-    {
-        return session('user') ?? false;
-    }
+    // protected function getUser()
+    // {
+    //     return session('user') ?? false;
+    // }
 
     /**
      * Constructor.

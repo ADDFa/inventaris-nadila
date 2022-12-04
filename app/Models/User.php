@@ -8,5 +8,5 @@ class User extends Model
 {
     protected $table            = 'users';
     protected $returnType       = 'object';
-    protected $allowedFields    = ['name'];
+    protected $allowedFields    = ['name', 'role'];
 }

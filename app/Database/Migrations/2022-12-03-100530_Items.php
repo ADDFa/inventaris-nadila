@@ -18,7 +18,7 @@ class Items extends Migration
                 'type'              => 'INT'
             ],
 
-            'building_id' => [
+            'room_id' => [
                 'type'              => 'INT'
             ],
 

@@ -1,0 +1,16 @@
+{
+  "name": "sass",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "login": "sass --no-source-map --style=compressed ./login.sass ../css/login.css -w",
+    "index": "sass --no-source-map --style=compressed ./index.sass ../css/index.css -w"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "bootstrap": "^5.2.3"
+  }
+}

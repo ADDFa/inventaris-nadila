@@ -18,4 +18,25 @@ class Room extends Model
         'room_size',
         'room_image'
     ];
+
+    public function getAll()
+    {
+        $result = $this->db->table('rooms')
+            ->join('users', 'rooms.user_id = users.id', 'INNER')
+            ->join('buildings', 'rooms.building_id = buildings.id', 'INNER')
+            ->get()->getResultObject();
+
+        return $result;
+    }
+
+    public function getWhere($key, $value)
+    {
+        $result = $this->db->table('rooms')
+            ->where($key, $value)
+            ->join('users', 'rooms.user_id = users.id', 'INNER')
+            ->join('buildings', 'rooms.building_id = buildings.id', 'INNER')
+            ->get()->getResultObject();
+
+        return $result;
+    }
 }
