@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use CodeIgniter\HTTP\Response;
 
 class Item extends BaseController
 {
@@ -188,5 +189,17 @@ class Item extends BaseController
                 ]
             ]
         ]);
+    }
+
+    public function category()
+    {
+        $result = (new \App\Models\ItemCategory())->findAll();
+        echo json_encode($result);
+    }
+
+    public function type()
+    {
+        $result = (new \App\Models\ItemType())->findAll();
+        return $result;
     }
 }

@@ -63,7 +63,7 @@
                     </div>
 
                     <div class="col-lg-3 p-0 d-flex justify-content-end">
-                        <button type="button" class="d-block btn badge bg-success">Tambah Kategori</button>
+                        <button data-bs-toggle="modal" data-bs-target="#manage-item" type="button" class="manage-category d-block btn badge bg-info">Kelola Kategori</button>
                     </div>
                 </div>
             </div>
@@ -80,7 +80,7 @@
                     </div>
 
                     <div class="col-lg-3 p-0 d-flex justify-content-end">
-                        <button type="button" class="d-block btn badge bg-success">Tambah Type</button>
+                        <button data-bs-toggle="modal" data-bs-target="#manage-item" type="button" class="manage-type d-block btn badge bg-info">Kelola Type</button>
                     </div>
                 </div>
             </div>
@@ -92,5 +92,39 @@
         <button class="btn btn-primary">Simpan</button>
     </div>
 </form>
+
+<!-- Manage Item -->
+<div class="modal fade" id="manage-item" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Kelola Kategori</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <ul class="list-group mb-3">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>Data</span>
+
+                        <form action="" method="POST">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button class="btn badge bg-danger">Hapus</button>
+                        </form>
+                    </li>
+                </ul>
+
+                <form action="/item/category" method="POST">
+                    <div class="mb-3">
+                        <label for="category_name" class="form-label">Tambah Kategori</label>
+                        <input type="text" id="category_name" name="category_name" class="form-control">
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button class="btn btn-default">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 <?= $this->endSection() ?>

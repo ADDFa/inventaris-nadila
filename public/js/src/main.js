@@ -29,7 +29,15 @@ if (notif) {
 }
 
 // Delete
-document.addEventListener('click', e => {
+const getItemData = target => {
+    return new Promise(resolve => {
+        fetch(`${origin}/item/${target}`)
+            .then(e => e.json())
+            .then(e => resolve(e))
+    })
+}
+
+document.addEventListener('click', async e => {
     if (e.target.classList.contains('delete')) {
         Swal.fire({
             title: 'Apakah Anda Yakin?',
@@ -45,5 +53,9 @@ document.addEventListener('click', e => {
                 form.querySelector('[type="submit"]').click()
             }
         })
+    }
+
+    if (e.target.classList.contains('manage-category')) {
+        console.log(await getItemData('category'))
     }
 })

@@ -45,6 +45,11 @@ $routes->group('', ['filter' => 'login'], static function ($routes) {
     $routes->get('dashboard', 'Home::index');
     $routes->get('report', 'Home::report');
 
+    $routes->get('item/category', 'Item::category');
+    $routes->get('item/item', 'Item::item');
+    $routes->post('item/category', 'Item::new');
+    $routes->post('item/type', 'Item::type');
+
     $routes->resource('building');
     $routes->resource('room');
     $routes->resource('item');
