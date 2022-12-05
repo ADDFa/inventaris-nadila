@@ -94,7 +94,7 @@
 </form>
 
 <!-- Manage Item -->
-<div class="modal fade" id="manage-item" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="manage-item" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -102,24 +102,15 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <ul class="list-group mb-3">
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <span>Data</span>
+                <ul class="list-group mb-3"></ul>
 
-                        <form action="" method="POST">
-                            <input type="hidden" name="_method" value="DELETE">
-                            <button class="btn badge bg-danger">Hapus</button>
-                        </form>
-                    </li>
-                </ul>
-
-                <form action="/item/category" method="POST">
+                <form action="/item/category" class="new" method="POST">
                     <div class="mb-3">
-                        <label for="category_name" class="form-label">Tambah Kategori</label>
-                        <input type="text" id="category_name" name="category_name" class="form-control">
+                        <label for="name" class="form-label">Tambah Kategori</label>
+                        <input type="text" id="name" name="name" class="form-control">
                     </div>
                     <div class="d-flex justify-content-end">
-                        <button class="btn btn-default">Simpan</button>
+                        <button type="button" class="save btn btn-default">Simpan</button>
                     </div>
                 </form>
             </div>

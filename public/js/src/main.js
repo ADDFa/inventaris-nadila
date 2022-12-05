@@ -2,40 +2,9 @@ require('./bootstrap.bundle.min')
 require('../components/form')
 require('../partials/sidebar')
 
-const { el } = require('../partials/main')
-
-// Notification
-const notif = el('.notif')
-
-const Toast = Swal.mixin({
-    toast: true,
-    position: 'top-end',
-    showConfirmButton: false,
-    timer: 2000,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-        toast.addEventListener('mouseenter', Swal.stopTimer)
-        toast.addEventListener('mouseleave', Swal.resumeTimer)
-    }
-})
-
-if (notif) {
-    if (notif.dataset.status) {
-        Toast.fire({
-            icon: notif.dataset.status,
-            title: notif.dataset.message
-        })
-    }
-}
-
-// Delete
-const getItemData = target => {
-    return new Promise(resolve => {
-        fetch(`${origin}/item/${target}`)
-            .then(e => e.json())
-            .then(e => resolve(e))
-    })
-}
+const { setItemCategory, setItemType, } = require('../pages/items/index')
+const { saveItem } = require('../pages/items/new')
+const deleteItem = require('../pages/items/delete')
 
 document.addEventListener('click', async e => {
     if (e.target.classList.contains('delete')) {
@@ -55,7 +24,8 @@ document.addEventListener('click', async e => {
         })
     }
 
-    if (e.target.classList.contains('manage-category')) {
-        console.log(await getItemData('category'))
-    }
+    if (e.target.classList.contains('manage-category')) setItemCategory('category')
+    if (e.target.classList.contains('manage-type')) setItemType('type')
+    if (e.target.classList.contains('save')) saveItem(e.target)
+    if (e.target.classList.contains('delete-items-attribute')) deleteItem(e.target)
 })

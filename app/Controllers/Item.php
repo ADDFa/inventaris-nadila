@@ -197,9 +197,113 @@ class Item extends BaseController
         echo json_encode($result);
     }
 
+    public function newCategory()
+    {
+        if (!$this->categoryValid()) {
+            $response = [
+                'status'    => 400,
+                'ok'        => false,
+                'message'   => $this->validation->getError('name')
+            ];
+
+            echo json_encode($response);
+            return;
+        }
+
+        (new \App\Models\ItemCategory())->insert(['category_name' => $this->request->getPost('name')]);
+
+        $response = [
+            'status'    => 200,
+            'ok'        => true,
+            'message'   => 'Category Berhasil Ditambahkan'
+        ];
+
+        echo json_encode($response);
+        return;
+    }
+
+    public function deleteCategory($id = null)
+    {
+        (new \App\Models\ItemCategory())->delete($id);
+
+        $response = [
+            'status'    => 200,
+            'ok'        => true,
+            'message'   => 'Categori Berhasil Dihapus'
+        ];
+
+        echo json_encode($response);
+        return;
+    }
+
+    public function categoryValid()
+    {
+        return $this->validate([
+            'name'  => [
+                'rules'             => 'required|max_length[40]',
+                'errors'            => [
+                    'required'      => 'Nama Kategori Harus Diisi',
+                    'max_length'    => 'Panjang Karakter Maksimal 40 Karakter'
+                ]
+            ]
+        ]);
+    }
+
     public function type()
     {
         $result = (new \App\Models\ItemType())->findAll();
-        return $result;
+        echo json_encode($result);
+    }
+
+    public function newType()
+    {
+        if (!$this->typeValid()) {
+            $response = [
+                'status'    => 400,
+                'ok'        => false,
+                'message'   => $this->validation->getError('name')
+            ];
+
+            echo json_encode($response);
+            return;
+        }
+
+        (new \App\Models\ItemType())->insert(['type_name' => $this->request->getPost('name')]);
+
+        $response = [
+            'status'    => 200,
+            'ok'        => true,
+            'message'   => 'Jenis Barang Berhasil Ditambahkan'
+        ];
+
+        echo json_encode($response);
+        return;
+    }
+
+    public function deleteType($id = null)
+    {
+        (new \App\Models\ItemType())->delete($id);
+
+        $response = [
+            'status'    => 200,
+            'ok'        => true,
+            'message'   => 'Jenis Barang Berhasil Dihapus'
+        ];
+
+        echo json_encode($response);
+        return;
+    }
+
+    public function typeValid()
+    {
+        return $this->validate([
+            'name'  => [
+                'rules'             => 'required|max_length[40]',
+                'errors'            => [
+                    'required'      => 'Jenis Barang Harus Diisi',
+                    'max_length'    => 'Panjang Karakter Maksimal 40 Karakter'
+                ]
+            ]
+        ]);
     }
 }

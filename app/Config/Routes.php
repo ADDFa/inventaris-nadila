@@ -46,9 +46,11 @@ $routes->group('', ['filter' => 'login'], static function ($routes) {
     $routes->get('report', 'Home::report');
 
     $routes->get('item/category', 'Item::category');
-    $routes->get('item/item', 'Item::item');
-    $routes->post('item/category', 'Item::new');
-    $routes->post('item/type', 'Item::type');
+    $routes->get('item/type', 'Item::type');
+    $routes->post('item/category', 'Item::newCategory');
+    $routes->post('item/type', 'Item::newType');
+    $routes->delete('item/category/(:any)', 'Item::deleteCategory/$1');
+    $routes->delete('item/type/(:any)', 'Item::deleteType/$1');
 
     $routes->resource('building');
     $routes->resource('room');
