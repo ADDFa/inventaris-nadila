@@ -3,16 +3,17 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use CodeIgniter\HTTP\Response;
 
 class Item extends BaseController
 {
-    private $table, $rooms;
+    private $table, $rooms, $category, $type;
 
     public function __construct()
     {
         $this->table = new \App\Models\Item();
         $this->rooms = new \App\Models\Room();
+        $this->category = new \App\Models\ItemCategory();
+        $this->type = new \App\Models\ItemType();
     }
 
     public function index()
@@ -53,9 +54,9 @@ class Item extends BaseController
         $data = [
             'title'             => 'Tambah Data Barang',
             'validation'        => $this->validation,
-            'categories'        => (new \App\Models\ItemCategory())->findAll(),
-            'types'             => (new \App\Models\ItemType())->findAll(),
-            'rooms'             => (new \App\Models\Room())->findAll()
+            'categories'        => $this->category->findAll(),
+            'types'             => $this->type->findAll(),
+            'rooms'             => $this->rooms->findAll()
         ];
 
         return view('items/new', $data);
@@ -66,10 +67,52 @@ class Item extends BaseController
         if (is_null($id)) return redirect()->to('item');
 
         $data = [
-            'title'     => 'Ubah Data Barang'
+            'title'         => 'Ubah Data Barang',
+            'item'          => $this->table->get($id),
+            'validation'        => $this->validation,
+            'categories'        => $this->category->findAll(),
+            'types'             => $this->type->findAll(),
+            'rooms'             => $this->rooms->findAll()
         ];
 
         return view('items/edit', $data);
+    }
+
+    public function parsingData()
+    {
+        $data = $this->request->getPost();
+        $data += ['user_id' => session('users')->id];
+
+        $data = array_replace($data, [
+            'item_total'    => $this->getPositifNumber($this->request->getPost('item_total')),
+            'item_price'    => $this->getPositifNumber($this->request->getPost('item_price')),
+            'record_date'   => strtotime($data['record_date'])
+        ]);
+
+        return (object) $data;
+    }
+
+    public function roomAvailable($itemTotal, $room)
+    {
+        $total = $itemTotal + $room->filed;
+        if ($total > $room->room_capacity) {
+            session()->setFlashdata([
+                'status'    => 'error',
+                'message'   => 'Total Barang Melebihi Kapasitas Ruangan, Barang Tidak Ditambahkan'
+            ]);
+
+            return false;
+        }
+
+        return true;
+    }
+
+    public function updateRoom($itemTotal, $room)
+    {
+        $this->rooms->update($room->id, [
+            'filed'         => $room->filed + $itemTotal,
+            'available'     => $room->available - $itemTotal
+        ]);
     }
 
     public function create()
@@ -77,31 +120,14 @@ class Item extends BaseController
         // validasi
         if (!$this->dataItemValid()) return redirect()->to('item/new')->withInput();
 
-        $data = $this->request->getPost();
-        $data += ['user_id' => session('users')->id];
-        $itemTotal = $this->getPositifNumber($this->request->getPost('item_total'));
-
-        $data = array_replace($data, ['item_total' => $itemTotal]);
-        $room = $this->rooms->find($data['room_id']);
+        $data = $this->parsingData();
 
         // cek apakah total barang cukup untuk ruangan yang dipilih
-        $itemsTotal = $data['item_total'] + $room->filed;
+        $room = $this->rooms->find($this->request->getPost('room_id'));
+        if (!$this->roomAvailable($data->item_total, $room)) return redirect()->to('item/new')->withInput();
 
-        if ($itemsTotal > $room->room_capacity) {
-            session()->setFlashdata([
-                'status'    => 'error',
-                'message'   => 'Total Barang Melebihi Kapasitas Ruangan, Barang Tidak Ditambahkan'
-            ]);
-            return redirect()->to('item/new')->withInput();
-        }
-
-        // ambil sisa dari pengurangan (kapasitas - filed | terisi) update table ruangan
-        $roomAvailable = $room->room_capacity - $itemsTotal;
-        $updateRoom = [
-            'filed'         => $itemsTotal,
-            'available'     => $roomAvailable
-        ];
-        $this->rooms->update($room->id, $updateRoom);
+        // update room dan insert data
+        $this->updateRoom($data->item_total, $room);
         $this->table->insert($data);
 
         session()->setFlashdata([
@@ -111,9 +137,38 @@ class Item extends BaseController
         return redirect()->to('item');
     }
 
-    public function update()
+    public function update($id = null)
     {
-        // 
+        // validasi
+        if (!$this->dataItemValid()) return redirect()->to("item/{$id}/edit")->withInput();
+
+        $data = $this->parsingData();
+
+        $item = $this->table->find($id);
+        $room = $this->rooms->find($item->room_id);
+
+        // jika barang berpindah ruangan
+        if ($room->id != $data->room_id) {
+            // apakah tersedia ruang di room baru
+            $newRoom = $this->rooms->find($data->room_id);
+            if (!$this->roomAvailable($data->item_total, $newRoom)) return redirect()->to("item/${id}/edit")->withInput();
+
+            // update room lama dan update room baru
+            $this->updateRoom(-$item->item_total, $room);
+            $this->updateRoom($data->item_total, $newRoom);
+        } else {
+            $itemTotal = $data->item_total - $item->item_total;
+            $this->updateRoom($itemTotal, $room);
+        }
+
+        $this->table->update($id, $data);
+
+        session()->setFlashdata([
+            'status'    => 'success',
+            'message'   => 'Data Barang Berhasil Diubah'
+        ]);
+
+        return redirect()->to('item');
     }
 
     public function delete($id = null)
@@ -193,7 +248,7 @@ class Item extends BaseController
 
     public function category()
     {
-        $result = (new \App\Models\ItemCategory())->findAll();
+        $result = $this->category->findAll();
         echo json_encode($result);
     }
 
@@ -210,7 +265,7 @@ class Item extends BaseController
             return;
         }
 
-        (new \App\Models\ItemCategory())->insert(['category_name' => $this->request->getPost('name')]);
+        $this->category->insert(['category_name' => $this->request->getPost('name')]);
 
         $response = [
             'status'    => 200,
@@ -224,7 +279,7 @@ class Item extends BaseController
 
     public function deleteCategory($id = null)
     {
-        (new \App\Models\ItemCategory())->delete($id);
+        $this->category->delete($id);
 
         $response = [
             'status'    => 200,
@@ -251,7 +306,7 @@ class Item extends BaseController
 
     public function type()
     {
-        $result = (new \App\Models\ItemType())->findAll();
+        $result = $this->type->findAll();
         echo json_encode($result);
     }
 
@@ -268,7 +323,7 @@ class Item extends BaseController
             return;
         }
 
-        (new \App\Models\ItemType())->insert(['type_name' => $this->request->getPost('name')]);
+        $this->type->insert(['type_name' => $this->request->getPost('name')]);
 
         $response = [
             'status'    => 200,
@@ -282,7 +337,7 @@ class Item extends BaseController
 
     public function deleteType($id = null)
     {
-        (new \App\Models\ItemType())->delete($id);
+        $this->type->delete($id);
 
         $response = [
             'status'    => 200,

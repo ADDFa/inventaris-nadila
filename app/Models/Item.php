@@ -58,9 +58,9 @@ class Item extends Model
             ->where('items.id', $id)
             ->join('item_categories', 'items.category_id = item_categories.id', 'INNER')
             ->join('item_types', 'items.type_id = item_types.id', 'INNER')
-            ->join('rooms', 'items.room_id = items.id', 'INNER')
+            ->join('rooms', 'items.room_id = rooms.id', 'INNER')
             ->join('users', 'items.user_id = users.id', 'INNER')
-            ->get()->getFirstRow();
+            ->get()->getRowObject();
 
         return $result;
     }

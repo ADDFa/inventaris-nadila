@@ -37,6 +37,10 @@
     <div class="col-lg-6">
         <fieldset disabled>
             <div class="mb-3">
+                <label class="form-label">Lokasi Barang</label>
+                <input type="text" class="form-control" value="<?= $item->room_name ?>">
+            </div>
+            <div class="mb-3">
                 <label class="form-label">Kondisi Barang</label>
                 <input type="text" class="form-control" value="<?= $item->item_condition ?>">
             </div>
