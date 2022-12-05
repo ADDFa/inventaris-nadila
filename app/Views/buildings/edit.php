@@ -27,11 +27,6 @@
                 <span class="invalid-feedback" id="sizeFeedback"><?= $validation->getError('building_size') ?></span>
             </div>
             <div class="mb-3">
-                <label for="room_total" class="form-label">Total Ruangan</label>
-                <input type="number" placeholder="0" id="room_total" class="form-control <?= $validation->hasError('room_total') ? 'is-invalid' : '' ?>" name="room_total" aria-describedby="roomFeedback" value="<?= old('room_total') ?? $building->room_total ?>">
-                <span class="invalid-feedback" id="roomFeedback"><?= $validation->getError('room_total') ?></span>
-            </div>
-            <div class="mb-3">
                 <label for="building_registration_date" class="form-label">Tanggal Pendaftaran Bangunan</label>
                 <input type="datetime-local" id="building_registration_date" class="form-control <?= $validation->hasError('building_registration_date') ? 'is-invalid' : '' ?>" name="building_registration_date" aria-describedby="dateFeedback" value="<?= old('building_registration_date') ?? date('Y-m-d H:i:s', $building->building_registration_date) ?>">
                 <span class="invalid-feedback" id="dateFeedback"><?= $validation->getError('building_registration_date') ?></span>

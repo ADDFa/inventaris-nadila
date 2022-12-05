@@ -6,11 +6,12 @@ use App\Controllers\BaseController;
 
 class Building extends BaseController
 {
-    private $table;
+    private $table, $room;
 
     public function __construct()
     {
         $this->table = new \App\Models\Building();
+        $this->room = new \App\Models\Room();
     }
 
     public function index()
@@ -35,16 +36,11 @@ class Building extends BaseController
 
     public function show($id = null)
     {
-        if (is_null($id)) return redirect()->to('building');
-
-        $building = $this->table->find($id);
-        $user = (new \App\Models\User())->find($building->user_id);
-
         $data = [
             'title'         => 'Detail Gedung',
-            'building'      => $building,
-            'user'          => $user
+            'building'      => $this->table->get($id)
         ];
+
         return view('buildings/detail', $data);
     }
 
@@ -60,8 +56,6 @@ class Building extends BaseController
 
     public function edit($id = null)
     {
-        if (is_null($id)) return redirect()->to('building');
-
         $data = [
             'title'         => 'Ubah Data Gedung',
             'building'      => $this->table->find($id),
@@ -80,7 +74,6 @@ class Building extends BaseController
         $imageName = $this->checkImageValid('building_image');
         if (!$imageName) return redirect()->to('building/new')->withInput();
 
-        // cek folder buildings
         $this->request->getFile('building_image')->move('images/building', $imageName);
         $this->table->insert($this->getDataBuilding($imageName));
 
@@ -93,26 +86,23 @@ class Building extends BaseController
 
     public function update($id = null)
     {
-        if (is_null($id)) return redirect()->to('building');
-        $building = $this->table->find($id);
-
         // validasi
         if (!$this->checkValid()) return redirect()->to("building/{$id}/edit")->withInput();
 
         $data = $this->getDataBuilding();
+        $building = $this->table->find($id);
 
         if ($this->request->getFile('building_image')->getError() === 0) {
-            // hapus gambar
-            if (file_exists("images/building/{$building->building_image}")) unlink("images/building/{$building->building_image}");
-
             // validasi gambar
             $imageName = $this->checkImageValid('building_image');
             if (!$imageName) return redirect()->to("building/{$id}/edit")->withInput();
 
             // upload gambar
             $this->request->getFile('building_image')->move('images/building', $imageName);
-
             $data = $this->getDataBuilding($imageName);
+
+            // hapus gambar
+            if (file_exists("images/building/{$building->building_image}")) unlink("images/building/{$building->building_image}");
         }
 
         $this->table->update($id, $data);
@@ -127,7 +117,11 @@ class Building extends BaseController
 
     public function delete($id = null)
     {
-        if (is_null($id)) return redirect()->to('building');
+        // hapus semua ruangan
+        $rooms = $this->room->where('building_id', $id)->findAll();
+        foreach ($rooms as $room) {
+            $this->room->delete($room->id);
+        }
 
         $building = $this->table->find($id);
 
@@ -154,22 +148,16 @@ class Building extends BaseController
                 ]
             ],
             'building_size'          => [
-                'rules'     => 'required|max_length[10]',
+                'rules'     => 'required|max_length[40]',
                 'errors'    => [
                     'required'      => 'Ukuran Gedung Tidak Boleh Kosong',
-                    'max_length'    => 'Panjang Karakter Maksimal 10'
+                    'max_length'    => 'Panjang Karakter Maksimal 40'
                 ]
             ],
             'building_registration_date'          => [
                 'rules'     => 'required',
                 'errors'    => [
                     'required'      => 'Tanggal Pendaftaran Tidak Boleh Kosong'
-                ]
-            ],
-            'room_total'    => [
-                'rules'     => 'required',
-                'errors'    => [
-                    'required'      => 'Total Ruangan Tidak Boleh Kosong'
                 ]
             ]
         ]);
@@ -181,11 +169,10 @@ class Building extends BaseController
             'user_id'                       => session('users')->id,
             'building_name'                 => $this->request->getPost('building_name'),
             'building_size'                 => $this->request->getPost('building_size'),
-            'room_total'                    => $this->getPositifNumber($this->request->getPost('room_total')),
-            'building_registration_date'    => strtotime($this->request->getPost('building_registration_date')),
+            'building_registration_date'    => strtotime($this->request->getPost('building_registration_date'))
         ];
-
         if ($image) $data += ['building_image' => $image];
+
         return $data;
     }
 }

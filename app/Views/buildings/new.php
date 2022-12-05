@@ -27,14 +27,6 @@
         </div>
 
         <div class="col-lg-6">
-            <label for="room_total" class="form-label">Total Ruangan</label>
-            <input type="number" placeholder="0" id="room_total" class="form-control <?= $validation->hasError('room_total') ? 'is-invalid' : '' ?>" name="room_total" aria-describedby="roomFeedback" value="<?= old('room_total') ?>">
-            <span class="invalid-feedback" id="roomFeedback"><?= $validation->getError('room_total') ?></span>
-        </div>
-    </div>
-
-    <div class="row mb-3">
-        <div class="col-lg-6">
             <label for="building_image" class="form-label">Gambar Gedung</label>
             <input type="file" id="building_image" class="form-control <?= $validation->hasError('image') ? 'is-invalid' : '' ?>" aria-describedby="imageFeedback" accept=".jpg, .png, .jpeg" name="building_image" min="0" name="building_image">
             <span class="invalid-feedback" id="imageFeedback"><?= $validation->getError('image') ?></span>

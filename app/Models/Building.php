@@ -16,4 +16,13 @@ class Building extends Model
         'building_registration_date',
         'building_image'
     ];
+
+    public function get($id)
+    {
+        $result = $this->db->table('buildings')
+            ->where('buildings.id', $id)->join('users', 'buildings.user_id = users.id', 'INNER')
+            ->get()->getFirstRow();
+
+        return $result;
+    }
 }

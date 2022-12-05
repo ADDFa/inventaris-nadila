@@ -26,7 +26,7 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Dikelola Oleh</label>
-                <input type="text" class="form-control" value="<?= $user->name ?>">
+                <input type="text" class="form-control" value="<?= $building->name ?>">
             </div>
             <div class="mb-3">
                 <label class="form-label">Pada Tanggal</label>

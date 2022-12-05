@@ -6,11 +6,13 @@ use App\Controllers\BaseController;
 
 class Room extends BaseController
 {
-    private $table;
+    private $table, $building, $item;
 
     public function __construct()
     {
         $this->table = new \App\Models\Room();
+        $this->building = new \App\Models\Building();
+        $this->item = new \App\Models\Item();
     }
 
     public function index()
@@ -36,12 +38,10 @@ class Room extends BaseController
 
     public function show($id = null)
     {
-        if (is_null($id)) return redirect()->to('room');
-
         $data = [
             'title'         => 'Detail Ruangan',
-            'room'          => $this->table->getWhere('users.id', $id)[0],
-            'items'          => (new \App\Models\Item())->getWhere('room_id', $id)
+            'room'          => $this->table->getFirstWhere('rooms.id', $id),
+            'items'          => $this->item->getWhere('room_id', $id)
         ];
 
         return view('rooms/detail', $data);
@@ -51,8 +51,8 @@ class Room extends BaseController
     {
         $data = [
             'title'         => 'Tambah Data Ruangan',
-            'validation'    => $this->validation,
-            'buildings'      => (new \App\Models\Building())->findAll()
+            'buildings'      => $this->building->findAll(),
+            'validation'    => $this->validation
         ];
 
         return view('rooms/new', $data);
@@ -60,13 +60,11 @@ class Room extends BaseController
 
     public function edit($id = null)
     {
-        if (is_null($id)) return redirect()->to('room');
-
         $data = [
             'title'         => 'Ubah Data Ruangan',
-            'validation'    => $this->validation,
             'room'          => $this->table->find($id),
-            'buildings'     => (new \App\Models\Building())->findAll()
+            'buildings'     => $this->building->findAll(),
+            'validation'    => $this->validation
         ];
 
         return view('rooms/edit', $data);
@@ -82,7 +80,17 @@ class Room extends BaseController
         if (!$imageName) return redirect()->to('room/new')->withInput();
 
         $data = $this->request->getPost();
-        $data += ['room_image'  => $imageName];
+        $data += [
+            'available'   => $data['room_capacity'],
+            'room_image'  => $imageName,
+            'user_id'     => session('users')->id
+        ];
+
+        // insert jumlah ruangan kedalam data gedung
+        $building = $this->building->where('id', $data['building_id'])->first();
+        $this->building->update($data['building_id'], [
+            'room_total'    => $building->room_total + 1
+        ]);
 
         // uplaod gambar dan masukkan data kedalam database
         $this->request->getFile('room_image')->move('images/rooms', $imageName);
@@ -98,8 +106,6 @@ class Room extends BaseController
 
     public function update($id = null)
     {
-        if (is_null($id)) return redirect()->to('room');
-
         // validasi ruangan
         if (!$this->checkValid()) return redirect()->to("room/{$id}/edit")->withInput();
 
@@ -114,6 +120,19 @@ class Room extends BaseController
             ]);
 
             return redirect()->to("room/{$id}/edit")->withInput();
+        }
+
+        // cek apakah ruangan berpindah gedung atau tidak
+        if ($room->building_id != $data['building_id']) {
+            // jika berpindah gedung, update isi gedung
+            $oldBuilding = $this->building->find($room->building_id);
+            $newBuilding = $this->building->find($data['building_id']);
+            $this->building->update($data['building_id'], [
+                'room_total'    => $newBuilding->room_total + 1
+            ]);
+            $this->building->update($room->building_id, [
+                'room_total'    => $oldBuilding->room_total - 1
+            ]);
         }
 
         // tambahkan kolom available terupdate ke data
@@ -146,20 +165,22 @@ class Room extends BaseController
 
     public function delete($id = null)
     {
-        if (is_null($id)) return redirect()->to('room');
-
         $room = $this->table->find($id);
 
         // hapus gambar jika ada dan hapus data dari database
         if (file_exists("images/rooms/{$room->room_image}")) unlink("images/rooms/{$room->room_image}");
         $this->table->delete($id);
 
-        // Hapus semua data barang yang bersangkutan
-        $itemTable = new \App\Models\Item();
+        // hapus jumlah ruangan di tabel gedung
+        $building = $this->building->find($room->building_id);
+        $this->building->update($room->building_id, [
+            'room_total'    => $building->room_total - 1
+        ]);
 
-        $items = $itemTable->where('room_id', $id)->findAll();
+        // hapus seluruh data item yang bersangkutan
+        $items = $this->item->where('room_id', $id)->findAll();
         foreach ($items as $item) {
-            $itemTable->delete($item->id);
+            $this->item->delete($item->id);
         }
 
         session()->setFlashdata([
@@ -173,6 +194,12 @@ class Room extends BaseController
     public function checkValid()
     {
         return  $this->validate([
+            'building_id' => [
+                'rules'             => 'required',
+                'errors'            => [
+                    'required'      => 'Gedung Wajib Diisi'
+                ]
+            ],
             'room_name' => [
                 'rules'             => 'required|max_length[40]',
                 'errors'            => [

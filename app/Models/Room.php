@@ -29,13 +29,13 @@ class Room extends Model
         return $result;
     }
 
-    public function getWhere($key, $value)
+    public function getFirstWhere($key, $value)
     {
         $result = $this->db->table('rooms')
             ->where($key, $value)
-            ->join('users', 'rooms.user_id = users.id', 'INNER')
+            ->join('users', 'users.id = rooms.user_id', 'INNER')
             ->join('buildings', 'rooms.building_id = buildings.id', 'INNER')
-            ->get()->getResultObject();
+            ->get()->getFirstRow();
 
         return $result;
     }

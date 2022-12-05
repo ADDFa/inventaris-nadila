@@ -25,7 +25,7 @@ class Buildings extends Migration
 
             'building_size' => [
                 'type'              => 'VARCHAR',
-                'constraint'        => 10
+                'constraint'        => 40
             ],
 
             'room_total' => [
