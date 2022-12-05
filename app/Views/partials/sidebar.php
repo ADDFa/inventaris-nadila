@@ -28,11 +28,11 @@
                     <i class='bx bx-home-circle nav_icon'></i>
                     <span class="nav_name">Ruangan</span>
                 </a>
-                <a href="/barang" class="nav_link">
+                <a href="/item" class="nav_link">
                     <i class='bx bx-unite nav_icon'></i>
                     <span class="nav_name">Barang</span>
                 </a>
-                <a href="/laporan" class="nav_link">
+                <a href="/report" class="nav_link">
                     <i class='bx bxs-report'></i>
                     <span class="nav_name">Laporan</span>
                 </a>

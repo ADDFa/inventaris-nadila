@@ -106,6 +106,20 @@ class Room extends BaseController
         $room = $this->table->find($id);
         $data = $this->request->getPost();
 
+        // cek apakah ruangan memenuhi syarat untuk update (kapasitas ruangan harus lebih besar dari jumlah ruangan terisi)
+        if ($data['room_capacity'] < $room->filed) {
+            session()->setFlashdata([
+                'status'    => 'error',
+                'message'   => 'Gagal Update, Kapasitas Ruangan Harus Lebih Dari Jumlah Barang Saat Ini.'
+            ]);
+
+            return redirect()->to("room/{$id}/edit")->withInput();
+        }
+
+        // tambahkan kolom available terupdate ke data
+        $available = (int) $data['room_capacity'] - $room->filed;
+        $data += ['available' => $available];
+
         // cek apakah gambar diubah
         if ($this->request->getFile('room_image')->getError() === 0) {
             // validasi gambar
@@ -140,6 +154,14 @@ class Room extends BaseController
         if (file_exists("images/rooms/{$room->room_image}")) unlink("images/rooms/{$room->room_image}");
         $this->table->delete($id);
 
+        // Hapus semua data barang yang bersangkutan
+        $itemTable = new \App\Models\Item();
+
+        $items = $itemTable->where('room_id', $id)->findAll();
+        foreach ($items as $item) {
+            $itemTable->delete($item->id);
+        }
+
         session()->setFlashdata([
             'status'    => 'success',
             'message'   => 'Data Ruangan Berhasil Dihapus'
@@ -165,10 +187,10 @@ class Room extends BaseController
                 ]
             ],
             'room_size' => [
-                'rules'             => 'required|max_length[10]',
+                'rules'             => 'required|max_length[20]',
                 'errors'            => [
                     'required'      => 'Ukuran Ruangan Harus Diisi',
-                    'max_length'    => 'Ukuran Ruangan Maksimal 10 Karakter'
+                    'max_length'    => 'Ukuran Ruangan Maksimal 20 Karakter'
                 ]
             ]
         ]);

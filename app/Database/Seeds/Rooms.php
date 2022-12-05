@@ -14,8 +14,8 @@ class Rooms extends Seeder
                 'building_id'   => 1,
                 'room_name'     => 'Ruangan Makan',
                 'room_capacity' => 200,
-                'filed'         => 150,
-                'available'     => 50,
+                'filed'         => 0,
+                'available'     => 200,
                 'room_size'     => '5 X 5',
                 'room_image'    => 'sample.jpg'
             ],
@@ -25,8 +25,8 @@ class Rooms extends Seeder
                 'building_id'   => 2,
                 'room_name'     => 'Ruangan Minum',
                 'room_capacity' => 100,
-                'filed'         => 50,
-                'available'     => 50,
+                'filed'         => 10,
+                'available'     => 90,
                 'room_size'     => '5 X 5',
                 'room_image'    => 'sample.jpg'
             ]

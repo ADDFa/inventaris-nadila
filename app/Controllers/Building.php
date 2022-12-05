@@ -178,23 +178,14 @@ class Building extends BaseController
     private function getDataBuilding($image = null)
     {
         $data = [
-            'user_id'                       => session('users')->user_id,
+            'user_id'                       => session('users')->id,
             'building_name'                 => $this->request->getPost('building_name'),
             'building_size'                 => $this->request->getPost('building_size'),
-            'room_total'                    => $this->getRoomTotal(),
+            'room_total'                    => $this->getPositifNumber($this->request->getPost('room_total')),
             'building_registration_date'    => strtotime($this->request->getPost('building_registration_date')),
         ];
 
         if ($image) $data += ['building_image' => $image];
         return $data;
-    }
-
-    private function getRoomTotal()
-    {
-        // ubah nilai negatif menjadi positif
-        $roomTotal = (int) $this->request->getPost('room_total');
-        if ($roomTotal < 0) $roomTotal *= -1;
-
-        return $roomTotal;
     }
 }

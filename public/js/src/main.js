@@ -1,8 +1,8 @@
 require('./bootstrap.bundle.min')
-require('./components/form')
-require('./partials/sidebar')
+require('../components/form')
+require('../partials/sidebar')
 
-const { el } = require('./partials/main')
+const { el } = require('../partials/main')
 
 // Notification
 const notif = el('.notif')

@@ -43,7 +43,7 @@ class Rooms extends Migration
 
             'room_size' => [
                 'type'              => 'VARCHAR',
-                'constraint'        => 10
+                'constraint'        => 20
             ],
 
             'room_image' => [

@@ -33,7 +33,7 @@ class Auth extends BaseController
 
         session()->set([
             'login' => true,
-            'users' => $users
+            'users' => (new \App\Models\User())->find($users->user_id)
         ]);
 
         return redirect()->to('/dashboard');

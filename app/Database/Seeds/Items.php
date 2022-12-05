@@ -10,21 +10,29 @@ class Items extends Seeder
     {
         $items = [
             [
-                'user_id'       => 1,
-                'room_id'       => 1,
-                'category_id'   => 1,
-                'type_id'       => 1,
-                'item_name'     => 'HP IPONG 14 PRO MAX',
-                'item_total'    => 2
+                'user_id'           => 1,
+                'room_id'           => 2,
+                'category_id'       => 1,
+                'type_id'           => 1,
+                'item_name'         => 'HP IPONG 14 PRO MAX',
+                'item_total'        => 6,
+                'item_brand'        => 'Apel Manis',
+                'item_condition'    => 'Bagus',
+                'item_price'        => 20000,
+                'record_date'       => '1670067568'
             ],
 
             [
-                'user_id'       => 2,
-                'room_id'       => 2,
-                'category_id'   => 2,
-                'type_id'       => 1,
-                'item_name'     => 'Macbook Pro Max 70 Juta',
-                'item_total'    => 2
+                'user_id'           => 2,
+                'room_id'           => 2,
+                'category_id'       => 2,
+                'type_id'           => 1,
+                'item_name'         => 'Macbook Pro Max 70 Juta',
+                'item_total'        => 4,
+                'item_brand'        => 'Apel Manis',
+                'item_condition'    => 'Bagus',
+                'item_price'        => 20000,
+                'record_date'       => '1670067568'
             ]
         ];
 

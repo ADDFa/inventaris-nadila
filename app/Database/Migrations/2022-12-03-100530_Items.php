@@ -37,6 +37,26 @@ class Items extends Migration
 
             'item_total' => [
                 'type'              => 'INT'
+            ],
+
+            'item_brand' => [
+                'type'              => 'VARCHAR',
+                'constraint'        => 40
+            ],
+
+            'item_condition' => [
+                'type'              => 'VARCHAR',
+                'constraint'        => 40
+            ],
+
+            'item_price' => [
+                'type'              => 'VARCHAR',
+                'constraint'        => 40
+            ],
+
+            'record_date' => [
+                'type'              => 'VARCHAR',
+                'constraint'        => 40
             ]
         ]);
 

@@ -3,7 +3,7 @@
 <?= $this->section('content') ?>
 
 <div>
-    <h1 class="fw-bold">Selamat Datang <?= session('users')->username ?></h1>
+    <h1 class="fw-bold">Selamat Datang <?= session('users')->name ?></h1>
     <h3 class="fs-5">Di Sistem Informasi Inventaris Barang SMPIT Iqra' Kota Bengkulu</h3>
 </div>
 
