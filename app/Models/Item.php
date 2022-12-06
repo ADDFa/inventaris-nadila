@@ -55,12 +55,13 @@ class Item extends Model
     public function get($id)
     {
         $result = $this->db->table('items')
-            ->where('items.id', $id)
+            ->select('*, items.id AS item_id')
             ->join('item_categories', 'items.category_id = item_categories.id', 'INNER')
             ->join('item_types', 'items.type_id = item_types.id', 'INNER')
             ->join('rooms', 'items.room_id = rooms.id', 'INNER')
             ->join('users', 'items.user_id = users.id', 'INNER')
-            ->get()->getRowObject();
+            ->where('items.id', $id)
+            ->get()->getFirstRow();
 
         return $result;
     }

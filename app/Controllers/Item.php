@@ -64,11 +64,9 @@ class Item extends BaseController
 
     public function edit($id = null)
     {
-        if (is_null($id)) return redirect()->to('item');
-
         $data = [
-            'title'         => 'Ubah Data Barang',
-            'item'          => $this->table->get($id),
+            'title'             => 'Ubah Data Barang',
+            'item'              => $this->table->get($id),
             'validation'        => $this->validation,
             'categories'        => $this->category->findAll(),
             'types'             => $this->type->findAll(),
@@ -158,6 +156,7 @@ class Item extends BaseController
             $this->updateRoom($data->item_total, $newRoom);
         } else {
             $itemTotal = $data->item_total - $item->item_total;
+            if (!$this->roomAvailable($itemTotal, $room)) return redirect()->to("item/${id}/edit")->withInput();
             $this->updateRoom($itemTotal, $room);
         }
 
@@ -173,24 +172,18 @@ class Item extends BaseController
 
     public function delete($id = null)
     {
-        if (is_null($id)) return redirect()->to('item');
-
         $item = $this->table->find($id);
         $room = $this->rooms->find($item->room_id);
-        // update data filed dan available di tabel room
-        $filed = $room->filed - $item->item_total;
-        $roomUpdate = [
-            'filed'         => $filed,
-            'available'     => $room->room_capacity - $filed
-        ];
 
-        $this->rooms->update($room->id, $roomUpdate);
+        // update tabel room
+        $this->updateRoom(-$item->item_total, $room);
         $this->table->delete($id);
 
         session()->setFlashdata([
             'status'    => 'success',
             'message'   => 'Data Barang Berhasil Dihapus'
         ]);
+
         return redirect()->to('item');
     }
 
