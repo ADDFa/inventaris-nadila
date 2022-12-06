@@ -17,11 +17,18 @@ const deleteItem = target => {
                     icon: 'success',
                     title: res.message
                 })
+
+                const parentTarget = target.parentElement
+                el('.modal-body ul').removeChild(parentTarget)
+            }
+
+            if (!res.ok) {
+                Toast.fire({
+                    icon: 'error',
+                    title: res.message
+                })
             }
         })
-
-    const parentTarget = target.parentElement
-    el('.modal-body ul').removeChild(parentTarget)
 
     buttonOn()
 }

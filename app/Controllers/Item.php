@@ -39,8 +39,6 @@ class Item extends BaseController
 
     public function show($id = null)
     {
-        if (is_null($id)) return redirect()->to('item');
-
         $data = [
             'title'     => 'Detail Barang',
             'item'      => $this->table->get($id)
@@ -272,6 +270,20 @@ class Item extends BaseController
 
     public function deleteCategory($id = null)
     {
+        $items = $this->table->where('category_id', $id)->findAll();
+        $category = $this->category->find($id);
+
+        if (count($items) > 0) {
+            $response = [
+                'status'    => 409,
+                'ok'        => false,
+                'message'   => 'Tidak Dapat Menghapus Kategori, Terdapat Item Dengan Kategori ' . $category->category_name
+            ];
+
+            echo json_encode($response);
+            return;
+        }
+
         $this->category->delete($id);
 
         $response = [
@@ -330,6 +342,20 @@ class Item extends BaseController
 
     public function deleteType($id = null)
     {
+        $items = $this->table->where('type_id', $id)->findAll();
+        $type = $this->type->find($id);
+
+        if (count($items) > 0) {
+            $response = [
+                'status'    => 409,
+                'ok'        => false,
+                'message'   => 'Tidak Dapat Menghapus Kategori, Terdapat Item Dengan Jenis ' . $type->type_name
+            ];
+
+            echo json_encode($response);
+            return;
+        }
+
         $this->type->delete($id);
 
         $response = [

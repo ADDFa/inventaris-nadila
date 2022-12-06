@@ -19,19 +19,10 @@ class Room extends Model
         'room_image'
     ];
 
-    public function getAll()
-    {
-        $result = $this->db->table('rooms')
-            ->join('users', 'rooms.user_id = users.id', 'INNER')
-            ->join('buildings', 'rooms.building_id = buildings.id', 'INNER')
-            ->get()->getResultObject();
-
-        return $result;
-    }
-
     public function getFirstWhere($key, $value)
     {
         $result = $this->db->table('rooms')
+            ->select('*, rooms.id AS room_id')
             ->where($key, $value)
             ->join('users', 'users.id = rooms.user_id', 'INNER')
             ->join('buildings', 'rooms.building_id = buildings.id', 'INNER')

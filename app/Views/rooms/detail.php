@@ -77,7 +77,7 @@
 
 <div class="mb-3 mt-5 d-flex justify-content-end gap-3 col-lg-8 mx-auto">
     <a href="/room" class="btn btn-warning">Kembali</a>
-    <a href="/room/<?= $room->id ?>/edit" class="btn btn-primary">Ubah</a>
+    <a href="/room/<?= $room->room_id ?>/edit" class="btn btn-primary">Ubah</a>
 </div>
 
 <?= $this->endSection() ?>

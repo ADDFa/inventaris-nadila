@@ -3,25 +3,27 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Models\Building;
-use App\Models\Room;
-use App\Models\Item;
 
 class Home extends BaseController
 {
+    private $building, $room, $item;
+
+    public function __construct()
+    {
+        $this->building = new \App\Models\Building();
+        $this->room = new \App\Models\Room();
+        $this->item = new \App\Models\Item();
+    }
+
     public function index()
     {
-        $numberOfBuilding = (new Building())->countAllResults();
-        $numberOfRoom = (new Room())->countAllResults();
-        $numberOfItem = (new Item())->countAllResults();
-
         $data = [
             'title'         => 'Dashboard',
             'style'         => 'dashboard',
             'numberOf'     => [
-                'building'   => $numberOfBuilding,
-                'room'      => $numberOfRoom,
-                'item'      => $numberOfItem
+                'building'   => $this->building->countAllResults(),
+                'room'      => $this->room->countAllResults(),
+                'item'      => $this->item->countAllResults()
             ]
         ];
 
@@ -30,6 +32,11 @@ class Home extends BaseController
 
     public function report()
     {
-        echo 'report';
+        $data = [
+            'title'     => 'Laporan Manajemen',
+            'data'      => $this->item->getAll()
+        ];
+
+        return view('report', $data);
     }
 }

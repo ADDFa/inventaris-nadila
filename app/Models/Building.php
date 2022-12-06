@@ -20,6 +20,7 @@ class Building extends Model
     public function get($id)
     {
         $result = $this->db->table('buildings')
+            ->select('*, buildings.id AS building_id')
             ->where('buildings.id', $id)->join('users', 'buildings.user_id = users.id', 'INNER')
             ->get()->getFirstRow();
 

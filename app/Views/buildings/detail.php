@@ -38,7 +38,7 @@
 
 <div class="mb-3 d-flex justify-content-end gap-3 col-lg-8 mx-auto">
     <a href="/building" class="btn btn-warning">Kembali</a>
-    <a href="/building/<?= $building->id ?>/edit" class="btn btn-primary">Ubah</a>
+    <a href="/building/<?= $building->building_id ?>/edit" class="btn btn-primary">Ubah</a>
 </div>
 
 <?= $this->endSection() ?>

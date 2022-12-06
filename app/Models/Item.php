@@ -24,6 +24,7 @@ class Item extends Model
     public function getAll()
     {
         $result = $this->db->table('items')
+            ->select('*, items.id AS item_id')
             ->join('item_categories', 'items.category_id = item_categories.id', 'INNER')
             ->join('item_types', 'items.type_id = item_types.id', 'INNER')
             ->get()->getResultObject();
@@ -34,6 +35,7 @@ class Item extends Model
     public function getWhere($key, $value)
     {
         $result = $this->db->table('items')
+            ->select('*, items.id AS item_id')
             ->join('item_categories', 'items.category_id = item_categories.id', 'INNER')
             ->join('item_types', 'items.type_id = item_types.id', 'INNER')
             ->where($key, $value)
@@ -45,6 +47,7 @@ class Item extends Model
     public function getLimit($limit, $offset = 0)
     {
         $result = $this->db->table('items')
+            ->select('*, items.id AS item_id')
             ->join('item_categories', 'items.category_id = item_categories.id', 'INNER')
             ->join('item_types', 'items.type_id = item_types.id', 'INNER')
             ->get($limit, $offset)->getResultObject();

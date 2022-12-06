@@ -62,7 +62,7 @@
 
 <div class="mb-3 d-flex justify-content-end gap-3 col-lg-10 mx-auto">
     <a href="/item" class="btn btn-warning">Kembali</a>
-    <a href="/item/<?= $item->id ?>/edit" class="btn btn-primary">Ubah</a>
+    <a href="/item/<?= $item->item_id ?>/edit" class="btn btn-primary">Ubah</a>
 </div>
 
 <?= $this->endSection() ?>
