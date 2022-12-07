@@ -34,12 +34,12 @@ class Home extends BaseController
     {
         $limit = 10;
 
-        $items = $this->item->findAll($limit);
+        $items = $this->item->getAll($limit);
         $pages = $this->request->getGet('pages');
 
         if ($pages) {
             $offset = (int) $pages * $limit - $limit;
-            $items = $this->item->findAll($limit, $offset);
+            $items = $this->item->getAll($limit, $offset);
         }
 
         $data = [

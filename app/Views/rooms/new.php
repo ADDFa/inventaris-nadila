@@ -34,7 +34,9 @@
             <input type="text" id="room_size" placeholder="24 X 24 M" class="form-control <?= $validation->hasError('room_size') ? 'is-invalid' : '' ?>" name="room_size" value="<?= old('room_size') ?>" aria-describedby="room_sizeFeedback">
             <span class="invalid-feedback" id="room_sizeFeedback"><?= $validation->getError('room_size') ?></span>
         </div>
+    </div>
 
+    <div class="row mb-3">
         <div class="col-md-6">
             <label for="description" class="form-label">Keterangan</label>
             <input type="text" id="description" class="form-control <?= $validation->hasError('description') ? 'is-invalid' : '' ?>" name="description" value="<?= old('description') ?>" aria-describedby="descriptionFeedback">

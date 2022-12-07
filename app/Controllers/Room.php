@@ -100,10 +100,12 @@ class Room extends BaseController
 
     public function update($id = null)
     {
-        // validasi ruangan
-        if (!$this->checkValid()) return redirect()->to("room/{$id}/edit")->withInput();
-
         $room = $this->table->find($id);
+        $oldName = $this->request->getPost('room_name') === $room->room_name;
+
+        // validasi ruangan
+        if (!$this->checkValid($oldName)) return redirect()->to("room/{$id}/edit")->withInput();
+
         $data = $this->request->getPost();
 
         // cek apakah ruangan memenuhi syarat untuk update (kapasitas ruangan harus lebih besar dari jumlah ruangan terisi)
@@ -170,21 +172,13 @@ class Room extends BaseController
         return redirect()->to('room');
     }
 
-    public function checkValid()
+    public function checkValid($oldName = false)
     {
-        return  $this->validate([
+        $validation = [
             'building_id' => [
                 'rules'             => 'required',
                 'errors'            => [
                     'required'      => 'Gedung Wajib Diisi'
-                ]
-            ],
-            'room_name' => [
-                'rules'             => 'required|max_length[40]|is_unique[rooms.room_name]',
-                'errors'            => [
-                    'required'      => 'Nama Ruangan Harus Diisi',
-                    'max_length'    => 'Nama Ruangan Maksimal 40 Karakter',
-                    'is_unique'     => 'Nama Ruangan Telah Ada, Masukkan Nama Ruangan Yang Lain'
                 ]
             ],
             'room_capacity' => [
@@ -207,6 +201,21 @@ class Room extends BaseController
                     'max_length'    => 'Panjang Maksimal 40 Karakter'
                 ]
             ]
-        ]);
+        ];
+
+        if (!$oldName) {
+            $validation += [
+                'room_name' => [
+                    'rules'             => 'required|max_length[40]|is_unique[rooms.room_name]',
+                    'errors'            => [
+                        'required'      => 'Nama Ruangan Harus Diisi',
+                        'max_length'    => 'Nama Ruangan Maksimal 40 Karakter',
+                        'is_unique'     => 'Nama Ruangan Telah Ada, Masukkan Nama Ruangan Yang Lain'
+                    ]
+                ]
+            ];
+        }
+
+        return  $this->validate($validation);
     }
 }
