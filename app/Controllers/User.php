@@ -87,7 +87,7 @@ class User extends BaseController
         $credential = [
             'user_id'       => $userId,
             'username'      => $this->request->getPost('username'),
-            'password'      => password_hash($this->request->getPost('username'), PASSWORD_BCRYPT)
+            'password'      => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT)
         ];
         $this->credential->insert($credential);
 
@@ -121,6 +121,8 @@ class User extends BaseController
 
         $this->table->update($id, $data);
         $this->credential->where('user_id', $id)->update(null, $credential);
+
+        session()->set('users', $this->table->find($id));
 
         session()->setFlashdata([
             'status'    => 'success',

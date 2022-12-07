@@ -83,6 +83,7 @@ abstract class BaseController extends Controller
     /**
      * Constructor.
      */
+
     public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
     {
         // Do Not Edit This Line
@@ -93,6 +94,5 @@ abstract class BaseController extends Controller
         // E.g.: $this->session = \Config\Services::session();
 
         $this->validation = Services::validation();
-        $this->user = new User();
     }
 }

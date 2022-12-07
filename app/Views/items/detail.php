@@ -2,11 +2,6 @@
 
 <?= $this->section('content') ?>
 
-<figure class="figure col-lg-5 mx-auto d-block mb-3">
-    <img src="/images/rooms/<?= $item->room_image ?>" class="figure-img img-fluid rounded" alt="Gambar Ruangan">
-    <figcaption class="figure-caption text-center fs-5"><?= $item->room_name ?></figcaption>
-</figure>
-
 <div class="row col-lg-10 mx-auto mb-3">
     <div class="col-lg-6">
         <fieldset disabled>

@@ -17,7 +17,7 @@ class Rooms extends Seeder
                 'filed'         => 0,
                 'available'     => 200,
                 'room_size'     => '5 X 5',
-                'room_image'    => 'sample.jpg'
+                'description'   => 'ini deskripsi 1'
             ],
 
             [
@@ -28,7 +28,7 @@ class Rooms extends Seeder
                 'filed'         => 10,
                 'available'     => 90,
                 'room_size'     => '5 X 5',
-                'room_image'    => 'sample.jpg'
+                'description'   => 'ini deskripsi 2'
             ]
         ];
 

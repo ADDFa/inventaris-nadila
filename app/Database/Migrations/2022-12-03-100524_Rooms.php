@@ -14,17 +14,10 @@ class Rooms extends Migration
                 'auto_increment'    => true
             ],
 
-            'user_id' => [
-                'type'              => 'INT'
-            ],
-
-            'building_id' => [
-                'type'              => 'INT'
-            ],
-
             'room_name' => [
                 'type'              => 'VARCHAR',
-                'constraint'        => 40
+                'constraint'        => 40,
+                'unique'            => true
             ],
 
             'room_capacity' => [
@@ -46,9 +39,17 @@ class Rooms extends Migration
                 'constraint'        => 20
             ],
 
-            'room_image' => [
+            'description' => [
                 'type'              => 'VARCHAR',
-                'constraint'        => 255
+                'constraint'        => 40
+            ],
+
+            'building_id' => [
+                'type'              => 'INT'
+            ],
+
+            'user_id' => [
+                'type'              => 'INT'
             ]
         ]);
 

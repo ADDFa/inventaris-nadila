@@ -32,6 +32,40 @@
             </div>
         </fieldset>
     </div>
+
+    <div class="accordion my-5" id="accordionBarang">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Lihat List Ruangan
+                </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionBarang">
+                <div class="accordion-body">
+                    <ul class="list-group">
+                        <?php if (!$rooms) : ?>
+                            <li class="list-group-item d-flex justify-content-between align-rooms-center">
+                                Nama Ruangan
+                                <a href="/room/new" class="badge bg-warning rounded-pill">
+                                    <i class="fa-solid fa-plus"></i> Tambah Ruangan
+                                </a>
+                            </li>
+                        <?php else : ?>
+                            <?php foreach ($rooms as $room) : ?>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <?= $room->room_name ?>
+                                    <a href="/room/<?= $room->id ?>" class="badge bg-primary rounded-pill">
+                                        <i class="fa-solid fa-eye"></i>
+                                        Lihat Detail
+                                    </a>
+                                </li>
+                            <?php endforeach ?>
+                        <?php endif ?>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="mb-3 d-flex justify-content-end gap-3 col-lg-8 mx-auto">

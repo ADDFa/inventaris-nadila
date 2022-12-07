@@ -36,9 +36,9 @@
         </div>
 
         <div class="col-md-6">
-            <label for="room_image" class="form-label">Gambar Ruangan</label>
-            <input type="file" id="room_image" class="form-control <?= $validation->hasError('image') ? 'is-invalid' : '' ?>" accept=".jpg, .png, .jpeg" name="room_image" aria-describedby="room_imageFeedback">
-            <span class="invalid-feedback" id="room_imageFeedback"><?= $validation->getError('image') ?></span>
+            <label for="description" class="form-label">Keterangan</label>
+            <input type="text" id="description" class="form-control <?= $validation->hasError('description') ? 'is-invalid' : '' ?>" name="description" value="<?= old('description') ?>" aria-describedby="descriptionFeedback">
+            <span class="invalid-feedback" id="descriptionFeedback"><?= $validation->getError('description') ?></span>
         </div>
     </div>
 

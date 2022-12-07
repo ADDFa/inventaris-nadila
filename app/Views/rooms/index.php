@@ -28,6 +28,7 @@
                 <th scope="col">Kapasitas</th>
                 <th scope="col">Terisi</th>
                 <th scope="col">Tersedia</th>
+                <th scope="col">Nama Gedung</th>
                 <th scope="col" class="col-lg-2">Aksi</th>
             </tr>
         </thead>
@@ -40,24 +41,25 @@
                     <td><?= $room->room_capacity ?></td>
                     <td><?= $room->filed ?></td>
                     <td><?= $room->available ?></td>
+                    <td><?= $room->building_name ?></td>
                     <td class="col-lg-2">
                         <div class="d-flex justify-content-center gap-3">
-                            <a href="/room/<?= $room->id ?>">
+                            <a href="/room/<?= $room->room_id ?>">
                                 <button class="btn btn-warning">
                                     <i class='bx bxs-show bx-sm'></i>
                                 </button>
                             </a>
 
-                            <a href="/room/<?= $room->id ?>/edit">
+                            <a href="/room/<?= $room->room_id ?>/edit">
                                 <button class="btn btn-primary">
                                     <i class='bx bx-edit bx-sm'></i>
                                 </button>
                             </a>
 
-                            <form action="/room/<?= $room->id ?>" method="POST">
+                            <form action="/room/<?= $room->room_id ?>" method="POST">
                                 <input type="hidden" name="_method" value="DELETE">
 
-                                <input type="hidden" name="id" value="<?= $room->id ?>">
+                                <input type="hidden" name="id" value="<?= $room->room_id ?>">
                                 <button type="button" class="btn btn-danger delete">
                                     <i class='bx bxs-trash-alt bx-sm delete'></i>
                                 </button>

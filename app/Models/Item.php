@@ -21,7 +21,7 @@ class Item extends Model
         'record_date'
     ];
 
-    public function getAll()
+    public function getAll($limit = null, $offset = 0)
     {
         $result = $this->db->table('items')
             ->select('*, items.id AS item_id')
@@ -29,7 +29,7 @@ class Item extends Model
             ->join('item_types', 'items.type_id = item_types.id', 'INNER')
             ->join('rooms', 'items.room_id = rooms.id', 'INNER')
             ->join('users', 'items.user_id = users.id', 'INNER')
-            ->get()->getResultObject();
+            ->get($limit, $offset)->getResultObject();
 
         return $result;
     }

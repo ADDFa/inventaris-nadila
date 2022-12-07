@@ -3,6 +3,19 @@
 <?= $this->section('content') ?>
 
 <div class="d-flex justify-content-between align-items-center px-5">
+    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Show
+            </button>
+            <ul class="dropdown-menu">
+                <?php for ($i = 1; $i <= $pages; $i++) : ?>
+                    <li><a class="dropdown-item" href="<?= "?pages=$i" ?>"><?= "Halaman $i" ?></a></li>
+                <?php endfor ?>
+            </ul>
+        </div>
+    </div>
+
     <a href="/laporan/print" type="button" class="btn btn-default d-flex gap-2 align-items-center">
         <i class='bx bx-printer w-100 h-100'></i>
         Print

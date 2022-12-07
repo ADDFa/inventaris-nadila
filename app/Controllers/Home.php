@@ -32,9 +32,20 @@ class Home extends BaseController
 
     public function report()
     {
+        $limit = 10;
+
+        $items = $this->item->findAll($limit);
+        $pages = $this->request->getGet('pages');
+
+        if ($pages) {
+            $offset = (int) $pages * $limit - $limit;
+            $items = $this->item->findAll($limit, $offset);
+        }
+
         $data = [
             'title'     => 'Laporan Manajemen',
-            'items'     => $this->item->getAll()
+            'items'     => $items,
+            'pages'     => ceil($this->item->countAllResults() / $limit)
         ];
 
         return view('report', $data);

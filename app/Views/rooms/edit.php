@@ -36,11 +36,13 @@
             <input type="text" id="room_size" placeholder="24 X 24 M" class="form-control <?= $validation->hasError('room_size') ? 'is-invalid' : '' ?>" name="room_size" value="<?= old('room_size') ?? $room->room_size ?>" aria-describedby="room_sizeFeedback">
             <span class="invalid-feedback" id="room_sizeFeedback"><?= $validation->getError('room_size') ?></span>
         </div>
+    </div>
 
-        <div class="col-md-6">
-            <label for="room_image" class="form-label">Gambar Ruangan</label>
-            <input type="file" id="room_image" class="form-control <?= $validation->hasError('image') ? 'is-invalid' : '' ?>" accept=".jpg, .png, .jpeg" name="room_image" aria-describedby="room_imageFeedback">
-            <span class="invalid-feedback" id="room_imageFeedback"><?= $validation->getError('image') ?></span>
+    <div class="row mb-3">
+        <div class="col-lg-6">
+            <label for="description" class="form-label">Keterangan</label>
+            <input type="text" id="description" class="form-control <?= $validation->hasError('description') ? 'is-invalid' : '' ?>" name="description" value="<?= old('description') ?? $room->description ?>" aria-describedby="descriptionFeedback">
+            <span class="invalid-feedback" id="descriptionFeedback"><?= $validation->getError('description') ?></span>
         </div>
     </div>
 

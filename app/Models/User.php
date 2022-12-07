@@ -10,7 +10,7 @@ class User extends Model
     protected $returnType       = 'object';
     protected $allowedFields    = ['name', 'profile_picture'];
 
-    public function getAll($limit, $offset = 0)
+    public function getAll($limit = null, $offset = 0)
     {
         $result = $this->db->table('users')
             ->join('credentials', 'credentials.user_id = users.id', 'INNER')

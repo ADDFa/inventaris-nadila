@@ -38,7 +38,8 @@ class Building extends BaseController
     {
         $data = [
             'title'         => 'Detail Gedung',
-            'building'      => $this->table->get($id)
+            'building'      => $this->table->get($id),
+            'rooms'         => $this->room->where('building_id', $id)->findAll()
         ];
 
         return view('buildings/detail', $data);

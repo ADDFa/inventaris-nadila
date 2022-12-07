@@ -19,13 +19,14 @@ class Room extends BaseController
     {
         $limit = 10;
 
-        $rooms = $this->table->findAll($limit);
+        $rooms = $this->table->getAll($limit);
         $pages = $this->request->getGet('pages');
 
         if ($pages) {
             $offset = (int) $pages * $limit - $limit;
-            $rooms = $this->table->findAll($limit, $offset);
+            $rooms = $this->table->getAll($limit, $offset);
         }
+
 
         $data = [
             'title'         => 'Manajemen Data Ruangan',
@@ -75,25 +76,18 @@ class Room extends BaseController
         // validasi ruangan
         if (!$this->checkValid()) return redirect()->to('room/new')->withInput();
 
-        // validasi gambar
-        $imageName = $this->checkImageValid('room_image');
-        if (!$imageName) return redirect()->to('room/new')->withInput();
+        $building = $this->building->where('id', $this->request->getPost('building_id'))->first();
 
         $data = $this->request->getPost();
         $data += [
-            'available'   => $data['room_capacity'],
-            'room_image'  => $imageName,
-            'user_id'     => session('users')->id
+            'available'     => $data['room_capacity'],
+            'user_id'       => session('users')->id
         ];
 
         // insert jumlah ruangan kedalam data gedung
-        $building = $this->building->where('id', $data['building_id'])->first();
         $this->building->update($data['building_id'], [
             'room_total'    => $building->room_total + 1
         ]);
-
-        // uplaod gambar dan masukkan data kedalam database
-        $this->request->getFile('room_image')->move('images/rooms', $imageName);
         $this->table->insert($data);
 
         session()->setFlashdata([
@@ -139,19 +133,6 @@ class Room extends BaseController
         $available = (int) $data['room_capacity'] - $room->filed;
         $data += ['available' => $available];
 
-        // cek apakah gambar diubah
-        if ($this->request->getFile('room_image')->getError() === 0) {
-            // validasi gambar
-            $imageName = $this->checkImageValid('room_image');
-            if (!$imageName) return redirect()->to('room/new')->withInput();
-
-            $data += ['room_image'  => $imageName];
-
-            // hapus gambar dan upload gambar
-            if (file_exists("images/rooms/{$room->room_image}")) unlink("images/rooms/{$room->room_image}");
-            $this->request->getFile('room_image')->move('images/rooms', $imageName);
-        }
-
         // update data di database
         $this->table->update($id, $data);
 
@@ -167,10 +148,6 @@ class Room extends BaseController
     {
         $room = $this->table->find($id);
 
-        // hapus gambar jika ada dan hapus data dari database
-        if (file_exists("images/rooms/{$room->room_image}")) unlink("images/rooms/{$room->room_image}");
-        $this->table->delete($id);
-
         // hapus jumlah ruangan di tabel gedung
         $building = $this->building->find($room->building_id);
         $this->building->update($room->building_id, [
@@ -182,6 +159,8 @@ class Room extends BaseController
         foreach ($items as $item) {
             $this->item->delete($item->id);
         }
+
+        $this->table->delete($id);
 
         session()->setFlashdata([
             'status'    => 'success',
@@ -201,10 +180,11 @@ class Room extends BaseController
                 ]
             ],
             'room_name' => [
-                'rules'             => 'required|max_length[40]',
+                'rules'             => 'required|max_length[40]|is_unique[rooms.room_name]',
                 'errors'            => [
                     'required'      => 'Nama Ruangan Harus Diisi',
-                    'max_length'    => 'Nama Ruangan Maksimal 40 Karakter'
+                    'max_length'    => 'Nama Ruangan Maksimal 40 Karakter',
+                    'is_unique'     => 'Nama Ruangan Telah Ada, Masukkan Nama Ruangan Yang Lain'
                 ]
             ],
             'room_capacity' => [
@@ -218,6 +198,13 @@ class Room extends BaseController
                 'errors'            => [
                     'required'      => 'Ukuran Ruangan Harus Diisi',
                     'max_length'    => 'Ukuran Ruangan Maksimal 20 Karakter'
+                ]
+            ],
+            'description'           => [
+                'rules'             => 'required|max_length[40]',
+                'errors'            => [
+                    'required'      => 'Deskripsi Ruangan Harus Diisi',
+                    'max_length'    => 'Panjang Maksimal 40 Karakter'
                 ]
             ]
         ]);

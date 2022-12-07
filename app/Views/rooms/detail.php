@@ -2,12 +2,15 @@
 
 <?= $this->section('content') ?>
 
-<div class="col-lg-5 mx-auto">
-    <img src="/images/rooms/<?= $room->room_image ?>" alt="Foto Ruangan" class="w-100 border border-secondary p-1 rounded-3">
-</div>
-
 <div class="col-lg-8 mt-5 mx-auto">
     <ol class="list-group list-group-numbered">
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+                <div class="fw-bold">Nama ruangan</div>
+                <?= $room->room_name ?>
+            </div>
+            <span class="badge bg-primary rounded-pill"><?= $room->room_name ?></span>
+        </li>
         <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
                 <div class="fw-bold">Kapasitas ruangan</div>
@@ -28,6 +31,20 @@
                 <?= $room->available ?>
             </div>
             <span class="badge bg-primary rounded-pill"><?= $room->available ?></span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+                <div class="fw-bold">Ukuran Ruangan</div>
+                <?= $room->room_size ?>
+            </div>
+            <span class="badge bg-primary rounded-pill"><?= $room->room_size ?></span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+                <div class="fw-bold">Deskripsi</div>
+                <?= $room->description ?>
+            </div>
+            <span class="badge bg-primary rounded-pill"><?= $room->description ?></span>
         </li>
         <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
