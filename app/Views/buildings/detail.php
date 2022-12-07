@@ -2,8 +2,6 @@
 
 <?= $this->section('content') ?>
 
-<h1 class="text-center fw-bold"><?= $title ?></h1>
-
 <div class="row col-lg-8 mx-auto mb-3">
     <figure class="figure col-lg-5 mx-auto mb-3">
         <img src="/images/building/<?= $building->building_image ?>" class="figure-img img-fluid rounded" alt="Gambar Gedung">

@@ -3,7 +3,18 @@
         <i class='bx bx-menu' id="header-toggle"></i>
     </div>
     <div class="header_img">
-        <img src="https://i.imgur.com/hczKIze.jpg" alt="user">
+        <img src="/images/users/<?= session('users')->profile_picture ?>" alt="user" aria-controls="user-action" data-bs-toggle="collapse" data-bs-target="#user-action">
+    </div>
+
+    <div class="collapse" id="user-action">
+        <ul class="d-flex flex-column align-items-center gap-4" style="list-style: none;">
+            <li>
+                <a href="/user/<?= session('users')->id ?>">Profile</a>
+            </li>
+            <li>
+                <a href="/logout">SignOut</a>
+            </li>
+        </ul>
     </div>
 </header>
 
@@ -36,6 +47,12 @@
                     <i class='bx bxs-report'></i>
                     <span class="nav_name">Laporan</span>
                 </a>
+                <?php if (session('users')->role === 'admin') : ?>
+                    <a href="/user" class="nav_link">
+                        <i class='bx bxs-user-detail'></i>
+                        <span class="nav_name">Kelola Petugas</span>
+                    </a>
+                <?php endif ?>
             </div>
         </div>
 

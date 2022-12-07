@@ -2,8 +2,6 @@
 
 <?= $this->section('content') ?>
 
-<h1 class="text-center fw-bold mb-5"><?= $title ?></h1>
-
 <form action="/item/<?= $item->item_id ?>" method="POST" class="col-lg-10 mx-auto">
     <input type="hidden" name="_method" value="PUT">
 

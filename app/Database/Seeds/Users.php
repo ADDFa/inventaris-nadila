@@ -14,8 +14,7 @@ class Users extends Seeder
                 'role'  => 'admin'
             ],
             [
-                'name'  => 'Adha Dont Differatama',
-                'role'  => 'officer'
+                'name'  => 'Adha Dont Differatama'
             ]
         ];
 

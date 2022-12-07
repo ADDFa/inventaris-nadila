@@ -16,12 +16,19 @@ class Users extends Migration
 
             'name' => [
                 'type'             => 'VARCHAR',
-                'constraint'       => '40'
+                'constraint'       => 40
+            ],
+
+            'profile_picture' => [
+                'type'             => 'VARCHAR',
+                'constraint'       => 255,
+                'default'          => 'default.jpg'
             ],
 
             'role' => [
-                'type'              => 'VARCHAR',
-                'constraint'        => '10'
+                'type'             => 'VARCHAR',
+                'constraint'       => 10,
+                'default'          => 'officer'
             ]
         ]);
 

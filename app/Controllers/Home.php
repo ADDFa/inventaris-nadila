@@ -34,7 +34,7 @@ class Home extends BaseController
     {
         $data = [
             'title'     => 'Laporan Manajemen',
-            'data'      => $this->item->getAll()
+            'items'     => $this->item->getAll()
         ];
 
         return view('report', $data);

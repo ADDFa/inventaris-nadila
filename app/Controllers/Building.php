@@ -81,6 +81,7 @@ class Building extends BaseController
             'status'    => 'success',
             'message'   => 'Data Gedung Berhasil Ditambahkan'
         ]);
+
         return redirect()->to('building');
     }
 

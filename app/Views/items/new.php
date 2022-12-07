@@ -2,8 +2,6 @@
 
 <?= $this->section('content') ?>
 
-<h1 class="text-center fw-bold mb-5"><?= $title ?></h1>
-
 <form action="/item" method="POST" class="col-lg-10 mx-auto">
     <div class="row mb-3">
         <div class="col-lg-6">

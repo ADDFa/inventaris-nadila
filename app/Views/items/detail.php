@@ -2,8 +2,6 @@
 
 <?= $this->section('content') ?>
 
-<h1 class="text-center fw-bold mb-5"><?= $title ?></h1>
-
 <figure class="figure col-lg-5 mx-auto d-block mb-3">
     <img src="/images/rooms/<?= $item->room_image ?>" class="figure-img img-fluid rounded" alt="Gambar Ruangan">
     <figcaption class="figure-caption text-center fs-5"><?= $item->room_name ?></figcaption>

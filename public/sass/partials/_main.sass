@@ -9,11 +9,6 @@ $body-font: "Nunito", sans-serif
 $normal-font-size: 1rem
 $z-fixed: 100
 
-*,
-::before,
-::after
-    box-sizing: border-box
-
 body
     position: relative
     margin: $header-height 0 0 0
@@ -54,6 +49,25 @@ a
 
     &_img img
         width: 40px
+
+        &:hover
+            cursor: pointer
+
+    #user-action
+        position: absolute
+        right: 2rem
+        top: calc( $header-height + 2rem )
+
+        a
+            color: #000
+            border-bottom: 7px solid #000
+            border-radius: 1rem
+            padding: .4rem 1.2rem
+            transition: color 300ms, border-bottom-color 300ms
+
+            &:hover
+                color: $first-color
+                border-bottom-color: $first-color
 
 .l-navbar
     position: fixed

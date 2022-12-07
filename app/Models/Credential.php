@@ -8,5 +8,5 @@ class Credential extends Model
 {
     protected $table            = 'credentials';
     protected $returnType       = 'object';
-    protected $allowedFields    = ['username', 'password'];
+    protected $allowedFields    = ['user_id', 'username', 'password'];
 }

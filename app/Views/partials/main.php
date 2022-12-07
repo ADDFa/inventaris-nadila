@@ -18,6 +18,12 @@
     </div>
 
     <div class="py-5 col-lg-11 mx-auto">
+        <span class="notif" data-status="<?= session('status') ?>" data-message="<?= session('message') ?>"></span>
+
+        <div class="title">
+            <h1 class="text-center fw-bold"><?= $title ?></h1>
+        </div>
+
         <?= $this->renderSection('content') ?>
     </div>
 

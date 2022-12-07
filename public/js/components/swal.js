@@ -9,19 +9,17 @@ const Toast = Swal.mixin({
     showConfirmButton: false,
     timer: 2000,
     timerProgressBar: true,
-    didOpen: (toast) => {
+    didOpen: toast => {
         toast.addEventListener('mouseenter', Swal.stopTimer)
         toast.addEventListener('mouseleave', Swal.resumeTimer)
     }
 })
 
-if (notif) {
-    if (notif.dataset.status) {
-        Toast.fire({
-            icon: notif.dataset.status,
-            title: notif.dataset.message
-        })
-    }
+if (notif.dataset.status) {
+    Toast.fire({
+        icon: notif.dataset.status,
+        title: notif.dataset.message
+    })
 }
 
 module.exports = {

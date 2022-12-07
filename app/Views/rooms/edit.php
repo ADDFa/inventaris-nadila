@@ -2,8 +2,6 @@
 
 <?= $this->section('content') ?>
 
-<h1 class="text-center fw-bold"><?= $title ?></h1>
-
 <form action="/room/<?= $room->id ?>" method="POST" enctype="multipart/form-data" class="col-lg-10 mx-auto my-5">
     <input type="hidden" name="_method" value="PUT">
 

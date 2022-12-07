@@ -51,7 +51,7 @@ abstract class BaseController extends Controller
         $image = $this->request->getFile($name);
         $type = explode('/', $image->getMimeType());
 
-        if ($image->getError() != 0) {
+        if ($image->getError() !== 0) {
             $this->validator->setError('image', 'Gambar Tidak Boleh Kosong');
 
             return false;

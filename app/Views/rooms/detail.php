@@ -2,8 +2,6 @@
 
 <?= $this->section('content') ?>
 
-<h1 class="text-center fw-bold"><?= $room->room_name ?></h1>
-
 <div class="col-lg-5 mx-auto">
     <img src="/images/rooms/<?= $room->room_image ?>" alt="Foto Ruangan" class="w-100 border border-secondary p-1 rounded-3">
 </div>
@@ -61,7 +59,7 @@
                             <?php foreach ($items as $item) : ?>
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     <?= $item->item_name ?>
-                                    <a href="/item/<?= $item->id ?>" class="badge bg-primary rounded-pill">
+                                    <a href="/item/<?= $item->item_id ?>" class="badge bg-primary rounded-pill">
                                         <i class="fa-solid fa-eye"></i>
                                         Lihat Detail
                                     </a>
