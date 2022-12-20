@@ -50,4 +50,14 @@ class Home extends BaseController
 
         return view('report', $data);
     }
+
+    public function printReport()
+    {
+        $data = [
+            'title'     => 'Laporan Manajemen Barang',
+            'items'     => $this->item->getAll()
+        ];
+
+        return view('report-print', $data);
+    }
 }

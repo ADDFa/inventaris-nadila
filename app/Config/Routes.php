@@ -44,6 +44,7 @@ $routes->get('/logout', 'Auth::logout');
 $routes->group('', ['filter' => 'login'], static function ($routes) {
     $routes->get('dashboard', 'Home::index');
     $routes->get('report', 'Home::report');
+    $routes->get('report/print', 'Home::printReport');
 
     $routes->get('item/category', 'Item::category');
     $routes->get('item/type', 'Item::type');

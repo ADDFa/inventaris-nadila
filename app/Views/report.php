@@ -16,7 +16,7 @@
         </div>
     </div>
 
-    <a href="/laporan/print" type="button" class="btn btn-default d-flex gap-2 align-items-center">
+    <a href="/report/print" target="_blank" type="button" class="btn btn-default d-flex gap-2 align-items-center">
         <i class='bx bx-printer w-100 h-100'></i>
         Print
     </a>
