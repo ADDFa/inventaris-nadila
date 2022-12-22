@@ -49,7 +49,9 @@ class Item extends BaseController
 
     public function findItem()
     {
-        $items = $this->table->like('item_name', $this->request->getGet('v'))->findAll(10);
+        $items = $this->table->like('item_name', $this->request->getGet('v'))
+            ->select('*, items.id AS item_id')
+            ->findAll(10);
         return $this->response->setJSON(['data' => $items]);
     }
 

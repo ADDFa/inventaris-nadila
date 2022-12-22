@@ -76,7 +76,7 @@ const rows = {
                 <th scope="row">${i}</th>
                 <td>${item.item_name}</td>
                 <td>${item.item_total}</td>
-                ${this.actionColumn(`${origin}/item/${item.id}`)}
+                ${this.actionColumn(`${origin}/item/${item.item_id}`)}
         `
     },
 
@@ -89,7 +89,7 @@ const rows = {
                 <td>${room.filed}</td>
                 <td>${room.available}</td>
                 <td>${room.building_name}</td>
-                ${this.actionColumn(`${origin}/room/${room.id}`)}
+                ${this.actionColumn(`${origin}/room/${room.room_id}`)}
             </tr>
         `
     }
