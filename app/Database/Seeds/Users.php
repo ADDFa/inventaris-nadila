@@ -20,12 +20,12 @@ class Users extends Seeder
 
         $credentials = [
             [
-                'user_id'   => '1',
+                'user_id'   => 1,
                 'username'  => 'nadila',
                 'password'  => password_hash('123456', PASSWORD_DEFAULT)
             ],
             [
-                'user_id'   => '2',
+                'user_id'   => 2,
                 'username'  => 'ADDFa',
                 'password'  => password_hash('123456', PASSWORD_DEFAULT)
             ]

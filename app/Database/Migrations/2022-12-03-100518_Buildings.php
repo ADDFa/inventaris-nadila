@@ -44,6 +44,7 @@ class Buildings extends Migration
         ]);
 
         $this->forge->addPrimaryKey('id');
+        $this->forge->addForeignKey('user_id', 'users', 'id', 'CASCADE', 'CASCADE');
         $this->forge->createTable('buildings');
     }
 

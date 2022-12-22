@@ -27,7 +27,6 @@
         <?= $this->renderSection('content') ?>
     </div>
 
-    <script src="/js/src/sweetalert2.all.min.js"></script>
     <script src="/js/index.js"></script>
 </body>
 

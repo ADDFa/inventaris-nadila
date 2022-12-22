@@ -20,6 +20,16 @@
 </div>
 
 <div class="table-ruangan col-lg-11 mx-auto my-5 row">
+    <div class="row my-3 gap-3 justify-content-end">
+        <div class="spinner-border text-warning d-none" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <form action="/search/room" class="d-flex gap-3 col-lg-5" data-table="room">
+            <input type="text" class="form-control" placeholder="Cari Berdasarkan Nama">
+            <button type="button" class="search btn btn-primary">Cari</button>
+        </form>
+    </div>
+
     <table class="table">
         <thead>
             <tr class="text-center">

@@ -71,6 +71,12 @@ class Room extends BaseController
         return view('rooms/edit', $data);
     }
 
+    public function findRoom()
+    {
+        $rooms = $this->table->like('room_name', $this->request->getGet('v'))->findAll(10);
+        return $this->response->setJSON(['data' => $rooms]);
+    }
+
     public function create()
     {
         // validasi ruangan
@@ -155,12 +161,6 @@ class Room extends BaseController
         $this->building->update($room->building_id, [
             'room_total'    => $building->room_total - 1
         ]);
-
-        // hapus seluruh data item yang bersangkutan
-        $items = $this->item->where('room_id', $id)->findAll();
-        foreach ($items as $item) {
-            $this->item->delete($item->id);
-        }
 
         $this->table->delete($id);
 

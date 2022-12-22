@@ -47,6 +47,12 @@ class Item extends BaseController
         return view('items/detail', $data);
     }
 
+    public function findItem()
+    {
+        $items = $this->table->like('item_name', $this->request->getGet('v'))->findAll(10);
+        return $this->response->setJSON(['data' => $items]);
+    }
+
     public function new()
     {
         $data = [

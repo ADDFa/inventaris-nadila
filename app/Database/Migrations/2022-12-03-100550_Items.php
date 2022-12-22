@@ -61,6 +61,10 @@ class Items extends Migration
         ]);
 
         $this->forge->addPrimaryKey('id');
+        $this->forge->addForeignKey('user_id', 'users', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('room_id', 'rooms', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('category_id', 'item_categories', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('type_id', 'item_types', 'id', 'CASCADE', 'CASCADE');
         $this->forge->createTable('items');
     }
 

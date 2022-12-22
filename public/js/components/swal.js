@@ -1,4 +1,5 @@
 // Notification
+const Swal = require('sweetalert2')
 const { el } = require('../partials/main')
 
 const notif = el('.notif')
