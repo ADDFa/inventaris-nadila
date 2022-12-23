@@ -75,6 +75,7 @@ const rows = {
             <tr class="text-center align-middle">
                 <th scope="row">${i}</th>
                 <td>${item.item_name}</td>
+                <td>${item.room_name}</td>
                 <td>${item.item_total}</td>
                 ${this.actionColumn(`${origin}/item/${item.item_id}`)}
         `

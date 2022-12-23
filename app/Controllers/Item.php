@@ -20,12 +20,18 @@ class Item extends BaseController
     {
         $limit = 10;
 
-        $items = $this->table->findAll($limit);
+        $items = $this->table
+            ->select('*, items.id AS item_id')
+            ->join('rooms', 'items.room_id = rooms.id', 'INNER')
+            ->findAll($limit);
         $pages = $this->request->getGet('pages');
 
         if ($pages) {
             $offset = (int) $pages * $limit - $limit;
-            $items = $this->table->findAll($limit, $offset);
+            $items = $this->table
+                ->select('*, items.id AS item_id')
+                ->join('rooms', 'items.room_id = rooms.id', 'INNER')
+                ->findAll($limit, $offset);
         }
 
         $data = [
@@ -51,6 +57,7 @@ class Item extends BaseController
     {
         $items = $this->table->like('item_name', $this->request->getGet('v'))
             ->select('*, items.id AS item_id')
+            ->join('rooms', 'items.room_id = rooms.id', 'INNER')
             ->findAll(10);
         return $this->response->setJSON(['data' => $items]);
     }
