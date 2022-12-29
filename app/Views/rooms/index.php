@@ -1,7 +1,9 @@
 <?= $this->extend('partials/main') ?>
 
 <?= $this->section('content') ?>
-
+<h1>
+    Test
+</h1>
 <div class="d-flex flex-wrap justify-content-between align-items-center px-5 gap-3">
     <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
         <div class="btn-group" role="group">
