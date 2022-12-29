@@ -12,12 +12,14 @@ class Storages extends Seeder
             [
                 'room_id'       => 1,
                 'item_id'       => 1,
+                'user_id'       => 1,
                 'record_date'   => time(),
                 'qty'           => 6
             ],
             [
                 'room_id'       => 2,
                 'item_id'       => 2,
+                'user_id'       => 2,
                 'record_date'   => time(),
                 'qty'           => 4
             ]

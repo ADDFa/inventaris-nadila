@@ -35,11 +35,11 @@ class ItemStore extends Migration
 
         $this->forge->addForeignKey('item_id', 'items', 'id', 'CASCADE', 'CASCADE');
         $this->forge->addForeignKey('storage_id', 'storages', 'id', 'CASCADE', 'CASCADE');
-        $this->forge->createTable('item_details');
+        $this->forge->createTable('item_stores');
     }
 
     public function down()
     {
-        $this->forge->dropTable('item_details');
+        $this->forge->dropTable('item_stores');
     }
 }

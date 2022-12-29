@@ -10,7 +10,8 @@ class Storage extends Migration
     {
         $this->forge->addField([
             'id' => [
-                'type'      => 'INT'
+                'type'              => 'INT',
+                'auto_increment'    => true
             ],
 
             'room_id' => [

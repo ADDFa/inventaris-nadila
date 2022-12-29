@@ -6,7 +6,7 @@ use App\Controllers\BaseController;
 
 class Item extends BaseController
 {
-    private $table, $rooms, $category, $type, $storage;
+    private $table, $rooms, $storage;
 
     public function __construct()
     {
@@ -18,17 +18,11 @@ class Item extends BaseController
     public function index()
     {
         $limit = 10;
-
-        $items = $this->table->findAll($limit);
-
+        $offset = 0;
         $pages = $this->request->getGet('pages');
 
-        if ($pages) {
-            $offset = (int) $pages * $limit - $limit;
-            $items = $this->table
-                ->select('*, items.id AS item_id')
-                ->findAll($limit, $offset);
-        }
+        $offset = $pages ? $offset = (int) $pages * $limit - $limit : 0;
+        $items = $this->table->findAll($limit, $offset);
 
         $data = [
             'title'     => 'Manajemen Data Barang',
@@ -43,10 +37,8 @@ class Item extends BaseController
     {
         $data = [
             'title'     => 'Detail Barang',
-            // 'item'      => $this->table->get($id),
-            'storages'  => $this->storage->where('item_id', $id)
-                ->join('rooms', 'room_id = rooms.id')
-                ->findAll()
+            'item'      => $this->table->find($id),
+            'storages'  => $this->storage->getWhere('item_id', $id)
         ];
 
         return view('items/detail', $data);

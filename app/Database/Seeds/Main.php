@@ -13,5 +13,6 @@ class Main extends Seeder
         $this->call('Rooms');
         $this->call('Items');
         $this->call('Storages');
+        $this->call('ItemStores');
     }
 }

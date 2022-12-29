@@ -15,16 +15,22 @@ class Items extends Migration
             ],
 
             'item_category' => [
-                'type'              => 'INT'
+                'type'              => 'VARCHAR',
+                'constraint'        => 40
             ],
 
             'item_type' => [
-                'type'              => 'INT'
+                'type'              => 'VARCHAR',
+                'constraint'        => 40
             ],
 
             'item_name' => [
                 'type'              => 'VARCHAR',
                 'constraint'        => 40
+            ],
+
+            'item_total' => [
+                'type'              => 'INT'
             ]
         ]);
 
