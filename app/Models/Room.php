@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use App\Models\BaseModel;
 
 class Room extends Model
 {
@@ -19,25 +20,44 @@ class Room extends Model
         'description'
     ];
 
-    public function getFirstWhere($key, $value)
+    public function getRoom($id)
     {
-        $result = $this->db->table('rooms')
-            ->select('*, rooms.id AS room_id')
-            ->where($key, $value)
+        return $this->select('*, rooms.id AS room_id')
             ->join('users', 'users.id = rooms.user_id', 'INNER')
             ->join('buildings', 'rooms.building_id = buildings.id', 'INNER')
-            ->get()->getFirstRow();
-
-        return $result;
+            ->find($id);
     }
 
-    public function getAll($limit = null, $offset = 0)
+    public function insertRoom(int $roomTotal, array $roomData): bool
     {
-        $result = $this->db->table('rooms')
-            ->select('*, rooms.id AS room_id')
-            ->join('buildings', 'rooms.building_id = buildings.id', 'INNER')
-            ->get($limit, $offset)->getResultObject();
+        $data = BaseModel::getKeysVals($roomData);
+        $query = "INSERT INTO rooms ($data->keys) VALUES ($data->vals)";
 
-        return $result;
+        $this->db->transStart();
+        $this->db->query("UPDATE buildings SET room_total = $roomTotal WHERE id = {$roomData['building_id']}");
+        $this->db->query($query);
+        return $this->db->transComplete();
+    }
+
+    public function updateRoom(bool $isMoveBuilding, array $data, int $roomId): bool
+    {
+        $vals = BaseModel::getValsUpdate($data);
+
+        $this->db->transStart();
+        $buildingId = $this->db->query("SELECT building_id FROM rooms WHERE id = $roomId")->getFirstRow()->building_id;
+        if ($isMoveBuilding) {
+            $this->db->query("UPDATE buildings SET room_total = room_total - 1 WHERE id = $buildingId");
+            $this->db->query("UPDATE buildings SET room_total = room_total + 1 WHERE id = {$data['building_id']}");
+        }
+        $this->db->query("UPDATE rooms SET $vals WHERE id = $roomId");
+        return $this->db->transComplete();
+    }
+
+    public function deleteRoom(int $roomTotal, int $roomId): bool
+    {
+        $this->db->transStart();
+        $this->db->query("UPDATE buildings SET room_total = $roomTotal");
+        $this->db->query("DELETE FROM rooms WHERE id = $roomId");
+        return $this->db->transComplete();
     }
 }

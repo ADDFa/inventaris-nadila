@@ -17,13 +17,16 @@ class Building extends Model
         'building_image'
     ];
 
-    public function get($id)
+    public function getBuilding($id)
     {
-        $result = $this->db->table('buildings')
-            ->select('*, buildings.id AS building_id')
-            ->where('buildings.id', $id)->join('users', 'buildings.user_id = users.id', 'INNER')
-            ->get()->getFirstRow();
+        return $this->select('*, buildings.id AS building_id')
+            ->join('users', 'buildings.user_id = users.id', 'INNER')
+            ->find($id);
+    }
 
-        return $result;
+    public function getAnyColumn(string $columns): array
+    {
+        return $this->select($columns)
+            ->get()->getResultObject();
     }
 }

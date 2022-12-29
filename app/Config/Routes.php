@@ -55,9 +55,9 @@ $routes->group('', ['filter' => 'login'], static function ($routes) {
 
     $routes->resource('building');
     $routes->resource('room');
-    $routes->get('search/room', 'Room::findRoom');
+    $routes->get('search/room', 'Room::search');
     $routes->resource('item');
-    $routes->get('search/item', 'Item::findItem');
+    $routes->get('search/item', 'Item::search');
 
     $routes->resource('user');
 });

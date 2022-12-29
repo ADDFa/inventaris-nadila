@@ -15,6 +15,22 @@ class Item extends Model
         'item_total'
     ];
 
+    public function getItem($keyword)
+    {
+        return $this->like('item_name', $keyword)
+            ->orLike('item_Category', $keyword)
+            ->orLike('item_type', $keyword)
+            ->get(10)
+            ->getResultObject();
+    }
+
+    public function getByRoom($roomId)
+    {
+        return $this->join('storages', 'items.id = storages.item_id', 'INNER')
+            ->where('storages.room_id', $roomId)
+            ->get()->getResultObject();
+    }
+
     // public function getAll($limit = null, $offset = 0)
     // {
     //     $result = $this->db->table('items')

@@ -44,14 +44,13 @@ class Item extends BaseController
         return view('items/detail', $data);
     }
 
-    public function findItem()
+    public function search()
     {
-        $items = $this->table->like('item_name', $this->request->getGet('v'))
-            ->select('*, items.id AS item_id')
-            ->join('rooms', 'items.room_id = rooms.id', 'INNER')
-            ->findAll(10);
+        $keyword = $this->request->getGet('v');
 
-        return $this->response->setJSON(['data' => $items]);
+        return $this->response->setJSON([
+            'data' => $this->table->getItem($keyword)
+        ]);
     }
 
     public function new()

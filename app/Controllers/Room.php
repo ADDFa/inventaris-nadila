@@ -6,31 +6,24 @@ use App\Controllers\BaseController;
 
 class Room extends BaseController
 {
-    private $table, $building, $item, $storage;
+    private $table, $building, $item, $db;
 
     public function __construct()
     {
         $this->table = new \App\Models\Room();
         $this->building = new \App\Models\Building();
         $this->item = new \App\Models\Item();
-        $this->storage = new \App\Models\Storage();
     }
 
     public function index()
     {
         $limit = 10;
-
-        $rooms = $this->table->getAll($limit);
         $pages = $this->request->getGet('pages');
-
-        if ($pages) {
-            $offset = (int) $pages * $limit - $limit;
-            $rooms = $this->table->getAll($limit, $offset);
-        }
+        $offset = $pages ? (int) $pages * $limit - $limit : 0;
 
         $data = [
             'title'         => 'Manajemen Data Ruangan',
-            'rooms'         => $rooms,
+            'rooms'         => $this->table->findAll($limit, $offset),
             'pages'         => ceil($this->table->countAllResults() / $limit)
         ];
 
@@ -41,10 +34,8 @@ class Room extends BaseController
     {
         $data = [
             'title'         => 'Detail Ruangan',
-            'room'          => $this->table->getFirstWhere('rooms.id', $id),
-            'items'          => $this->storage->where('room_id', $id)
-                ->join('items', 'storages.item_id = items.id')
-                ->findAll()
+            'room'          => $this->table->getRoom($id),
+            'items'         => $this->item->getByRoom($id)
         ];
 
         return view('rooms/detail', $data);
@@ -54,7 +45,7 @@ class Room extends BaseController
     {
         $data = [
             'title'         => 'Tambah Data Ruangan',
-            'buildings'      => $this->building->findAll(),
+            'buildings'     => $this->building->getAnyColumn('id, building_name'),
             'validation'    => $this->validation
         ];
 
@@ -66,14 +57,14 @@ class Room extends BaseController
         $data = [
             'title'         => 'Ubah Data Ruangan',
             'room'          => $this->table->find($id),
-            'buildings'     => $this->building->findAll(),
+            'buildings'     => $this->building->getAnyColumn('id, building_name'),
             'validation'    => $this->validation
         ];
 
         return view('rooms/edit', $data);
     }
 
-    public function findRoom()
+    public function search()
     {
         $rooms = $this->table->like('room_name', $this->request->getGet('v'))
             ->select('*, rooms.id AS room_id')
@@ -86,24 +77,28 @@ class Room extends BaseController
         // validasi ruangan
         if (!$this->checkValid()) return redirect()->to('room/new')->withInput();
 
-        $building = $this->building->where('id', $this->request->getPost('building_id'))->first();
-
-        $data = $this->request->getPost();
-        $data += [
-            'available'     => $data['room_capacity'],
+        $data = $this->request->getPost() + [
+            'available'     => $this->request->getPost('room_capacity'),
             'user_id'       => session('users')->id
         ];
 
-        // insert jumlah ruangan kedalam data gedung
-        $this->building->update($data['building_id'], [
-            'room_total'    => $building->room_total + 1
-        ]);
-        $this->table->insert($data);
+        // cek apakah kapasitas ruangan minus
+        if ($data['room_capacity'] < 0) $data['room_capacity'] *= -1;
 
-        session()->setFlashdata([
-            'status'    => 'success',
-            'message'   => 'Data Ruangan Berhasil Ditambahkan'
-        ]);
+        $roomTotal = $this->building->where('id', $data['building_id'])->findColumn('room_total')[0] + 1;
+
+        // insert jumlah ruangan kedalam data gedung
+        if ($this->table->insertRoom($roomTotal, $data)) {
+            session()->setFlashdata([
+                'status'    => 'success',
+                'message'   => 'Data Ruangan Berhasil Ditambahkan'
+            ]);
+        } else {
+            session()->setFlashdata([
+                'status'    => 'error',
+                'message'   => 'Gagal Menambahkan, Harap Ulangi Lagi!'
+            ]);
+        }
 
         return redirect()->to('room');
     }
@@ -111,15 +106,15 @@ class Room extends BaseController
     public function update($id = null)
     {
         $room = $this->table->find($id);
-        $oldName = $this->request->getPost('room_name') === $room->room_name;
+        $req = (object) $this->request->getPost();
+        $isOldName = $this->request->getPost('room_name') === $room->room_name;
+        $isRoomMove = $room->building_id != $req->building_id;
 
         // validasi ruangan
-        if (!$this->checkValid($oldName)) return redirect()->to("room/{$id}/edit")->withInput();
-
-        $data = $this->request->getPost();
+        if (!$this->checkValid($isOldName)) return redirect()->to("room/{$id}/edit")->withInput();
 
         // cek apakah ruangan memenuhi syarat untuk update (kapasitas ruangan harus lebih besar dari jumlah ruangan terisi)
-        if ($data['room_capacity'] < $room->filed) {
+        if ($req->room_capacity < $room->filed) {
             session()->setFlashdata([
                 'status'    => 'error',
                 'message'   => 'Gagal Update, Kapasitas Ruangan Harus Lebih Dari Jumlah Barang Saat Ini.'
@@ -128,30 +123,31 @@ class Room extends BaseController
             return redirect()->to("room/{$id}/edit")->withInput();
         }
 
-        // cek apakah ruangan berpindah gedung atau tidak
-        if ($room->building_id != $data['building_id']) {
-            // jika berpindah gedung, update isi gedung
-            $oldBuilding = $this->building->find($room->building_id);
-            $newBuilding = $this->building->find($data['building_id']);
-            $this->building->update($data['building_id'], [
-                'room_total'    => $newBuilding->room_total + 1
-            ]);
-            $this->building->update($room->building_id, [
-                'room_total'    => $oldBuilding->room_total - 1
-            ]);
+        $available = $req->room_capacity - $room->filed;
+        $data = [
+            'building_id'   => $req->building_id,
+            'room_capacity' => $req->room_capacity,
+            'room_size'     => $req->room_size,
+            'description'   => $req->description,
+            'available'     => $available
+        ];
+
+        if (!$isOldName) {
+            $data += ['room_name' => $req->room_name,];
         }
 
-        // tambahkan kolom available terupdate ke data
-        $available = (int) $data['room_capacity'] - $room->filed;
-        $data += ['available' => $available];
-
         // update data di database
-        $this->table->update($id, $data);
-
-        session()->setFlashdata([
-            'status'    => 'success',
-            'message'   => 'Data Ruangan Berhasil Diubah'
-        ]);
+        if ($this->table->updateRoom($isRoomMove, $data, $id)) {
+            session()->setFlashdata([
+                'status'    => 'success',
+                'message'   => 'Data Ruangan Berhasil Diubah'
+            ]);
+        } else {
+            session()->setFlashdata([
+                'status'    => 'error',
+                'message'   => 'Gagal Update, Harap Ulangi Lagi!'
+            ]);
+        }
 
         return redirect()->to("room/{$id}/edit");
     }
@@ -160,23 +156,24 @@ class Room extends BaseController
     {
         $room = $this->table->find($id);
 
-        // hapus jumlah ruangan di tabel gedung
-        $building = $this->building->find($room->building_id);
-        $this->building->update($room->building_id, [
-            'room_total'    => $building->room_total - 1
-        ]);
-
-        $this->table->delete($id);
-
-        session()->setFlashdata([
-            'status'    => 'success',
-            'message'   => 'Data Ruangan Berhasil Dihapus'
-        ]);
+        // hapus ruangan
+        $roomTotal = $this->building->where('id', $room->building_id)->findColumn('room_total')[0] - 1;
+        if ($this->table->deleteRoom($roomTotal, $id)) {
+            session()->setFlashdata([
+                'status'    => 'success',
+                'message'   => 'Data Ruangan Berhasil Dihapus'
+            ]);
+        } else {
+            session()->setFlashdata([
+                'status'    => 'error',
+                'message'   => 'Gagal Menghapus, Harap Ulangi Lagi!'
+            ]);
+        }
 
         return redirect()->to('room');
     }
 
-    public function checkValid($oldName = false)
+    public function checkValid(bool $oldName = false): bool
     {
         $validation = [
             'building_id' => [
