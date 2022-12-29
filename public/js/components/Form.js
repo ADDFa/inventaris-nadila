@@ -108,16 +108,20 @@ const setData = (data, table) => {
 const searching = e => {
     if (!e.target.classList.contains('search')) return
 
-    e.target.setAttribute('disabled', '')
+    const form = e.target.form
+    const target = e.target
+
+    target.setAttribute('disabled', '')
     el('.spinner-border').classList.toggle('d-none')
 
-    const form = e.target.form
     fetch(`${form.action}?v=${form.childNodes.item(1).value}`)
         .then(e => e.json())
-        .then(e => setData(e.data, form.dataset.table))
+        .then(e => {
+            setData(e.data, form.dataset.table)
 
-    e.target.removeAttribute('disabled')
-    el('.spinner-border').classList.toggle('d-none')
+            target.removeAttribute('disabled')
+            el('.spinner-border').classList.toggle('d-none')
+        })
 }
 
 document.addEventListener('click', searching)

@@ -11,28 +11,26 @@ class Items extends Seeder
         $items = [
             [
                 'user_id'           => 1,
-                'room_id'           => 2,
                 'category_id'       => 1,
                 'type_id'           => 1,
                 'item_name'         => 'HP IPONG 14 PRO MAX',
+                'slug_name'         => 'hpipong14promax',
                 'item_total'        => 6,
                 'item_brand'        => 'Apel Manis',
                 'item_condition'    => 'Bagus',
-                'item_price'        => 20000,
-                'record_date'       => '1670067568'
+                'item_price'        => 20000
             ],
 
             [
                 'user_id'           => 2,
-                'room_id'           => 2,
                 'category_id'       => 2,
                 'type_id'           => 1,
-                'item_name'         => 'Macbook Pro Max 70 Juta',
+                'item_name'         => 'Macbook Pro Max 70 Jeti',
+                'slug_name'         => 'macbookpromax70juta',
                 'item_total'        => 4,
                 'item_brand'        => 'Apel Manis',
                 'item_condition'    => 'Bagus',
-                'item_price'        => 20000,
-                'record_date'       => '1670067568'
+                'item_price'        => 20000
             ]
         ];
 
@@ -43,11 +41,11 @@ class Items extends Seeder
 
         $itemType = ['type_name'           => 'Elektronik'];
 
-        for ($i = 0; $i < count($items); $i++) {
-            $this->db->table('items')->insert($items[$i]);
-            $this->db->table('item_categories')->insert($itemCategory[$i]);
-        }
-
         $this->db->table('item_types')->insert($itemType);
+
+        for ($i = 0; $i < count($items); $i++) {
+            $this->db->table('item_categories')->insert($itemCategory[$i]);
+            $this->db->table('items')->insert($items[$i]);
+        }
     }
 }

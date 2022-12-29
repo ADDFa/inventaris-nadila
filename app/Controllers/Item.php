@@ -6,31 +6,27 @@ use App\Controllers\BaseController;
 
 class Item extends BaseController
 {
-    private $table, $rooms, $category, $type;
+    private $table, $rooms, $category, $type, $storage;
 
     public function __construct()
     {
         $this->table = new \App\Models\Item();
         $this->rooms = new \App\Models\Room();
-        $this->category = new \App\Models\ItemCategory();
-        $this->type = new \App\Models\ItemType();
+        $this->storage = new \App\Models\Storage();
     }
 
     public function index()
     {
         $limit = 10;
 
-        $items = $this->table
-            ->select('*, items.id AS item_id')
-            ->join('rooms', 'items.room_id = rooms.id', 'INNER')
-            ->findAll($limit);
+        $items = $this->table->findAll($limit);
+
         $pages = $this->request->getGet('pages');
 
         if ($pages) {
             $offset = (int) $pages * $limit - $limit;
             $items = $this->table
                 ->select('*, items.id AS item_id')
-                ->join('rooms', 'items.room_id = rooms.id', 'INNER')
                 ->findAll($limit, $offset);
         }
 
@@ -47,7 +43,10 @@ class Item extends BaseController
     {
         $data = [
             'title'     => 'Detail Barang',
-            'item'      => $this->table->get($id)
+            // 'item'      => $this->table->get($id),
+            'storages'  => $this->storage->where('item_id', $id)
+                ->join('rooms', 'room_id = rooms.id')
+                ->findAll()
         ];
 
         return view('items/detail', $data);
@@ -59,6 +58,7 @@ class Item extends BaseController
             ->select('*, items.id AS item_id')
             ->join('rooms', 'items.room_id = rooms.id', 'INNER')
             ->findAll(10);
+
         return $this->response->setJSON(['data' => $items]);
     }
 

@@ -6,13 +6,14 @@ use App\Controllers\BaseController;
 
 class Room extends BaseController
 {
-    private $table, $building, $item;
+    private $table, $building, $item, $storage;
 
     public function __construct()
     {
         $this->table = new \App\Models\Room();
         $this->building = new \App\Models\Building();
         $this->item = new \App\Models\Item();
+        $this->storage = new \App\Models\Storage();
     }
 
     public function index()
@@ -26,7 +27,6 @@ class Room extends BaseController
             $offset = (int) $pages * $limit - $limit;
             $rooms = $this->table->getAll($limit, $offset);
         }
-
 
         $data = [
             'title'         => 'Manajemen Data Ruangan',
@@ -42,7 +42,9 @@ class Room extends BaseController
         $data = [
             'title'         => 'Detail Ruangan',
             'room'          => $this->table->getFirstWhere('rooms.id', $id),
-            'items'          => $this->item->getWhere('room_id', $id)
+            'items'          => $this->storage->where('room_id', $id)
+                ->join('items', 'storages.item_id = items.id')
+                ->findAll()
         ];
 
         return view('rooms/detail', $data);

@@ -35,34 +35,32 @@
             <tr class="text-center">
                 <th scope="col">No</th>
                 <th scope="col">Nama Barang</th>
-                <th scope="col">Nama Ruangan</th>
                 <th scope="col">Jumlah Barang</th>
                 <th scope="col" class="col-lg-2">Aksi</th>
             </tr>
         </thead>
 
         <tbody class="table-group-divider">
-            <?php foreach ($items as $i => $item) : ?>
+            <?php for ($i = 0; $i < 10; $i++) : ?>
                 <tr class="text-center align-middle">
-                    <th scope="row"><?= ++$i ?></th>
-                    <td><?= $item->item_name ?></td>
-                    <td><?= $item->room_name ?></td>
-                    <td><?= $item->item_total ?></td>
+                    <th scope="row"><?= $i ?></th>
+                    <td><?= 'Barang XX' ?></td>
+                    <td><?= 200 ?></td>
                     <td class="col-lg-2">
                         <div class="d-flex justify-content-center gap-3">
-                            <a href="/item/<?= $item->item_id ?>">
+                            <a href="/item/<?= 1 ?>">
                                 <button class="btn btn-warning">
                                     <i class='bx bxs-show bx-sm'></i>
                                 </button>
                             </a>
 
-                            <a href="/item/<?= $item->item_id ?>/edit">
+                            <a href="/item/<?= 1 ?>/edit">
                                 <button class="btn btn-primary">
                                     <i class='bx bx-edit bx-sm'></i>
                                 </button>
                             </a>
 
-                            <form action="/item/<?= $item->item_id ?>" method="POST">
+                            <form action="/item/<?= 1 ?>" method="POST">
                                 <input type="hidden" name="_method" value="DELETE">
 
                                 <button type="button" class="delete btn btn-danger">
@@ -73,7 +71,7 @@
                         </div>
                     </td>
                 </tr>
-            <?php endforeach ?>
+            <?php endfor ?>
         </tbody>
     </table>
 </div>

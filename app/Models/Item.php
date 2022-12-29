@@ -34,17 +34,17 @@ class Item extends Model
         return $result;
     }
 
-    public function getWhere($key, $value)
-    {
-        $result = $this->db->table('items')
-            ->select('*, items.id AS item_id')
-            ->join('item_categories', 'items.category_id = item_categories.id', 'INNER')
-            ->join('item_types', 'items.type_id = item_types.id', 'INNER')
-            ->where($key, $value)
-            ->get()->getResultObject();
+    // public function getWhere($key, $value)
+    // {
+    //     $result = $this->db->table('items')
+    //         ->select('*, items.id AS item_id')
+    //         ->join('item_categories', 'items.category_id = item_categories.id', 'INNER')
+    //         ->join('item_types', 'items.type_id = item_types.id', 'INNER')
+    //         // ->where($key, $value)
+    //         ->get()->getResultObject();
 
-        return $result;
-    }
+    //     return $result;
+    // }
 
     public function getLimit($limit, $offset = 0)
     {
@@ -63,8 +63,8 @@ class Item extends Model
             ->select('*, items.id AS item_id')
             ->join('item_categories', 'items.category_id = item_categories.id', 'INNER')
             ->join('item_types', 'items.type_id = item_types.id', 'INNER')
-            ->join('rooms', 'items.room_id = rooms.id', 'INNER')
             ->join('users', 'items.user_id = users.id', 'INNER')
+            ->join('storages', 'storages.item_id = items.id')
             ->where('items.id', $id)
             ->get()->getFirstRow();
 
