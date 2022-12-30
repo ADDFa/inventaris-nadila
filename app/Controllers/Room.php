@@ -66,10 +66,11 @@ class Room extends BaseController
 
     public function search()
     {
-        $rooms = $this->table->like('room_name', $this->request->getGet('v'))
-            ->select('*, rooms.id AS room_id')
-            ->join('buildings', 'buildings.id = rooms.building_id')->findAll(10);
-        return $this->response->setJSON(['data' => $rooms]);
+        $keyword = $this->request->getGet('v');
+
+        return $this->response->setJSON([
+            'data' => $this->table->searchRoom($keyword)
+        ]);
     }
 
     public function create()

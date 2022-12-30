@@ -30,7 +30,8 @@ class Items extends Migration
             ],
 
             'item_total' => [
-                'type'              => 'INT'
+                'type'              => 'INT',
+                'default'           => 0
             ]
         ]);
 

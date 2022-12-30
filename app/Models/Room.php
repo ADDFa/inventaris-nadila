@@ -20,6 +20,13 @@ class Room extends Model
         'description'
     ];
 
+    public function searchRoom(string $keyword): array
+    {
+        return $this->like('room_name', $keyword)
+            ->select('*, rooms.id AS room_id')
+            ->join('buildings', 'buildings.id = rooms.building_id')->findAll(10);
+    }
+
     public function getRoom($id)
     {
         return $this->select('*, rooms.id AS room_id')
