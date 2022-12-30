@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Controllers\Validator\ItemValidator;
+use App\Controllers\Helper\Messages;
 
 class Item extends BaseController
 {
@@ -14,6 +15,8 @@ class Item extends BaseController
         $this->table = new \App\Models\Item();
         $this->rooms = new \App\Models\Room();
         $this->storage = new \App\Models\Storage();
+
+        Messages::setName('Barang');
     }
 
     public function index()
@@ -79,18 +82,10 @@ class Item extends BaseController
         if (!$valid) return redirect()->to('item')->withInput()->with('errors', $this->validator->getErrors());
 
         $data = $this->request->getPost();
+        $this->table->insert($data);
 
-        if ($this->table->insert($data) > 0) {
-            session()->setFlashdata([
-                'status'    => 'success',
-                'message'   => 'Data Barang Berhasil Ditambahkan'
-            ]);
-        } else {
-            session()->setFlashdata([
-                'status'    => 'error',
-                'message'   => 'Data Barang Gagal Ditambahkan, Harap Ulangi!'
-            ]);
-        }
+        $message = Messages::getInsert();
+        session()->setFlashdata($message);
 
         return redirect()->to('item');
     }
@@ -101,34 +96,20 @@ class Item extends BaseController
         if (!$valid) return redirect()->to('item')->withInput()->with('errors', $this->validator->getErrors());
 
         $data = $this->request->getPost();
-        if ($this->table->update($id, $data)) {
-            session()->setFlashdata([
-                'status'    => 'success',
-                'message'   => 'Data Barang Berhasil Diubah'
-            ]);
-        } else {
-            session()->setFlashdata([
-                'status'    => 'error',
-                'message'   => 'Data Barang Gagal Diubah, Harap Ulangi!'
-            ]);
-        }
+        $this->table->update($id, $data);
+
+        $message = Messages::getUpdate();
+        session()->setFlashdata($message);
 
         return redirect()->to('item');
     }
 
     public function delete($id = null)
     {
-        if ($this->table->delete($id)) {
-            session()->setFlashdata([
-                'status'    => 'success',
-                'message'   => 'Data Barang Berhasil Dihapus'
-            ]);
-        } else {
-            session()->setFlashdata([
-                'status'    => 'error',
-                'message'   => 'Data Barang Gagal Dihapus, Harap Ulangi!'
-            ]);
-        }
+        $this->table->delete($id);
+
+        $message = Messages::getDelete();
+        session()->setFlashdata($message);
 
         return redirect()->to('item');
     }

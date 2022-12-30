@@ -35,13 +35,14 @@ class Room extends Model
             ->find($id);
     }
 
-    public function insertRoom(int $roomTotal, array $roomData): bool
+    public function insertRoom(array $roomData): bool
     {
+        $buildingId = $roomData['building_id'];
         $data = BaseModel::getKeysVals($roomData);
         $query = "INSERT INTO rooms ($data->keys) VALUES ($data->vals)";
 
         $this->db->transStart();
-        $this->db->query("UPDATE buildings SET room_total = $roomTotal WHERE id = {$roomData['building_id']}");
+        $this->db->query("UPDATE buildings SET room_total = room_total + 1 WHERE id = $buildingId");
         $this->db->query($query);
         return $this->db->transComplete();
     }

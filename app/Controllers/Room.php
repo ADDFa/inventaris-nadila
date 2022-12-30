@@ -3,16 +3,19 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Controllers\Helper\Messages;
 
 class Room extends BaseController
 {
-    private $table, $building, $item, $db;
+    private $table, $building, $item;
 
     public function __construct()
     {
         $this->table = new \App\Models\Room();
         $this->building = new \App\Models\Building();
         $this->item = new \App\Models\Item();
+
+        Messages::setName('Ruangan');
     }
 
     public function index()
@@ -45,8 +48,7 @@ class Room extends BaseController
     {
         $data = [
             'title'         => 'Tambah Data Ruangan',
-            'buildings'     => $this->building->getAnyColumn('id, building_name'),
-            'validation'    => $this->validation
+            'buildings'     => $this->building->getAnyColumn('id, building_name')
         ];
 
         return view('rooms/new', $data);
@@ -57,8 +59,7 @@ class Room extends BaseController
         $data = [
             'title'         => 'Ubah Data Ruangan',
             'room'          => $this->table->find($id),
-            'buildings'     => $this->building->getAnyColumn('id, building_name'),
-            'validation'    => $this->validation
+            'buildings'     => $this->building->getAnyColumn('id, building_name')
         ];
 
         return view('rooms/edit', $data);
@@ -82,24 +83,12 @@ class Room extends BaseController
             'available'     => $this->request->getPost('room_capacity'),
             'user_id'       => session('users')->id
         ];
-
-        // cek apakah kapasitas ruangan minus
         if ($data['room_capacity'] < 0) $data['room_capacity'] *= -1;
 
-        $roomTotal = $this->building->where('id', $data['building_id'])->findColumn('room_total')[0] + 1;
+        $this->table->insertRoom($data);
 
-        // insert jumlah ruangan kedalam data gedung
-        if ($this->table->insertRoom($roomTotal, $data)) {
-            session()->setFlashdata([
-                'status'    => 'success',
-                'message'   => 'Data Ruangan Berhasil Ditambahkan'
-            ]);
-        } else {
-            session()->setFlashdata([
-                'status'    => 'error',
-                'message'   => 'Gagal Menambahkan, Harap Ulangi Lagi!'
-            ]);
-        }
+        $message = Messages::getInsert();
+        session()->setFlashdata($message);
 
         return redirect()->to('room');
     }

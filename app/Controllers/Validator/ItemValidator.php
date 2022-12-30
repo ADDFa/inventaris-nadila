@@ -2,18 +2,10 @@
 
 namespace App\Controllers\Validator;
 
-class ItemValidator
+use App\Controllers\Validator\BaseValidator;
+
+class ItemValidator extends BaseValidator
 {
-    static private function required(string $attr): string
-    {
-        return "$attr Harus Diisi";
-    }
-
-    static private function maxLength(int $length): string
-    {
-        return "Panjang Karakter Maksimal $length Karakter";
-    }
-
     static private function validator(): array
     {
         return

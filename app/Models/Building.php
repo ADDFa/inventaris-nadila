@@ -19,7 +19,7 @@ class Building extends Model
 
     public function getBuilding($id)
     {
-        return $this->select('*, buildings.id AS building_id')
+        return $this->select('buildings.*, name')
             ->join('users', 'buildings.user_id = users.id', 'INNER')
             ->find($id);
     }
