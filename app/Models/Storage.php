@@ -51,7 +51,9 @@ class Storage extends Model
                 'item_price',
                 'users.name',
                 'users.role',
-                'room_name'
+                'room_name',
+                'storages.room_id',
+                'storages.item_id'
             ])
             ->find($id);
     }
@@ -96,9 +98,45 @@ class Storage extends Model
         return $this->db->transComplete();
     }
 
-    public function updateStorage()
+    public function updateStorage(array $data, int $id): bool
     {
-        // 
+        $storage = $data['storage'];
+        $itemStore = $data['itemStore'];
+        $storageVals = BaseModel::getValsUpdate($storage);
+        $itemVals = BaseModel::getValsUpdate($itemStore);
+
+        $this->db->transStart();
+
+        $oldStorage = $this->where('storages.id', $id)->join('rooms', 'storages.room_id = rooms.id')
+            ->join('items', 'storages.item_id = items.id')
+            ->select([
+                'qty',
+                'rooms.filed',
+                'rooms.available',
+                'item_total',
+                'item_id',
+                'room_id'
+            ])
+            ->first();
+
+        if ($oldStorage->qty != $storage['qty']) {
+            // update rooms
+            $filed = $oldStorage->filed - $oldStorage->qty + $storage['qty'];
+            $available = $oldStorage->available + $oldStorage->qty - $storage['qty'];
+            $this->db->query("UPDATE rooms SET filed = $filed, available = $available WHERE id = {$oldStorage->room_id}");
+
+            // update items
+            $itemTotal = $oldStorage->item_total - $oldStorage->qty + $storage['qty'];
+            $this->db->query("UPDATE items SET item_total = $itemTotal WHERE id = {$oldStorage->item_id}");
+        }
+
+        // update item_stores
+        $this->db->query("UPDATE item_stores SET $itemVals WHERE storage_id = $id");
+
+        // update storages
+        $this->db->query("UPDATE storages SET $storageVals WHERE id = $id");
+
+        return $this->db->transComplete();
     }
 
     public function deleteStorage(int $id): bool

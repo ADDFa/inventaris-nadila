@@ -20,6 +20,15 @@ class Storage extends BaseController
         Messages::setName('Penyimpanan');
     }
 
+    private function isValidCapacity(array $req, object $room): bool
+    {
+        $capacity = (int)$room->filed + (int)$req['qty'];
+        if ($capacity < $room->room_capacity) return true;
+
+        $this->validator->setError('qty', 'Jumlah Barang Melebihi Kapasitas');
+        return false;
+    }
+
     private function getStorageData(array $req, array $room, array $item): array
     {
         $roomFiled = $room['filed'] + $req['qty'];
@@ -47,6 +56,25 @@ class Storage extends BaseController
 
             'item' => [
                 'item_total'        => $item['item_total'] + $req['qty']
+            ]
+        ];
+    }
+
+    public function getStorageDataUpdate(): array
+    {
+        $data = $this->request->getPost();
+
+        return [
+            'storage' => [
+                'user_id'           => session('users')->id,
+                'record_date'       => time(),
+                'qty'               => $data['qty']
+            ],
+
+            'itemStore' => [
+                'item_price'        => $data['item_price'],
+                'item_brand'        => $data['item_brand'],
+                'item_condition'    => $data['item_condition']
             ]
         ];
     }
@@ -91,9 +119,7 @@ class Storage extends BaseController
     {
         $data = [
             'title'     => 'Ubah Data Penyimpanan',
-            'storage'  => $this->table->join('item_stores', 'storages.id = item_stores.storage_id', 'INNER')->find($id),
-            'rooms'     => $this->room->getAnyColumn('id, room_name'),
-            'items'     => $this->item->getAnyColumn('id, item_name')
+            'storage'  => $this->table->getStorage($id)
         ];
 
         return view('storages/edit', $data);
@@ -101,18 +127,14 @@ class Storage extends BaseController
 
     public function create()
     {
-        $valid = $this->validate(StorageValidator::getValidator());
-        if (!$valid) return redirect()->to("storage/new")->withInput()->with('errors', $this->validator->getErrors());
-
         $req = $this->request->getPost();
         $room = $this->room->select(['filed', 'available', 'room_capacity'])->find($req['room_id']);
         $item = $this->item->find($req['item_id']);
-        // $roomAvailable = $room->room_capacity - $roomFiled;
 
-        if (($room->filed + $req['qty']) > $room->room_capacity) {
-            $this->validator->setError('qty', 'Jumlah Barang Melebihi Kapasitas');
-            return redirect()->to("storage/new")->withInput()->with('errors', $this->validator->getErrors());
-        }
+        $valid = $this->validate(StorageValidator::getValidator());
+        $validCapacity = $this->isValidCapacity($req, $room);
+        if (!$valid || !$validCapacity) return redirect()->to("storage/new")
+            ->withInput()->with('errors', $this->validator->getErrors());
 
         $data = $this->getStorageData($req, (array) $room, (array) $item);
         $this->table->insertStorage($data);
@@ -125,13 +147,19 @@ class Storage extends BaseController
 
     public function update($id = null)
     {
+        $req = $this->request->getPost();
+        $room = $this->room->select(['filed', 'available', 'room_capacity'])->find($req['room_id']);
+        $item = $this->item->find($req['item_id']);
+
         $valid = $this->validate(StorageValidator::getValidator());
-        if (!$valid) return redirect()->to("storage/$id/edit")->withInput()->with('errors', $this->validator->getErrors());
+        $validCapacity = $this->isValidCapacity($req, $room);
+        if (!$valid || !$validCapacity) return redirect()->to("storage/$id/edit")
+            ->withInput()->with('errors', $this->validator->getErrors());
 
-        $data = [];
-        $this->table->insert($data);
+        $data = $this->getStorageDataUpdate();
+        $this->table->updateStorage($data, $id);
 
-        $message = Messages::getInsert();
+        $message = Messages::getUpdate();
         session()->setFlashdata($message);
 
         return redirect()->to('storage');

@@ -41,7 +41,7 @@
             <span class="invalid-feedback" id="item_nameFeedback"><?= session('errors')['item_condition'] ?? '' ?></span>
         </div>
         <div class="mb-3 d-flex justify-content-end gap-3 mx-auto">
-            <a href="/item" class="btn btn-warning">Kembali</a>
+            <a href="/storage" class="btn btn-warning">Kembali</a>
             <button class="btn btn-primary">Simpan</button>
         </div>
     </div>

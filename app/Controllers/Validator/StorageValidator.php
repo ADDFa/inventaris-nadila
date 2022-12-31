@@ -41,11 +41,6 @@ class StorageValidator extends BaseValidator
         ];
     }
 
-    public function test()
-    {
-        return redirect();
-    }
-
     static public function getValidator()
     {
         return self::validator();

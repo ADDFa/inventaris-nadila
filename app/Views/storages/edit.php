@@ -2,23 +2,19 @@
 
 <?= $this->section('content') ?>
 
-<form action="/storage" method="POST">
+<form action="/storage/<?= $storage->id ?>" method="POST">
+    <input type="hidden" name="_method" value="PUT">
+    <input type="hidden" name="room_id" value="<?= $storage->room_id ?>">
+    <input type="hidden" name="item_id" value="<?= $storage->item_id ?>">
+
     <div class="col-lg-8 mx-auto">
         <div class="mb-3">
-            <label for="room_id" class="form-label">Pilih Ruangan</label>
-            <select class="form-select" id="room_id" name="room_id" data-select="<?= old('room_id') ?? $storage->room_id ?>">
-                <?php foreach ($rooms as $room) : ?>
-                    <option value="<?= $room->id ?>"><?= $room->room_name ?></option>
-                <?php endforeach ?>
-            </select>
+            <label class="form-label">Lokasi Ruangan</label>
+            <input type="text" class="form-control" value="<?= $storage->room_name ?>" disabled>
         </div>
         <div class="mb-3">
-            <label for="item_id" class="form-label">Pilih Barang</label>
-            <select class="form-select" id="item_id" name="item_id" data-select="<?= old('item_id') ?? $storage->item_id ?>">
-                <?php foreach ($items as $item) : ?>
-                    <option value="<?= $item->id ?>"><?= $item->item_name ?></option>
-                <?php endforeach ?>
-            </select>
+            <label class="form-label">Nama Barang</label>
+            <input type="text" class="form-control" value="<?= $storage->item_name ?>" disabled>
         </div>
         <div class="mb-3">
             <label for="qty" class="form-label">Jumlah Barang Disimpan</label>
