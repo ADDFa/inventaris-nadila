@@ -22,15 +22,12 @@ class Item extends BaseController
     public function index()
     {
         $limit = 10;
-        $offset = 0;
         $pages = $this->request->getGet('pages');
-
         $offset = $pages ? $offset = (int) $pages * $limit - $limit : 0;
-        $items = $this->table->findAll($limit, $offset);
 
         $data = [
             'title'     => 'Manajemen Data Barang',
-            'items'     => $items,
+            'items'     => $this->table->findAll($limit, $offset),
             'pages'     => ceil($this->table->countAllResults() / $limit)
         ];
 
@@ -79,7 +76,7 @@ class Item extends BaseController
     public function create()
     {
         $valid = $this->validate(ItemValidator::getValidator());
-        if (!$valid) return redirect()->to('item')->withInput()->with('errors', $this->validator->getErrors());
+        if (!$valid) return redirect()->to('item/new')->withInput()->with('errors', $this->validator->getErrors());
 
         $data = $this->request->getPost();
         $this->table->insert($data);
@@ -93,7 +90,7 @@ class Item extends BaseController
     public function update($id = null)
     {
         $valid = $this->validate(ItemValidator::getValidator());
-        if (!$valid) return redirect()->to('item')->withInput()->with('errors', $this->validator->getErrors());
+        if (!$valid) return redirect()->to("item/$id/edit")->withInput()->with('errors', $this->validator->getErrors());
 
         $data = $this->request->getPost();
         $this->table->update($id, $data);

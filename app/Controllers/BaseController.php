@@ -10,8 +10,6 @@ use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
 use Config\Services;
 
-use App\Models\User;
-
 /**
  * Class BaseController
  *
@@ -70,14 +68,6 @@ abstract class BaseController extends Controller
         }
 
         return $image->getRandomName();
-    }
-
-    protected function getPositifNumber($value)
-    {
-        $result = (int) $value;
-        if ($result < 0) $result *= -1;
-
-        return $result;
     }
 
     /**

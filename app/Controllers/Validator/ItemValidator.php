@@ -2,8 +2,6 @@
 
 namespace App\Controllers\Validator;
 
-use App\Controllers\Validator\BaseValidator;
-
 class ItemValidator extends BaseValidator
 {
     static private function validator(): array

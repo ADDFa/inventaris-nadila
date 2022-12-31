@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Controllers\Validator\RoomValidator;
 use App\Controllers\Helper\Messages;
 
 class Room extends BaseController
@@ -16,6 +17,28 @@ class Room extends BaseController
         $this->item = new \App\Models\Item();
 
         Messages::setName('Ruangan');
+    }
+
+    private function getDataRoom(bool $isUpdate = false, ?object $room = null): array
+    {
+        $request = $this->request->getPost();
+        $prepareData = [
+            'available'     => 0,
+            'user_id'       => session('users')->id
+        ];
+
+        $available = $isUpdate ? $available = $request['room_capacity'] - $room->filed : $request['room_capacity'];
+        $prepareData['available'] = $available;
+        if ($request['room_capacity'] < 0) $request['room_capacity'] *= -1;
+
+        if ($isUpdate) {
+            unset($request['_method']);
+
+            $isOldName = $request['room_name'] === $room->room_name;
+            if ($isOldName) unset($request['room_name']);
+        }
+
+        return $request + $prepareData;
     }
 
     public function index()
@@ -77,16 +100,15 @@ class Room extends BaseController
     public function create()
     {
         // validasi ruangan
-        if (!$this->checkValid()) return redirect()->to('room/new')->withInput();
+        $valid = $this->validate(RoomValidator::getValidator());
+        if (!$valid) return redirect()->to('room/new')->withInput()
+            ->with('errors', $this->validator->getErrors());
 
-        $data = $this->request->getPost() + [
-            'available'     => $this->request->getPost('room_capacity'),
-            'user_id'       => session('users')->id
-        ];
-        if ($data['room_capacity'] < 0) $data['room_capacity'] *= -1;
-
+        // insert ruangan
+        $data = $this->getDataRoom();
         $this->table->insertRoom($data);
 
+        // pesan ruangan
         $message = Messages::getInsert();
         session()->setFlashdata($message);
 
@@ -97,34 +119,21 @@ class Room extends BaseController
     {
         $room = $this->table->find($id);
         $req = (object) $this->request->getPost();
-        $isOldName = $this->request->getPost('room_name') === $room->room_name;
         $isRoomMove = $room->building_id != $req->building_id;
+        $isOldName = $req->room_name === $room->room_name;
 
         // validasi ruangan
-        if (!$this->checkValid($isOldName)) return redirect()->to("room/{$id}/edit")->withInput();
+        $valid = $this->validate(RoomValidator::getValidator($isOldName));
+        if (!$valid) return redirect()->to("room/{$id}/edit")->withInput()
+            ->with('errors', $this->validator->getErrors());
 
-        // cek apakah ruangan memenuhi syarat untuk update (kapasitas ruangan harus lebih besar dari jumlah ruangan terisi)
-        if ($req->room_capacity < $room->filed) {
-            session()->setFlashdata([
-                'status'    => 'error',
-                'message'   => 'Gagal Update, Kapasitas Ruangan Harus Lebih Dari Jumlah Barang Saat Ini.'
+        // validasi kapasitas ruangan
+        if ($req->room_capacity < $room->filed) return redirect()->to("room/{$id}/edit")->withInput()
+            ->with('errors', [
+                'room_capacity'  => "Gagal Update, Ruangan Sudah Terisi Sebanyak $room->filed.<br />Kapasiteas Harus Lebih Atau Sama Dengan Jumlah Terisi"
             ]);
 
-            return redirect()->to("room/{$id}/edit")->withInput();
-        }
-
-        $available = $req->room_capacity - $room->filed;
-        $data = [
-            'building_id'   => $req->building_id,
-            'room_capacity' => $req->room_capacity,
-            'room_size'     => $req->room_size,
-            'description'   => $req->description,
-            'available'     => $available
-        ];
-
-        if (!$isOldName) {
-            $data += ['room_name' => $req->room_name,];
-        }
+        $data = $this->getDataRoom(true, $room);
 
         // update data di database
         if ($this->table->updateRoom($isRoomMove, $data, $id)) {
@@ -161,52 +170,5 @@ class Room extends BaseController
         }
 
         return redirect()->to('room');
-    }
-
-    public function checkValid(bool $oldName = false): bool
-    {
-        $validation = [
-            'building_id' => [
-                'rules'             => 'required',
-                'errors'            => [
-                    'required'      => 'Gedung Wajib Diisi'
-                ]
-            ],
-            'room_capacity' => [
-                'rules'             => 'required|max_length[11]',
-                'errors'            => [
-                    'required'      => 'Kapasitas Ruangan Ruangan Harus Diisi'
-                ]
-            ],
-            'room_size' => [
-                'rules'             => 'required|max_length[20]',
-                'errors'            => [
-                    'required'      => 'Ukuran Ruangan Harus Diisi',
-                    'max_length'    => 'Ukuran Ruangan Maksimal 20 Karakter'
-                ]
-            ],
-            'description'           => [
-                'rules'             => 'required|max_length[40]',
-                'errors'            => [
-                    'required'      => 'Deskripsi Ruangan Harus Diisi',
-                    'max_length'    => 'Panjang Maksimal 40 Karakter'
-                ]
-            ]
-        ];
-
-        if (!$oldName) {
-            $validation += [
-                'room_name' => [
-                    'rules'             => 'required|max_length[40]|is_unique[rooms.room_name]',
-                    'errors'            => [
-                        'required'      => 'Nama Ruangan Harus Diisi',
-                        'max_length'    => 'Nama Ruangan Maksimal 40 Karakter',
-                        'is_unique'     => 'Nama Ruangan Telah Ada, Masukkan Nama Ruangan Yang Lain'
-                    ]
-                ]
-            ];
-        }
-
-        return  $this->validate($validation);
     }
 }

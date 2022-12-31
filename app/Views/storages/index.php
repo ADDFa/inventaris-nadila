@@ -16,7 +16,7 @@
         </div>
     </div>
 
-    <a href="/item/new" type="button" class="btn btn-default">+ Insert Data</a>
+    <a href="/storage/new" type="button" class="btn btn-default">+ Insert Data</a>
 </div>
 
 <div class="table-gedung col-lg-11 mx-auto my-5 row">
@@ -24,9 +24,29 @@
         <div class="spinner-border text-warning d-none" role="status">
             <span class="visually-hidden">Loading...</span>
         </div>
-        <form action="/search/item" class="d-flex gap-3 col-lg-5" data-table="item">
-            <input type="text" class="form-control" placeholder="Cari Berdasarkan Nama, Kategori atau Jenis">
-            <button type="button" class="search btn btn-primary">Cari</button>
+        <form action="/search/storage" data-table="item">
+            <h4 class="text-nowrap">Filter Berdasarkan</h4>
+
+            <div class="d-flex gap-3 col-lg-8">
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>Kategori</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>Jenis</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+                <div class="d-flex align-items-center gap-3">
+                    <label for="" class="form-label">Tanggal</label>
+                    <input type="date" class="form-control">
+                    <span>-</span>
+                    <input type="date" class="form-control">
+                </div>
+            </div>
         </form>
     </div>
 
@@ -35,36 +55,36 @@
             <tr class="text-center">
                 <th scope="col">No</th>
                 <th scope="col">Nama Barang</th>
-                <th scope="col">Kategori Barang</th>
-                <th scope="col">Jenis Barang</th>
-                <th scope="col">Jumlah Barang</th>
+                <th scope="col">Lokasi Penyimpanan</th>
+                <th scope="col">Tanggal Disimpan</th>
+                <th scope="col">Jumlah</th>
+                <th scope="col">Pengelola</th>
                 <th scope="col" class="col-lg-2">Aksi</th>
             </tr>
         </thead>
 
         <tbody class="table-group-divider">
-            <?php foreach ($items as $i => $item) : ?>
+            <?php foreach ($storages as $i => $storage) : ?>
                 <tr class="text-center align-middle">
                     <th scope="row"><?= ++$i ?></th>
-                    <td><?= $item->item_name ?></td>
-                    <td><?= $item->item_category ?></td>
-                    <td><?= $item->item_type ?></td>
-                    <td><?= $item->item_total ?></td>
+                    <td><?= $storage->item_name ?></td>
+                    <td><?= $storage->room_name ?></td>
+                    <td><?= date('d-m-Y', $storage->record_date) ?></td>
+                    <td><?= $storage->qty ?></td>
+                    <td><?= $storage->name ?></td>
                     <td class="col-lg-2">
                         <div class="d-flex justify-content-center gap-3">
-                            <a href="/item/<?= $item->id ?>">
+                            <a href="/storage/<?= $storage->id ?>">
                                 <button class="btn btn-warning">
                                     <i class='bx bxs-show bx-sm'></i>
                                 </button>
                             </a>
-
-                            <a href="/item/<?= $item->id ?>/edit">
+                            <a href="/storage/<?= $storage->id ?>/edit">
                                 <button class="btn btn-primary">
                                     <i class='bx bx-edit bx-sm'></i>
                                 </button>
                             </a>
-
-                            <form action="/item/<?= $item->id ?>" method="POST">
+                            <form action="/storage/<?= $storage->id ?>" method="POST">
                                 <input type="hidden" name="_method" value="DELETE">
 
                                 <button type="button" class="delete btn btn-danger">

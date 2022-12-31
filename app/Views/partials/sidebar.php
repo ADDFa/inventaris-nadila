@@ -43,9 +43,9 @@
                     <i class='bx bx-unite nav_icon'></i>
                     <span class="nav_name">Barang</span>
                 </a>
-                <a href="/report" class="nav_link">
-                    <i class='bx bxs-report'></i>
-                    <span class="nav_name">Laporan</span>
+                <a href="/storage" class="nav_link">
+                    <i class='bx bxl-dropbox'></i>
+                    <span class="nav_name">Penyimpanan</span>
                 </a>
                 <?php if (session('users')->role === 'admin') : ?>
                     <a href="/user" class="nav_link">
@@ -53,6 +53,10 @@
                         <span class="nav_name">Kelola Petugas</span>
                     </a>
                 <?php endif ?>
+                <a href="/report" class="nav_link">
+                    <i class='bx bxs-report'></i>
+                    <span class="nav_name">Laporan</span>
+                </a>
             </div>
         </div>
 

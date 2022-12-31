@@ -35,6 +35,11 @@ class Room extends Model
             ->find($id);
     }
 
+    public function getAnyColumn(string $columns)
+    {
+        return $this->select($columns)->findAll();
+    }
+
     public function insertRoom(array $roomData): bool
     {
         $buildingId = $roomData['building_id'];

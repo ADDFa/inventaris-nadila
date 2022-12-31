@@ -3,7 +3,6 @@
 namespace App\Controllers\Validator;
 
 use App\Controllers\Validator\BaseValidator;
-use CodeIgniter\Files\File;
 
 class BuildingValidator extends BaseValidator
 {

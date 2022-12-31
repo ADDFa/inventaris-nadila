@@ -34,7 +34,11 @@
             <input type="file" name="profilePicture" class="form-control <?= $validation->hasError('image') ? 'is-invalid' : '' ?>" id="profile-picture">
             <span class="invalid-feedback" id="record_dateFeedback"><?= $validation->getError('image') ?></span>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+
+        <div class="mb-3 d-flex justify-content-end gap-3 mx-auto">
+            <a href="/user/<?= $user->id ?>" class="btn btn-warning">Kembali</a>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
     </form>
 </div>
 

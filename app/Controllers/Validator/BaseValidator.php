@@ -15,4 +15,9 @@ class BaseValidator extends BaseController
     {
         return "Panjang Karakter Maksimal $length Karakter";
     }
+
+    static protected function unique(string $attr): string
+    {
+        return "$attr Telah Ada, Masukkan $attr Yang Lain";
+    }
 }

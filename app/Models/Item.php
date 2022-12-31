@@ -15,7 +15,7 @@ class Item extends Model
         'item_total'
     ];
 
-    public function searchItem($keyword)
+    public function searchItem(string $keyword)
     {
         return $this->like('item_name', $keyword)
             ->orLike('item_Category', $keyword)
@@ -24,10 +24,15 @@ class Item extends Model
             ->getResultObject();
     }
 
-    public function getByRoom($roomId)
+    public function getByRoom(int $roomId)
     {
         return $this->join('storages', 'items.id = storages.item_id', 'INNER')
             ->where('storages.room_id', $roomId)
             ->get()->getResultObject();
+    }
+
+    public function getAnyColumn(string $columns)
+    {
+        return $this->select($columns)->findAll();
     }
 }

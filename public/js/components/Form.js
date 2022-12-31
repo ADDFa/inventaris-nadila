@@ -1,5 +1,5 @@
 const Swal = require('sweetalert2')
-const { el, elAll } = require('../partials/main')
+const { el, elAll } = require('../utils/main')
 
 const select = [...elAll('[data-select]')]
 const form = el('form')
@@ -38,6 +38,8 @@ const deleteConfirm = e => {
     })
 }
 
+document.addEventListener('click', e => (e.target.classList.contains('delete')) ? deleteConfirm(e) : '')
+
 // search
 const rows = {
     actionColumn(url) {
@@ -75,9 +77,11 @@ const rows = {
             <tr class="text-center align-middle">
                 <th scope="row">${i}</th>
                 <td>${item.item_name}</td>
-                <td>${item.room_name}</td>
+                <td>${item.item_category}</td>
+                <td>${item.item_type}</td>
                 <td>${item.item_total}</td>
-                ${this.actionColumn(`${origin}/item/${item.item_id}`)}
+                ${this.actionColumn(`${origin}/item/${item.id}`)}
+            </tr>
         `
     },
 
@@ -137,6 +141,4 @@ if (search) {
     })
 }
 
-module.exports = {
-    deleteConfirm
-}
+module.exports = deleteConfirm

@@ -26,7 +26,6 @@ class Building extends Model
 
     public function getAnyColumn(string $columns): array
     {
-        return $this->select($columns)
-            ->get()->getResultObject();
+        return $this->select($columns)->findAll();
     }
 }

@@ -18,6 +18,19 @@ class Building extends BaseController
         Messages::setName('Gedung');
     }
 
+    private function getDataBuilding($image = null): array
+    {
+        $data = [
+            'user_id'                       => session('users')->id,
+            'building_name'                 => $this->request->getPost('building_name'),
+            'building_size'                 => $this->request->getPost('building_size'),
+            'building_registration_date'    => strtotime($this->request->getPost('building_registration_date'))
+        ];
+        if ($image) $data += ['building_image' => $image];
+
+        return $data;
+    }
+
     public function index()
     {
         $limit = 10;
@@ -130,18 +143,5 @@ class Building extends BaseController
         session()->setFlashdata($message);
 
         return redirect()->to('building');
-    }
-
-    private function getDataBuilding($image = null)
-    {
-        $data = [
-            'user_id'                       => session('users')->id,
-            'building_name'                 => $this->request->getPost('building_name'),
-            'building_size'                 => $this->request->getPost('building_size'),
-            'building_registration_date'    => strtotime($this->request->getPost('building_registration_date'))
-        ];
-        if ($image) $data += ['building_image' => $image];
-
-        return $data;
     }
 }

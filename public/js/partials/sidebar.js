@@ -1,4 +1,4 @@
-const { el } = require('./main')
+const { el } = require('../utils/main')
 
 document.addEventListener("DOMContentLoaded", () => {
     const showNavbar = (toggleId, navId, bodyId, headerId) => {
