@@ -174,4 +174,9 @@ class Storage extends BaseController
 
         return redirect()->to('storage');
     }
+
+    public function filters()
+    {
+        // $this->table;
+    }
 }

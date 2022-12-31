@@ -27,7 +27,7 @@
         <form action="/search/storage" data-table="item">
             <h4 class="text-nowrap">Filter Berdasarkan</h4>
 
-            <div class="d-flex gap-3 col-lg-8">
+            <div class="d-flex gap-3 col-lg-8 mb-3">
                 <select class="form-select" aria-label="Default select example">
                     <option selected>Kategori</option>
                     <option value="1">One</option>
@@ -46,6 +46,27 @@
                     <span>-</span>
                     <input type="date" class="form-control">
                 </div>
+            </div>
+
+            <div class="filters col-lg-8 mb-3 d-flex gap-3">
+                <button type="button" class="btn btn-secondary position-relative">
+                    Kategori
+                    <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle" style="width: 10px; height: 10px;">
+                        <i class='bx bx-x' style="position: absolute; top: 0; left: 0;"></i>
+                    </span>
+                </button>
+                <button type="button" class="btn btn-secondary position-relative">
+                    Jenis
+                    <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle" style="width: 10px; height: 10px;">
+                        <i class='bx bx-x' style="position: absolute; top: 0; left: 0;"></i>
+                    </span>
+                </button>
+                <button type="button" class="btn btn-secondary position-relative">
+                    Tanggal
+                    <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle" style="width: 10px; height: 10px;">
+                        <i class='bx bx-x' style="position: absolute; top: 0; left: 0;"></i>
+                    </span>
+                </button>
             </div>
         </form>
     </div>
