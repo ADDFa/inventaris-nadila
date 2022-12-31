@@ -7,15 +7,15 @@
         <fieldset disabled>
             <div class="mb-3">
                 <label class="form-label">Nama Barang</label>
-                <input type="text" class="form-control" value="">
+                <input type="text" class="form-control" value="<?= $item->item_name ?>">
             </div>
             <div class="mb-3">
                 <label class="form-label">Jumlah Barang</label>
-                <input type="text" class="form-control" value="">
+                <input type="text" class="form-control" value="<?= $item->item_total ?>">
             </div>
             <div class="mb-3">
                 <label class="form-label">Kategori Barang</label>
-                <input type="text" class="form-control" value="">
+                <input type="text" class="form-control" value="<?= $item->item_category ?>">
             </div>
 
         </fieldset>
@@ -24,11 +24,11 @@
         <fieldset disabled>
             <div class="mb-3">
                 <label class="form-label">Dikelola Oleh</label>
-                <input type="text" class="form-control" value="">
+                <input type="text" class="form-control" value="<?= $item->name ?>">
             </div>
             <div class="mb-3">
                 <label class="form-label">Jenis Barang</label>
-                <input type="text" class="form-control" value="">
+                <input type="text" class="form-control" value="<?= $item->item_type ?>">
             </div>
         </fieldset>
     </div>

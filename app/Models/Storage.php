@@ -33,7 +33,7 @@ class Storage extends Model
             ->get()->getResultObject();
     }
 
-    public function get(int $id)
+    public function getStorage(int $id)
     {
         return $this->join('users', 'users.id = storages.user_id', 'INNER')
             ->join('rooms', 'rooms.id = storages.room_id', 'INNER')

@@ -38,7 +38,7 @@ class Item extends BaseController
     {
         $data = [
             'title'     => 'Detail Barang',
-            'item'      => $this->table->find($id),
+            'item'      => $this->table->getItem($id),
             'storages'  => $this->storage->getWhere('item_id', $id)
         ];
 

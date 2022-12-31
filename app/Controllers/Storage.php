@@ -70,7 +70,7 @@ class Storage extends BaseController
     {
         $data = [
             'title'     => 'Detail Penyimpanan',
-            'storage'   => $this->table->get($id)
+            'storage'   => $this->table->getStorage($id)
         ];
 
         return view('storages/detail', $data);
@@ -87,10 +87,13 @@ class Storage extends BaseController
         return view('storages/new', $data);
     }
 
-    public function edit()
+    public function edit($id = null)
     {
         $data = [
-            'title'     => 'Ubah Data Penyimpanan'
+            'title'     => 'Ubah Data Penyimpanan',
+            'storage'  => $this->table->join('item_stores', 'storages.id = item_stores.storage_id', 'INNER')->find($id),
+            'rooms'     => $this->room->getAnyColumn('id, room_name'),
+            'items'     => $this->item->getAnyColumn('id, item_name')
         ];
 
         return view('storages/edit', $data);

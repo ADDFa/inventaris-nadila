@@ -15,6 +15,21 @@ class Item extends Model
         'item_total'
     ];
 
+    public function getItem(int $id)
+    {
+        return $this->join('storages', 'storages.item_id = items.id')
+            ->join('users', 'users.id = storages.user_id')
+            ->select([
+                'users.name',
+                'item_name',
+                'item_category',
+                'item_type',
+                'item_total',
+                'items.id'
+            ])
+            ->find($id);
+    }
+
     public function searchItem(string $keyword)
     {
         return $this->like('item_name', $keyword)
