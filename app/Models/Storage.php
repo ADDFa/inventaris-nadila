@@ -157,4 +157,26 @@ class Storage extends Model
 
         return $this->db->transComplete();
     }
+
+    public function filterStorage(array $filters, string $search): array
+    {
+        $result = $this->select([
+            'storages.id',
+            'record_date',
+            'qty',
+            'room_name',
+            'item_name',
+            'users.name',
+        ])
+            ->join('items', 'items.id = storages.item_id')
+            ->join('rooms', 'rooms.id = storages.room_id')
+            ->join('users', 'users.id = storages.user_id')
+            ->like('item_name', $search);
+
+        foreach ($filters as $column => $filter) {
+            if ($column !== 's') $result->where($column, $filter);
+        }
+
+        return $result->findAll();
+    }
 }

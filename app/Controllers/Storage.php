@@ -181,8 +181,8 @@ class Storage extends BaseController
     {
         $req = $this->request->getGet();
 
-        // var_dump($req);
+        $res = $this->table->filterStorage($req, $req['s']);
 
-        return $this->response->setJSON($req);
+        return $this->response->setJSON($res);
     }
 }

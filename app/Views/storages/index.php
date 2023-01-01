@@ -36,12 +36,6 @@
                     <option class="text-capitalize" value="<?= $type ?>"><?= $type ?></option>
                 <?php endforeach ?>
             </select>
-            <div class="d-flex align-items-center gap-3">
-                <label class="form-label">Tanggal</label>
-                <input type="date" class="form-control" id="start-date">
-                <span>-</span>
-                <input type="date" class="form-control" id="end-date">
-            </div>
         </div>
 
         <div class="spinner-border text-warning d-none" id="loading" role="status">
@@ -52,15 +46,6 @@
             <input type="text" id="search" class="form-control" placeholder="Cari Berdasarkan Nama">
             <button type="button" class="search btn btn-primary">Cari</button>
         </div>
-    </div>
-
-    <div class="d-flex gap-3">
-        <button type="button" class="btn btn-secondary position-relative">
-            Kategori
-            <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle" style="width: 10px; height: 10px;">
-                <i class='bx bx-x' style="position: absolute; top: 0; left: 0;"></i>
-            </span>
-        </button>
     </div>
 </div>
 
