@@ -24,7 +24,7 @@ class Building extends BaseController
             'user_id'                       => session('users')->id,
             'building_name'                 => $this->request->getPost('building_name'),
             'building_size'                 => $this->request->getPost('building_size'),
-            'building_registration_date'    => strtotime($this->request->getPost('building_registration_date'))
+            'building_registration_date'    => strtotime((string) $this->request->getPost('building_registration_date'))
         ];
         if ($image) $data += ['building_image' => $image];
 

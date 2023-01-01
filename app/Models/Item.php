@@ -41,4 +41,9 @@ class Item extends Model
     {
         return $this->select($columns)->findAll();
     }
+
+    public function getDistinctColumn(string $column): array
+    {
+        return $this->db->query("SELECT DISTINCT $column FROM items")->getResultObject();
+    }
 }

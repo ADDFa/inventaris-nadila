@@ -8,12 +8,11 @@ use App\Controllers\Helper\Messages;
 
 class Storage extends BaseController
 {
-    private $table, $itemStore, $item, $room;
+    private $table, $item, $room;
 
     public function __construct()
     {
         $this->table = new \App\Models\Storage();
-        $this->itemStore = new \App\Models\ItemStore();
         $this->item = new \App\Models\Item();
         $this->room = new \App\Models\Room();
 
@@ -89,8 +88,8 @@ class Storage extends BaseController
             'title'         => 'Manajemen Penyimpanan',
             'storages'      => $this->table->getAll($limit, $offset),
             'pages'         => ceil($this->table->countAllResults() / $limit),
-            'categories'    => $this->item->findColumn('item_category'),
-            'types'         => $this->item->findColumn('item_type')
+            'categories'    => $this->item->getDistinctColumn('item_category'),
+            'types'         => $this->item->getDistinctColumn('item_type')
         ];
 
         return view('storages/index', $data);

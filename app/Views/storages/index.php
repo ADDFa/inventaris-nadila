@@ -27,13 +27,13 @@
             <select class="form-select" id="category" aria-label="Default select example">
                 <option selected value="">Kategori</option>
                 <?php foreach ($categories as $category) : ?>
-                    <option class="text-capitalize" value="<?= $category ?>"><?= $category ?></option>
+                    <option class="text-capitalize" value="<?= $category->item_category ?>"><?= $category->item_category ?></option>
                 <?php endforeach ?>
             </select>
             <select class="form-select" id="type" aria-label="Default select example">
                 <option selected value="">Jenis</option>
                 <?php foreach ($types as $type) : ?>
-                    <option class="text-capitalize" value="<?= $type ?>"><?= $type ?></option>
+                    <option class="text-capitalize" value="<?= $type->item_type ?>"><?= $type->item_type ?></option>
                 <?php endforeach ?>
             </select>
         </div>

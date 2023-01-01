@@ -8,13 +8,12 @@ use App\Controllers\Helper\Messages;
 
 class Room extends BaseController
 {
-    private $table, $building, $item;
+    private $table, $building;
 
     public function __construct()
     {
         $this->table = new \App\Models\Room();
         $this->building = new \App\Models\Building();
-        $this->item = new \App\Models\Item();
 
         Messages::setName('Ruangan');
     }
@@ -90,7 +89,7 @@ class Room extends BaseController
 
     public function search()
     {
-        $keyword = $this->request->getGet('v');
+        $keyword = (string) $this->request->getGet('v');
 
         return $this->response->setJSON([
             'data' => $this->table->searchRoom($keyword)
