@@ -24,7 +24,7 @@
         <fieldset disabled>
             <div class="mb-3">
                 <label class="form-label">Dikelola Oleh</label>
-                <input type="text" class="form-control" value="<?= $item->name ?>">
+                <input type="text" class="form-control" value="<?= $item->administrator ?>">
             </div>
             <div class="mb-3">
                 <label class="form-label">Jenis Barang</label>

@@ -12,22 +12,20 @@ class Item extends Model
         'item_category',
         'item_type',
         'item_name',
-        'item_total'
+        'item_total',
+        'administrator'
     ];
 
     public function getItem(int $id)
     {
-        return $this->join('storages', 'storages.item_id = items.id')
-            ->join('users', 'users.id = storages.user_id')
-            ->select([
-                'users.name',
-                'item_name',
-                'item_category',
-                'item_type',
-                'item_total',
-                'items.id'
-            ])
-            ->find($id);
+        return $this->select([
+            'id',
+            'item_name',
+            'item_category',
+            'item_type',
+            'item_total',
+            'administrator'
+        ])->find($id);
     }
 
     public function searchItem(string $keyword)
@@ -37,13 +35,6 @@ class Item extends Model
             ->orLike('item_type', $keyword)
             ->get(10)
             ->getResultObject();
-    }
-
-    public function getByRoom(int $roomId)
-    {
-        return $this->join('storages', 'items.id = storages.item_id', 'INNER')
-            ->where('storages.room_id', $roomId)
-            ->get()->getResultObject();
     }
 
     public function getAnyColumn(string $columns)

@@ -76,7 +76,7 @@
                             <?php foreach ($items as $item) : ?>
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     <?= $item->item_name ?>
-                                    <a href="/item/<?= $item->item_id ?>" class="badge bg-primary rounded-pill">
+                                    <a href="/item/<?= $item->id ?>" class="badge bg-primary rounded-pill">
                                         <i class="fa-solid fa-eye"></i>
                                         Lihat Detail
                                     </a>

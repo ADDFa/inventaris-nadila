@@ -35,6 +35,18 @@ class Room extends Model
             ->find($id);
     }
 
+    public function getItems(int $id)
+    {
+        return $this->join('storages', 'rooms.id = storages.room_id', 'INNER')
+            ->join('items', 'storages.item_id = items.id', 'INNER')
+            ->select([
+                'items.item_name',
+                'items.id'
+            ])
+            ->where('rooms.id', $id)
+            ->findAll();
+    }
+
     public function getAnyColumn(string $columns)
     {
         return $this->select($columns)->findAll();

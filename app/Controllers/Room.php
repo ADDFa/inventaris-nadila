@@ -61,7 +61,7 @@ class Room extends BaseController
         $data = [
             'title'         => 'Detail Ruangan',
             'room'          => $this->table->getRoom($id),
-            'items'         => $this->item->getByRoom($id)
+            'items'         => $this->table->getItems($id)
         ];
 
         return view('rooms/detail', $data);

@@ -74,6 +74,28 @@ class Storage extends Model
             ->findAll($limit, $offset);
     }
 
+    public function getReport(int $limit = 0, int $offset = 0)
+    {
+        return $this->join('users', 'storages.user_id = users.id')
+            ->join('rooms', 'storages.room_id = rooms.id')
+            ->join('items', 'storages.item_id = items.id')
+            ->join('item_stores', 'storages.item_id = item_stores.item_id')
+            ->select([
+                'item_name',
+                'item_total',
+                'item_brand',
+                'item_condition',
+                'item_price',
+                'record_date',
+                'item_category',
+                'item_type',
+                'items.administrator',
+                'room_name'
+            ])
+            ->orderBy('record_date', 'DESC')
+            ->findAll($limit, $offset);
+    }
+
     public function insertStorage(array $data): bool
     {
         $keyVals = BaseModel::getKeysVals($data['storage']);

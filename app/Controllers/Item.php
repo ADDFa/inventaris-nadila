@@ -79,6 +79,7 @@ class Item extends BaseController
         if (!$valid) return redirect()->to('item/new')->withInput()->with('errors', $this->validator->getErrors());
 
         $data = $this->request->getPost();
+        $data += ['administrator' => session('users')->id];
         $this->table->insert($data);
 
         $message = Messages::getInsert();
@@ -93,6 +94,7 @@ class Item extends BaseController
         if (!$valid) return redirect()->to("item/$id/edit")->withInput()->with('errors', $this->validator->getErrors());
 
         $data = $this->request->getPost();
+        $data += ['administrator' => session('users')->id];
         $this->table->update($id, $data);
 
         $message = Messages::getUpdate();

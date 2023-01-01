@@ -40,19 +40,19 @@
             </tr>
         </thead>
         <tbody class="table-group-divider">
-            <?php foreach ($items as $no => $item) : ?>
+            <?php foreach ($reports as $no => $report) : ?>
                 <tr>
                     <th scope="row"><?= ++$no ?></th>
-                    <td><?= $item->item_name ?></td>
-                    <td><?= $item->item_total ?></td>
-                    <td><?= $item->item_brand ?></td>
-                    <td><?= $item->item_condition ?></td>
-                    <td><?= $item->item_price ?></td>
-                    <td><?= date('d-M-Y H:i:s', $item->record_date) ?></td>
-                    <td><?= $item->category_name ?></td>
-                    <td><?= $item->type_name ?></td>
-                    <td><?= $item->room_name ?></td>
-                    <td><?= $item->name ?></td>
+                    <td><?= $report->item_name ?></td>
+                    <td><?= $report->item_total ?></td>
+                    <td><?= $report->item_brand ?></td>
+                    <td><?= $report->item_condition ?></td>
+                    <td><?= $report->item_price ?></td>
+                    <td><?= date('d-M-Y H:i:s', $report->record_date) ?></td>
+                    <td><?= $report->item_category ?></td>
+                    <td><?= $report->item_type ?></td>
+                    <td><?= $report->room_name ?></td>
+                    <td><?= $report->administrator ?></td>
                 </tr>
             <?php endforeach ?>
         </tbody>

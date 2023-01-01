@@ -32,6 +32,11 @@ class Items extends Migration
             'item_total' => [
                 'type'              => 'INT',
                 'default'           => 0
+            ],
+
+            'administrator' => [
+                'type'              => 'VARCHAR',
+                'constraint'         => 40
             ]
         ]);
 

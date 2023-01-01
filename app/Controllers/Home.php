@@ -6,13 +6,14 @@ use App\Controllers\BaseController;
 
 class Home extends BaseController
 {
-    private $building, $room, $item;
+    private $building, $room, $item, $storage;
 
     public function __construct()
     {
         $this->building = new \App\Models\Building();
         $this->room = new \App\Models\Room();
         $this->item = new \App\Models\Item();
+        $this->storage = new \App\Models\Storage();
     }
 
     public function index()
@@ -32,19 +33,13 @@ class Home extends BaseController
 
     public function report()
     {
-        $limit = 10;
-
-        $items = $this->item->getAll($limit);
+        $limit = 100;
         $pages = $this->request->getGet('pages');
-
-        if ($pages) {
-            $offset = (int) $pages * $limit - $limit;
-            $items = $this->item->getAll($limit, $offset);
-        }
+        $offset = $pages ? (int) $pages * $limit - $limit : 0;
 
         $data = [
             'title'     => 'Laporan Manajemen',
-            'items'     => $items,
+            'reports'   => $this->storage->getReport($limit, $offset),
             'pages'     => ceil($this->item->countAllResults() / $limit)
         ];
 
@@ -55,7 +50,7 @@ class Home extends BaseController
     {
         $data = [
             'title'     => 'Laporan Manajemen Barang',
-            'items'     => $this->item->getAll()
+            'reports'   => $this->storage->getReport(1000)
         ];
 
         return view('report-print', $data);
