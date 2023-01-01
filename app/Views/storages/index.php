@@ -19,58 +19,52 @@
     <a href="/storage/new" type="button" class="btn btn-default">+ Insert Data</a>
 </div>
 
-<div class="table-gedung col-lg-11 mx-auto my-5 row">
-    <div class="row my-3 gap-3 justify-content-end">
-        <div class="spinner-border text-warning d-none" role="status">
+<div class="col-lg-11 my-5 mx-auto filters">
+    <h4 class="text-nowrap">Filter Berdasarkan</h4>
+
+    <div class="d-flex justify-content-between">
+        <div class="d-flex mb-3 gap-3 col-lg-7">
+            <select class="form-select" id="category" aria-label="Default select example">
+                <option selected value="">Kategori</option>
+                <?php foreach ($categories as $category) : ?>
+                    <option class="text-capitalize" value="<?= $category ?>"><?= $category ?></option>
+                <?php endforeach ?>
+            </select>
+            <select class="form-select" id="type" aria-label="Default select example">
+                <option selected value="">Jenis</option>
+                <?php foreach ($types as $type) : ?>
+                    <option class="text-capitalize" value="<?= $type ?>"><?= $type ?></option>
+                <?php endforeach ?>
+            </select>
+            <div class="d-flex align-items-center gap-3">
+                <label class="form-label">Tanggal</label>
+                <input type="date" class="form-control" id="start-date">
+                <span>-</span>
+                <input type="date" class="form-control" id="end-date">
+            </div>
+        </div>
+
+        <div class="spinner-border text-warning d-none" id="loading" role="status">
             <span class="visually-hidden">Loading...</span>
         </div>
-        <form action="/search/storage" data-table="item">
-            <h4 class="text-nowrap">Filter Berdasarkan</h4>
 
-            <div class="d-flex gap-3 col-lg-8 mb-3">
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Kategori</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                </select>
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Jenis</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                </select>
-                <div class="d-flex align-items-center gap-3">
-                    <label for="" class="form-label">Tanggal</label>
-                    <input type="date" class="form-control">
-                    <span>-</span>
-                    <input type="date" class="form-control">
-                </div>
-            </div>
-
-            <div class="filters col-lg-8 mb-3 d-flex gap-3">
-                <button type="button" class="btn btn-secondary position-relative">
-                    Kategori
-                    <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle" style="width: 10px; height: 10px;">
-                        <i class='bx bx-x' style="position: absolute; top: 0; left: 0;"></i>
-                    </span>
-                </button>
-                <button type="button" class="btn btn-secondary position-relative">
-                    Jenis
-                    <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle" style="width: 10px; height: 10px;">
-                        <i class='bx bx-x' style="position: absolute; top: 0; left: 0;"></i>
-                    </span>
-                </button>
-                <button type="button" class="btn btn-secondary position-relative">
-                    Tanggal
-                    <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle" style="width: 10px; height: 10px;">
-                        <i class='bx bx-x' style="position: absolute; top: 0; left: 0;"></i>
-                    </span>
-                </button>
-            </div>
-        </form>
+        <div class="col-lg-4 d-flex align-items-start gap-2">
+            <input type="text" id="search" class="form-control" placeholder="Cari Berdasarkan Nama">
+            <button type="button" class="search btn btn-primary">Cari</button>
+        </div>
     </div>
 
+    <div class="d-flex gap-3">
+        <button type="button" class="btn btn-secondary position-relative">
+            Kategori
+            <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle" style="width: 10px; height: 10px;">
+                <i class='bx bx-x' style="position: absolute; top: 0; left: 0;"></i>
+            </span>
+        </button>
+    </div>
+</div>
+
+<div class="table-gedung col-lg-11 mx-auto my-5 row">
     <table class="table">
         <thead>
             <tr class="text-center">

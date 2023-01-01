@@ -86,9 +86,11 @@ class Storage extends BaseController
         $offset = $pages ? (int) $pages * $limit - $limit : 0;
 
         $data = [
-            'title'     => 'Manajemen Penyimpanan',
-            'storages'   => $this->table->getAll($limit, $offset),
-            'pages'     => ceil($this->table->countAllResults() / $limit)
+            'title'         => 'Manajemen Penyimpanan',
+            'storages'      => $this->table->getAll($limit, $offset),
+            'pages'         => ceil($this->table->countAllResults() / $limit),
+            'categories'    => $this->item->findColumn('item_category'),
+            'types'         => $this->item->findColumn('item_type')
         ];
 
         return view('storages/index', $data);
@@ -177,6 +179,10 @@ class Storage extends BaseController
 
     public function filters()
     {
-        // $this->table;
+        $req = $this->request->getGet();
+
+        // var_dump($req);
+
+        return $this->response->setJSON($req);
     }
 }

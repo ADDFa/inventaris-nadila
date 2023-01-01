@@ -53,7 +53,7 @@ $routes->group('', ['filter' => 'login'], static function ($routes) {
     $routes->resource('storage');
     $routes->get('search/room', 'Room::search');
     $routes->get('search/item', 'Item::search');
-    $routes->get('search/storage', 'Item::search');
+    $routes->get('filters/storage', 'Storage::filters');
 });
 
 
